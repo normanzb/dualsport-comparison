@@ -25,7 +25,7 @@ export type Bike = {
     tankL: number;
     seatMm: number;
     priceFrom: number;
-    /** Service interval normalized to miles; null when quoted in engine hours. */
+    /** Service interval normalised to miles; null when quoted in engine hours. */
     serviceMi: number | null;
     /** null where no figure is published */
     clearanceMm: number | null;
@@ -45,9 +45,9 @@ export type Bike = {
    * of those bikes shows no exhaust at all. "none" where it is not one-sided.
    */
   exhaustSide?: "left" | "right" | "none";
-  /** Brand color, contrast-checked against the graphite ground. */
+  /** Brand colour, contrast-checked against the graphite ground. */
   ink: string;
-  /** Secondary brand color, used for the section's minor accents. */
+  /** Secondary brand colour, used for the section's minor accents. */
   inkAlt: string;
   note: string;
 };
@@ -119,7 +119,7 @@ export const bikes: Bike[] = [
     condition: "new",
     ink: "#4E8CFF",
     inkAlt: "#FF4D5E",
-    note: "The only 125 on the list, and the least powerful by 8 hp. A1 license fodder, and priced to match.",
+    note: "The only 125 on the list, and the least powerful by 8 hp. A1 licence fodder, and priced to match.",
   },
   {
     slug: "suzuki-drz4s",
@@ -187,7 +187,7 @@ export const bikes: Bike[] = [
     condition: "new",
     ink: "#1EB8AE",
     inkAlt: "#F2F2F2",
-    note: "31 liters, half again the next biggest tank, which is the whole point. It still only manages second-longest range, because a rally 450 drinks.",
+    note: "31 litres, half again the next biggest tank, which is the whole point. It still only manages second-longest range, because a rally 450 drinks.",
   },
   {
     slug: "honda-crf450l",
@@ -325,7 +325,7 @@ export const bikes: Bike[] = [
     condition: "used",
     ink: "#4C79E0",
     inkAlt: "#C9CED6",
-    note: "The most ground clearance on the list at 360 mm, on a seat just 890 mm off the ground. A five-speed and hard to find, but 17 liters for £4,000 buys a lot of range.",
+    note: "The most ground clearance on the list at 360 mm, on a seat just 890 mm off the ground. A five-speed and hard to find, but 17 litres for £4,000 buys a lot of range.",
   },
   {
     slug: "ktm-690-enduro-r-2018",
@@ -469,7 +469,7 @@ export const bikes: Bike[] = [
     condition: "used",
     ink: "#6FA8FF",
     inkAlt: "#F7D417",
-    note: "Same platform as the 690: a liter more tank, two kilos more, and identical money secondhand. Pick on livery and dealer.",
+    note: "Same platform as the 690: a litre more tank, two kilos more, and identical money secondhand. Pick on livery and dealer.",
   },
   {
     slug: "husqvarna-701-enduro-2025",
@@ -575,7 +575,7 @@ export const bikes: Bike[] = [
     condition: "new",
     ink: "#FF7A1A",
     inkAlt: "#FFFFFF",
-    note: "Splits the difference: 44 hp on a 4,650-mile service interval, at half the money of an EXC-F. Pays for it with only 9 liters of fuel.",
+    note: "Splits the difference: 44 hp on a 4,650-mile service interval, at half the money of an EXC-F. Pays for it with only 9 litres of fuel.",
   },
   {
     slug: "ktm-390-adventure-r",
@@ -609,7 +609,7 @@ export const bikes: Bike[] = [
     condition: "new",
     ink: "#FF7A1A",
     inkAlt: "#FFFFFF",
-    note: "A screen and 14.5 liters for £6,699, which buys the fourth-longest range in the set. Third-heaviest bike here, and the offroad score shows it.",
+    note: "A screen and 14.5 litres for £6,699, which buys the fourth-longest range in the set. Third-heaviest bike here, and the offroad score shows it.",
   },
   {
     slug: "rieju-aventura-rally-307",
@@ -643,7 +643,7 @@ export const bikes: Bike[] = [
     condition: "new",
     ink: "#FF6B5B",
     inkAlt: "#F2F2F2",
-    note: "The longest range on the list: 21 liters on a 160 kg bike for £4,599. Nothing else here comes close for the money.",
+    note: "The longest range on the list: 21 litres on a 160 kg bike for £4,599. Nothing else here comes close for the money.",
   },
   {
     // Wet weight from independent measurement (195-197 kg), not CFMoto's claim
@@ -678,7 +678,7 @@ export const bikes: Bike[] = [
     condition: "new",
     ink: "#4C9AE8",
     inkAlt: "#F2F2F2",
-    note: "One of two parallel twins here, with the lowest seat at 820 mm. Second-heaviest bike on the list, and 220 mm of clearance caps how far off-road it goes.",
+    note: "One of three parallel twins here, with the lowest seat at 820 mm. Third-heaviest bike on the list, and 220 mm of clearance caps how far off-road it goes.",
   },
   {
     slug: "voge-300-rally",
@@ -816,7 +816,41 @@ export const bikes: Bike[] = [
     condition: "used",
     ink: "#5B93F0",
     inkAlt: "#F2F2F2",
-    note: "The only boxer twin here, and by a wide margin the most power and torque on the list: 105 hp and 115 Nm. Also the heaviest, and 13 liters buys just 155 miles.",
+    note: "The only boxer twin here, and by a wide margin the most power and torque on the list: 105 hp and 115 Nm. Carries its mass low for a 196 kg bike, which lifts it up the offroad-ease order, but 13 litres buys just 155 miles.",
+  },
+  {
+    slug: "yamaha-tenere-700",
+    make: "Yamaha",
+    model: "Tenere 700",
+    spec: {
+      serviceInterval: "6,000 mi",
+      dryWeight: "~196 kg",
+      wetWeight: "208 kg",
+      tank: "16 L",
+      gears: "6",
+      seatHeight: "875 mm",
+      clearance: "240 mm",
+      engine: "689 cc",
+      power: "72 hp",
+      torque: "68 Nm",
+      price: "~£10,104 new",
+    },
+    n: {
+      wetKg: 208,
+      dryKg: 196,
+      tankL: 16,
+      seatMm: 875,
+      priceFrom: 10104,
+      serviceMi: 6000,
+      clearanceMm: 240,
+      cc: 689,
+      hp: 72,
+      nm: 68,
+    },
+    condition: "new",
+    ink: "#4E8CFF",
+    inkAlt: "#F2F2F2",
+    note: "The heaviest bike here at 208 kg, and the hardest to take off the tarmac as a result. A 689 twin on a 875 mm seat with 240 mm of clearance: built for the road to the trail more than the trail.",
   },
 ];
 

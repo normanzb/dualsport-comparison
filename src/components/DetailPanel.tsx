@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AbilityChart } from "@/components/AbilityChart";
 import { BikeGlyph } from "@/components/BikeGlyph";
 import { BrandLogo } from "@/components/BrandLogo";
 import type { Bike } from "@/data/bikes";
 import { type Side, photosFor } from "@/data/photos";
+import { superlativesFor } from "@/data/superlatives";
 import { asset } from "@/lib/base-path";
 
 /**
@@ -41,14 +42,24 @@ function Stack({ bike }: { bike: Bike }) {
   const set = photosFor(bike.slug);
   const views = set?.views ?? [];
   const [side, setSide] = useState<Side>(views[0]?.side ?? "right");
+  const missing = views.length === 0;
 
-  if (views.length === 0) {
+  // Where to put a cutout is a maintainer's problem, so it goes to the console
+  // rather than into the page.
+  useEffect(() => {
+    if (missing) {
+      console.info(
+        `[dualsport] no photo for ${bike.slug}. Drop a cutout into public/bikes/${bike.slug}/ and add it to src/data/photos.ts.`,
+      );
+    }
+  }, [missing, bike.slug]);
+
+  if (missing) {
     return (
       <div className="flex min-h-[260px] flex-col items-center justify-center gap-3 border border-dashed border-hair px-6 text-center lg:min-h-[340px]">
         <BikeGlyph side="right" className="h-9 w-16 text-ink-faint" />
         <p className="max-w-[16rem] text-[11px] leading-relaxed text-ink-faint">
-          No studio photograph sourced for this one yet. Drop a cutout into{" "}
-          <code className="text-ink-dim">public/bikes/{bike.slug}/</code> and it appears here.
+          No studio photograph sourced for this one yet.
         </p>
       </div>
     );
@@ -133,6 +144,8 @@ function Stack({ bike }: { bike: Bike }) {
 export function DetailPanel({ bike, onClear }: { bike: Bike | null; onClear: () => void }) {
   if (!bike) return <Empty />;
 
+  const superlatives = superlativesFor(bike);
+
   return (
     <article
       className="relative border border-hair"
@@ -169,6 +182,22 @@ export function DetailPanel({ bike, onClear }: { bike: Bike | null; onClear: () 
       <div className="relative grid gap-8 px-5 py-6 md:px-7 lg:grid-cols-[1.35fr_1fr] lg:gap-10">
         <Stack key={bike.slug} bike={bike} />
         <div className="min-w-0">
+          {superlatives.length > 0 && (
+            <ul className="mb-3 flex flex-wrap gap-1.5">
+              {superlatives.map((s) => (
+                <li
+                  key={s.label}
+                  className="px-2 py-1 text-[10px] tracking-[0.14em] uppercase"
+                  style={{
+                    background: "color-mix(in srgb, var(--livery) 16%, transparent)",
+                    color: "var(--livery)",
+                  }}
+                >
+                  {s.label} <span className="text-ink-dim">{s.value}</span>
+                </li>
+              ))}
+            </ul>
+          )}
           <p className="mb-4 text-[12px] leading-relaxed text-ink-dim">{bike.note}</p>
           <AbilityChart bike={bike} />
         </div>

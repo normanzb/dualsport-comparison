@@ -1,9 +1,9 @@
 /**
- * Brand identity colors as weighted stripes, most significant first.
+ * Brand identity colours as weighted stripes, most significant first.
  *
- * These are the marque's own colors, not the single `ink` accent each row is
+ * These are the marque's own colours, not the single `ink` accent each row is
  * themed with. The weight is the stripe's share of the swatch, so a brand that is
- * mostly one color with a flash of another reads that way rather than as equal
+ * mostly one colour with a flash of another reads that way rather than as equal
  * halves.
  */
 export type Stripe = readonly [color: string, weight: number];

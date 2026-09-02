@@ -37,7 +37,7 @@ Getting this wrong fails in a way that looks like a broken deploy rather than a 
 
 Next rewrites most URLs for you, but not all, and the gaps are silent:
 
-- **`next/image` skips `basePath` entirely once `images.unoptimized` is set**, which static export requires. Photo sources therefore go through `asset()` from `src/lib/base-path.ts`. Without it every bike photo 404s while the rest of the page looks fine.
+- **`next/image` skips `basePath` entirely once `images.unoptimised` is set**, which static export requires. Photo sources therefore go through `asset()` from `src/lib/base-path.ts`. Without it every bike photo 404s while the rest of the page looks fine.
 - **URLs built inside a style attribute are never rewritten.** The logo masks go through `asset()` for the same reason.
 
 So any new hand-written asset URL needs `asset()`. To check a base-path build before pushing, build with one and serve it from a matching subdirectory:
@@ -82,7 +82,7 @@ Miss either and the bike silently falls back to a default, so add both.
 
 Engine size goes in `spec.engine` and `n.cc` (the number feeds the highway index). Power and torque go in `spec.power` / `spec.torque` (display strings) and `n.hp` / `n.nm` (numbers, which drive the performance axis). Use **claimed crank figures**, not dyno numbers, and keep the whole table on the same basis or the axis compares apples to oranges.
 
-`ink` is the one value worth checking by eye: it colors the chart, the selected row, and the panel, and it has to stay legible against `--color-ground`.
+`ink` is the one value worth checking by eye: it colours the chart, the selected row, and the panel, and it has to stay legible against `--colour-ground`.
 
 ---
 
@@ -118,12 +118,24 @@ The set only looks like one shoot because every file meets the same spec:
 2. **Cut it out** with `rembg` if it is not already transparent. `u2net` handles a plain white studio background; for a bike composited onto scenery, `isnet-general-use` is markedly better. Check the result rather than trusting it: a bad mask keeps a slab of background and is obvious at a glance.
 3. **Strip floating artwork.** Manufacturer images often carry a warranty badge or award logo in a corner. Keep only the largest connected alpha component; that drops the badge and keeps the bike.
 4. **Crop to the alpha bounding box**, so framing does not depend on the source's padding.
-5. **Fit onto a 1600x960 transparent canvas**, bike centered, scaled to about 94% of the width and no more than 92% of the height.
+5. **Fit onto a 1600x960 transparent canvas**, bike centred, scaled to about 94% of the width and no more than 92% of the height.
 6. **Save as WebP** with alpha, quality ~88. Expect roughly 200 KB.
 
 If a file is a different aspect ratio it still renders (the container is fixed at 1600/960 and the image is `object-contain`), but it will sit at a visibly different scale to the rest.
 
 ---
+
+## Language
+
+Prose is **British English**: normalised, colour, litre, judgement, centre, licence. The page is UK-market and the source table already reads `Wet / kerb`.
+
+Code identifiers and platform names stay American, because they are not prose: `color`, `backgroundColor`, `scrollIntoView({ block: "center" })`, Tailwind's `items-center` and `transition-colors`, and CSS custom properties such as `--color-ink`. Converting those breaks the build silently, since a misspelled Tailwind class raises no error and simply stops applying.
+
+## Superlatives
+
+`src/data/superlatives.ts` derives every "lightest", "biggest tank", "longest range" claim from the data at module load, keyed by slug, and the detail panel renders them as chips. Ties are detected rather than assumed, so two bikes sharing the longest service interval both read `joint-longest service`.
+
+To add a claim, add a `Metric` there. Do not write superlatives into a bike's `note`: hand-written ones went stale every time the set grew.
 
 ## Where the numbers come from
 
@@ -146,13 +158,19 @@ Five axes: service, range, performance, offroad, highway. Two rules:
 
 That split is deliberate. Range has a real-world absolute, so scaling it to the field would have shown the Kove as perfect when it is only the best of a short-legged group. `RANGE_FULL_MARKS` is 500 miles and nothing here comes close.
 
-**Range is tank size times real-world economy**, not tank size. The two are not interchangeable: the CRF300L carries a liter less than the DR-Z4S and still goes 29 miles further.
+**Range is tank size times real-world economy**, not tank size. The two are not interchangeable: the CRF300L carries a litre less than the DR-Z4S and still goes 29 miles further.
 
-**Offroad** combines three figures: wet weight and ground clearance at weight 1 each, seat height at 0.3. Lighter, more clearance and lower seat all score higher.
+**Offroad ease** is how readily a bike goes off the tarmac, not how capable it is once there. That distinction matters: a big adventure bike scores low because it is awkward to take off road, not because it cannot go.
 
-The weighting is the point. Clearance already carries the suspension-travel part of a tall seat, so seat height's remaining job is just reaching the ground, which is worth less: hence 0.3. Rolling all three together also avoids the r = -0.75 correlation between weight and clearance showing up as two spokes saying one thing.
+Four figures: wet weight and ground clearance at weight 1 each, centre of gravity at 0.5, seat height at 0.3. Lighter, more clearance, weight carried lower and a lower seat all score higher.
 
-**Performance** is power and torque weighted equally, normalized across the field.
+Centre of gravity is `LOW_COG` in `abilities.ts`, a hidden 1-to-4 index that appears nowhere in the table. 1 is the norm, the LC4 690/701 sit at 2 for their underseat tank, and the boxer HP2 is 3.
+
+It divides by a **fixed ceiling of 4**, not by the observed maximum. Two reasons: the 1 most bikes carry then reads as a baseline rather than a zero, and the top value stays meaningful. Dividing by the maximum would peg whichever bike scores highest at 1.0 regardless of its value, so lowering the HP2 from 4 to 3 would have moved the HP2 not at all and simply lifted every other bike.
+
+Seat height is deliberately the smallest weight. Clearance already carries the suspension-travel part of a tall seat, so seat height's remaining job is just reaching the ground.
+
+**Performance** is power and torque weighted equally, normalised across the field.
 
 **Highway** is `(4 x engine size + 3 x wind protection + 1 x top-gear comfort) / 8`.
 
@@ -160,9 +178,9 @@ Displacement is scored on a **log** scale, not linearly. The field spans 124 cc 
 
 Engine sits above wind protection at 4 to 3. At equal weight a screen exactly cancelled a 400 cc deficit, which let the 292 cc Voge tie the 693 cc KTM. Weather protection helps, but it cannot make up for an engine that is simply too small.
 
-Top-gear comfort is not min-max normalized either: gearboxes here are only ever five or six speeds, so scaling them to the field would make one gear worth the whole axis, more than a 112 cc gap. A five-speed scores 0.75, worth roughly the 10-15% more revs it turns at speed.
+Top-gear comfort is not min-max normalised either: gearboxes here are only ever five or six speeds, so scaling them to the field would make one gear worth the whole axis, more than a 112 cc gap. A five-speed scores 0.75, worth roughly the 10-15% more revs it turns at speed.
 
-Wind protection is the one subjective number on the page: a 0-5 judgment read off the bodywork, where a bare number plate is 0 and a rally tower with a screen is 5.
+Wind protection is the one subjective number on the page: a 0-5 judgement read off the bodywork, where a bare number plate is 0 and a rally tower with a screen is 5.
 
 Offroad, performance and highway are indices out of ten, not measurements. Hours-based service intervals (KTM 450 EXC-F, Ducati) do not convert to mileage, so the chart places them at a 30 mph working average purely to put them on the same axis. The table always shows the published hours.
 

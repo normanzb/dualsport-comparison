@@ -10,7 +10,7 @@ export type PhotoSet = {
 };
 
 /**
- * Manufacturer studio cutouts, already alpha-transparent, normalized to one
+ * Manufacturer studio cutouts, already alpha-transparent, normalised to one
  * canvas so the set reads as a single shoot. Left is the drive/chain side,
  * right is the exhaust side.
  */

@@ -59,12 +59,13 @@ const MPG_US: Record<string, number> = {
   "ajp-pr7": 55,
   // 1170 air-cooled boxer, and it drinks like one
   "bmw-hp2-enduro": 45,
+  "yamaha-tenere-700": 55,
 };
 
 /* ---------------------------------------------------------------------------
  * Highway comfort inputs.
  *
- * Displacement comes off the bike itself. Wind protection is a judgment on a 0-5
+ * Displacement comes off the bike itself. Wind protection is a judgement on a 0-5
  * scale, read off the bodywork: a rally tower with a screen shelters you, a number
  * plate does not. It is the one subjective number on the page.
  * ------------------------------------------------------------------------- */
@@ -92,10 +93,11 @@ const WIND: Record<string, number> = {
   "moto-morini-alltrhike-450": 3,
   "ajp-pr7": 3,
   "bmw-hp2-enduro": 1,
+  "yamaha-tenere-700": 3,
 };
 
 /**
- * Top-gear comfort. Not min-max normalized: gearboxes here are only ever five or
+ * Top-gear comfort. Not min-max normalised: gearboxes here are only ever five or
  * six speeds, so scaling them to the field would make a single gear worth the
  * entire axis, more than a 112 cc displacement gap. A five-speed still has a top
  * gear, just a shorter one, worth maybe 10-15% more revs at speed.
@@ -168,18 +170,50 @@ export function performance(b: Bike): number {
   return (unit(b.n.hp, HP) + unit(b.n.nm, NM)) / 2;
 }
 
+/**
+ * How low the bike carries its mass, 1 to 4. Not shown anywhere: it exists only
+ * to feed the offroad index, because a bike that keeps its weight low is far
+ * easier to handle off the tarmac than its kerb weight alone suggests.
+ *
+ * 1 is the norm. The LC4 690/701 sit at 2 for their underseat tank. The boxer
+ * HP2 is 3: two cylinders lying flat put its mass low, though it is still a
+ * 196 kg bike.
+ */
+const LOW_COG: Record<string, number> = {
+  "bmw-hp2-enduro": 3,
+  "husqvarna-701-enduro-2018": 2,
+  "husqvarna-701-enduro-2025": 2,
+  "husqvarna-701-enduro-2026": 2,
+  "ktm-690-enduro-r-2018": 2,
+  "ktm-690-enduro-r-2025": 2,
+  "ktm-690-enduro-r-2026": 2,
+};
+const COG_BASE = 1;
+/**
+ * A fixed ceiling, not the observed maximum. Dividing by the maximum would make
+ * the best bike here score 1.0 whatever its value, so lowering the HP2 from 4 to
+ * 3 would have moved it not at all and merely lifted everything else. 4 is a
+ * theoretical best that nothing on this list reaches.
+ */
+const COG_MAX = 4;
+/** Scored absolutely, so the 1 that most bikes sit at is a baseline, not a zero. */
+const cogScore = (slug: string) => Math.min(1, (LOW_COG[slug] ?? COG_BASE) / COG_MAX);
+
 const WET = span((b) => b.n.wetKg);
 const SEAT = span((b) => b.n.seatMm);
 const CLEAR = span((b) => b.n.clearanceMm ?? 0);
 
-/** Weights for the offroad index. Seat height is a third of the others. */
+/** Weights for the offroad index. Mass and clearance lead; the rest temper them. */
 const W_LIGHT = 1;
 const W_CLEAR = 1;
+const W_COG = 0.5;
 const W_SEAT = 0.3;
+const W_OFFROAD = W_LIGHT + W_CLEAR + W_COG + W_SEAT;
 
 /**
- * How willing the bike is once the tarmac stops: mass and ground clearance
- * carrying equal weight, seat height a third of that.
+ * How readily the bike goes off the tarmac. Ease, not capability: a light bike
+ * that carries its weight low and lets you reach the ground is easy to point at
+ * a trail, which is a different question from how fast it gets down one.
  *
  * Rolling all three into one axis is what stops the chart double-counting. Wet
  * weight and clearance correlate at r = -0.75, so as separate spokes they would
@@ -192,7 +226,8 @@ export function offroad(b: Bike): number {
   const light = 1 - unit(b.n.wetKg, WET);
   const clear = unit(b.n.clearanceMm ?? 0, CLEAR);
   const low = 1 - unit(b.n.seatMm, SEAT);
-  return (W_LIGHT * light + W_CLEAR * clear + W_SEAT * low) / (W_LIGHT + W_CLEAR + W_SEAT);
+  const cog = cogScore(b.slug);
+  return (W_LIGHT * light + W_CLEAR * clear + W_COG * cog + W_SEAT * low) / W_OFFROAD;
 }
 
 export type Axis = {
@@ -241,7 +276,7 @@ export const AXES: Axis[] = [
   },
   {
     key: "offroad",
-    label: "Offroad",
+    label: "Offroad ease",
     value: offroad,
     display: (b) => `${(offroad(b) * 10).toFixed(1)}/10`,
     absolute: offroad,

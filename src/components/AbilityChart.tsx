@@ -14,14 +14,17 @@ const pt = (i: number, r: number) => {
   const a = (-90 + (360 / AXES.length) * i) * (Math.PI / 180);
   return [CX + Math.cos(a) * r, CY + Math.sin(a) * r] as const;
 };
-const poly = (r: (i: number) => number) =>
-  AXES.map((_, i) => pt(i, r(i)).join(",")).join(" ");
+const poly = (r: (i: number) => number) => AXES.map((_, i) => pt(i, r(i)).join(",")).join(" ");
 
 export function AbilityChart({ bike }: { bike: Bike }) {
   return (
     <figure className="w-full">
-      <svg viewBox={`0 0 ${VB_W} ${VB_H}`} className="w-full" role="img"
-        aria-label={`Ability chart for the ${bike.make} ${bike.model}`}>
+      <svg
+        viewBox={`0 0 ${VB_W} ${VB_H}`}
+        className="w-full"
+        role="img"
+        aria-label={`Ability chart for the ${bike.make} ${bike.model}`}
+      >
         {/* grid */}
         <g>
           {RINGS.map((k) => (
@@ -35,7 +38,17 @@ export function AbilityChart({ bike }: { bike: Bike }) {
           ))}
           {AXES.map((_, i) => {
             const [x, y] = pt(i, R);
-            return <line key={i} x1={CX} y1={CY} x2={x} y2={y} stroke="var(--color-hair)" strokeWidth={1} />;
+            return (
+              <line
+                key={i}
+                x1={CX}
+                y1={CY}
+                x2={x}
+                y2={y}
+                stroke="var(--color-hair)"
+                strokeWidth={1}
+              />
+            );
           })}
         </g>
 
@@ -82,12 +95,13 @@ export function AbilityChart({ bike }: { bike: Bike }) {
       </svg>
       <figcaption className="mt-1 text-[10px] leading-relaxed text-ink-faint">
         Further out is better. Range is tank size times real-world economy, scored against a fixed
-        500-mile benchmark that nothing here reaches. Offroad weights mass and ground clearance
-        equally, with seat height at 0.3, so a lighter bike, more clearance and a lower seat all
-        score higher. Performance is power and torque weighted equally. Highway weights engine
-        size 4, wind protection 3 and top-gear comfort 1. Offroad, performance and
-        highway are indices out of ten, not measurements. Hours-based service intervals sit at a
-        30 mph working average.
+        500-mile benchmark that nothing here reaches. Offroad ease is how readily a bike goes off
+        the tarmac, not how capable it is once there: mass and ground clearance weighted equally, a
+        low centre of gravity at 0.5 and a low seat at 0.3. A big adventure bike scores low because
+        it is awkward to take off road, not because it cannot go. Performance is power and torque
+        weighted equally. Highway weights engine size 4, wind protection 3 and top-gear comfort 1.
+        Offroad ease, performance and highway are indices out of ten, not measurements. Hours-based
+        service intervals sit at a 30 mph working average.
       </figcaption>
     </figure>
   );

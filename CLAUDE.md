@@ -8,7 +8,9 @@ Every item below is a real error that shipped or nearly shipped here. Read befor
 
 **Every `note` in `bikes.ts` makes superlative claims that go stale the moment a bike is added.** Growing the set 14 to 22 silently falsified nine notes: Kove "nearly four times the tank of anything else" (a 21 L Rieju arrived), CCM "second-largest tank" (became fifth), Rieju "second-longest range" (became first), CFMoto "the heaviest" (a 196 kg BMW arrived). Two were wrong the day they were written: DR-Z4S "the only five-speed" when the CCM was also five-speed, and WR125R "lightest wet weight" when the EXC-F was 24 kg lighter.
 
-> After any change to `bikes`, recompute the rankings and check every note against them. Never write a superlative from memory, and never assume an untouched note is still true.
+> Superlatives are now derived: `src/data/superlatives.ts` builds a slug-to-claims table from the data at module load, detects ties, and the panel renders them as chips. Add a metric there rather than writing "the lightest" into prose.
+>
+> The hand-written `note` fields still carry some comparative wording. After any change to `bikes`, recompute the rankings and check every note against them. Never write a superlative from memory, and never assume an untouched note is still true.
 
 **Counts hardcoded in copy went stale three times.** The page title said "14 bikes" long after there were 20; the intro, the table caption and the footer's wordmark list all drifted.
 
@@ -16,11 +18,11 @@ Every item below is a real error that shipped or nearly shipped here. Read befor
 
 ## Scoring (`abilities.ts`)
 
-**Hardcoded normalization bounds let a value exceed 1.** `CC_HI = 693` meant the 1170 cc BMW scored 10.2 out of 10. The polygon clamps, so it looked fine and only the printed number gave it away.
+**Hardcoded normalisation bounds let a value exceed 1.** `CC_HI = 693` meant the 1170 cc BMW scored 10.2 out of 10. The polygon clamps, so it looked fine and only the printed number gave it away.
 
 > Derive every min and max from `bikes`. Never hardcode a bound.
 
-**Min-max on a low-cardinality field made one step worth the whole axis.** Gears only take 5 or 6, so normalizing them to the field made a single gear worth more than a 112 cc displacement gap, ranking a 300 above a 400 for highway comfort.
+**Min-max on a low-cardinality field made one step worth the whole axis.** Gears only take 5 or 6, so normalising them to the field made a single gear worth more than a 112 cc displacement gap, ranking a 300 above a 400 for highway comfort.
 
 > Do not min-max a field with two or three distinct values. Assign explicit scores (`GEAR_COMFORT`).
 
@@ -32,9 +34,13 @@ Every item below is a real error that shipped or nearly shipped here. Read befor
 
 > Read values from the data or parse the spec string. Never branch on a slug.
 
+### Normalise subjective indices against a fixed ceiling, not the observed maximum
+
+`LOW_COG` divides by a hardcoded `COG_MAX = 4`. When I first wrote it, it divided by `Math.max(...values)`. Norman then asked to drop the HP2 from 4 to 3, and that edit alone would have changed the HP2's score by exactly nothing: it was still the highest value, so it still normalised to 1.0. The only effect would have been to lift every other bike. For a hand-assigned index where the top value carries meaning ("3 out of a possible 4"), divide by the conceptual ceiling. Derive bounds from the data only for measured quantities where the range is whatever the field happens to contain.
+
 ## Deployment
 
-**`next/image` ignores `basePath` once `images.unoptimized` is set**, which static export requires. Every bike photo 404s while the rest of the page looks perfect.
+**`next/image` ignores `basePath` once `images.unoptimised` is set**, which static export requires. Every bike photo 404s while the rest of the page looks perfect.
 
 > Hand-written asset URLs go through `asset()` in `src/lib/base-path.ts`. That includes `next/image` `src` and any URL built inside a style attribute.
 
@@ -58,15 +64,16 @@ Every item below is a real error that shipped or nearly shipped here. Read befor
 
 ## Copy
 
-- **American English**, per the org standard: normalized, color, liter, judgment, center, license. Leave verbatim source data alone: the `Wet / kerb` column header comes from the source table.
+- **British English** in all prose: normalised, colour, litre, judgement, centre, licence. This is a UK-market page, and the source table already reads `Wet / kerb`.
+- **Code identifiers and platform names stay American.** `color`, `backgroundColor`, `scrollIntoView({ block: "center" })`, Tailwind's `items-center` / `text-center` / `transition-colors`, and CSS custom properties like `--color-ink`. A blind find-and-replace over the tree broke exactly these: Tailwind classes became `items-centre` and `transition-colours`, which **fail silently** with no type error and no lint error, and only a computed-style check caught them. Convert comments, JSX text and docs; never class names, property names or API string literals.
 - **No em dashes.** Use a comma, colon, parentheses, or rewrite.
 - **Do not overclaim.** Copy said "both sides of the machine" when most bikes have one view.
 
-## Brand colors
+## Brand colours
 
 `ink` was set to green for AJP because no other bike had green. That is not a reason.
 
-> Take `ink` from the bike's actual livery or mark, and check contrast against `--color-ground`.
+> Take `ink` from the bike's actual livery or mark, and check contrast against `--colour-ground`.
 
 ## Process
 

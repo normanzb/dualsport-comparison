@@ -9,6 +9,7 @@ export function Explorer() {
   const [selected, setSelected] = useState<Bike | null>(null);
   const [height, setHeight] = useState<number | null>(null);
   const outerRef = useRef<HTMLDivElement>(null);
+  const tableRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
 
   // Drive the wrapper height off the panel's real height so the empty state can
@@ -36,9 +37,16 @@ export function Explorer() {
     });
   }, []);
 
+  const clear = useCallback(() => {
+    setSelected(null);
+    tableRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
+
   return (
     <>
-      <SpecTable selected={selected} onSelect={select} />
+      <div ref={tableRef} className="scroll-mt-6">
+        <SpecTable selected={selected} onSelect={select} />
+      </div>
 
       <div
         ref={outerRef}
@@ -46,7 +54,7 @@ export function Explorer() {
         style={height === null ? undefined : { height }}
       >
         <div ref={innerRef}>
-          <DetailPanel bike={selected} onClear={() => setSelected(null)} />
+          <DetailPanel bike={selected} onClear={clear} />
         </div>
       </div>
     </>
