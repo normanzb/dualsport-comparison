@@ -1,5 +1,5 @@
 import { Explorer } from "@/components/Explorer";
-import { extremes } from "@/data/bikes";
+import { bikes, extremes } from "@/data/bikes";
 
 export default function Home() {
   return (
@@ -21,8 +21,8 @@ export default function Home() {
           </h1>
 
           <p className="mt-6 max-w-xl text-sm leading-relaxed text-ink-dim">
-            Fourteen bikes on one sheet. Pick any row and it opens underneath, both sides of the
-            machine and its abilities measured against the rest of the field.
+            {bikes.length} bikes on one sheet. Pick any row and it opens underneath, with
+            photographs and its abilities measured against the rest of the field.
           </p>
         </header>
 
@@ -36,7 +36,8 @@ export default function Home() {
             price ranges included. Photographs are manufacturer studio images, reproduced for
             identification and credited on each bike. Brand marks are the property of their
             respective owners. Logo files: Wikimedia Commons, public domain except Suzuki (CC BY-SA
-            4.0). Kove and CCM have no freely licensed mark, so they appear as wordmarks.
+            4.0). CCM, CFMoto, Kove, Moto Morini, Rieju and Voge have no freely licensed mark, so they
+            appear as wordmarks.
           </p>
         </div>
       </footer>

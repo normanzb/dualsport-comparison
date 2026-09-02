@@ -26,8 +26,8 @@ function Empty() {
         ?
       </span>
       <p className="max-w-xs text-[12px] leading-relaxed text-ink-dim">
-        Pick a bike from the table above to see it in full, from both sides, with its abilities
-        plotted against the rest of the field.
+        Pick a bike from the table above to see it in full, with its abilities plotted against the
+        rest of the field.
       </p>
     </div>
   );

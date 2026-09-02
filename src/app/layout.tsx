@@ -10,9 +10,9 @@ const plex = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dual Sport Index — 14 bikes, both sides, same scale",
+  title: "Dualsport motorcycle side by side (UK market)",
   description:
-    "A single-page comparison of 14 dual sport and enduro motorcycles: service intervals, weights, tank capacity, seat height and typical UK prices, with every bike drawn to the same scale.",
+    "A single-page comparison of 20 dual sport and enduro motorcycles: service intervals, weights, tank capacity, seat height, ground clearance, power and typical UK prices.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

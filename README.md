@@ -56,7 +56,7 @@ One append to `bikes` in `src/data/bikes.ts` is most of the job. The table, the 
   condition: "new" | "used",
   geo:  { wheelbaseMm, travelMm, tank, front },
   livery: { plastic, plasticAlt, accent, frame, rim, seat },
-  ink: "#RRGGBB",                  // brand colour, must pass contrast on the graphite ground
+  ink: "#RRGGBB",                  // brand color, must pass contrast on the graphite ground
   inkAlt: "#RRGGBB",
   note: "One or two sentences on what the numbers mean.",
 }
@@ -71,7 +71,7 @@ Miss either and the bike silently falls back to a default, so add both.
 
 Engine size goes in `spec.engine` and `n.cc` (the number feeds the highway index). Power and torque go in `spec.power` / `spec.torque` (display strings) and `n.hp` / `n.nm` (numbers, which drive the performance axis). Use **claimed crank figures**, not dyno numbers, and keep the whole table on the same basis or the axis compares apples to oranges.
 
-`ink` is the one value worth checking by eye: it colours the chart, the selected row, and the panel, and it has to stay legible against `--color-ground`.
+`ink` is the one value worth checking by eye: it colors the chart, the selected row, and the panel, and it has to stay legible against `--color-ground`.
 
 ---
 
@@ -105,7 +105,7 @@ The set only looks like one shoot because every file meets the same spec:
 2. **Cut it out** with `rembg` if it is not already transparent. `u2net` handles a plain white studio background; for a bike composited onto scenery, `isnet-general-use` is markedly better. Check the result rather than trusting it: a bad mask keeps a slab of background and is obvious at a glance.
 3. **Strip floating artwork.** Manufacturer images often carry a warranty badge or award logo in a corner. Keep only the largest connected alpha component; that drops the badge and keeps the bike.
 4. **Crop to the alpha bounding box**, so framing does not depend on the source's padding.
-5. **Fit onto a 1600x960 transparent canvas**, bike centred, scaled to about 94% of the width and no more than 92% of the height.
+5. **Fit onto a 1600x960 transparent canvas**, bike centered, scaled to about 94% of the width and no more than 92% of the height.
 6. **Save as WebP** with alpha, quality ~88. Expect roughly 200 KB.
 
 If a file is a different aspect ratio it still renders (the container is fixed at 1600/960 and the image is `object-contain`), but it will sit at a visibly different scale to the rest.
@@ -133,15 +133,15 @@ Five axes: service, range, performance, offroad, highway. Two rules:
 
 That split is deliberate. Range has a real-world absolute, so scaling it to the field would have shown the Kove as perfect when it is only the best of a short-legged group. `RANGE_FULL_MARKS` is 500 miles and nothing here comes close.
 
-**Range is tank size times real-world economy**, not tank size. The two are not interchangeable: the CRF300L carries a litre less than the DR-Z4S and still goes 29 miles further.
+**Range is tank size times real-world economy**, not tank size. The two are not interchangeable: the CRF300L carries a liter less than the DR-Z4S and still goes 29 miles further.
 
 **Offroad** combines three figures: wet weight and ground clearance at weight 1 each, seat height at 0.3. Lighter, more clearance and lower seat all score higher.
 
 The weighting is the point. Clearance already carries the suspension-travel part of a tall seat, so seat height's remaining job is just reaching the ground, which is worth less: hence 0.3. Rolling all three together also avoids the r = -0.75 correlation between weight and clearance showing up as two spokes saying one thing.
 
-**Performance** is power and torque weighted equally, normalised across the field.
+**Performance** is power and torque weighted equally, normalized across the field.
 
-**Highway** is `(1 x top-gear comfort + 3 x engine size + 3 x wind protection) / 7`, each component normalised to 0-1 first so displacement does not swamp the rest. Wind protection is the one subjective number on the page: a 0-5 judgement read off the bodywork, where a bare number plate is 0 and a rally tower with a screen is 5.
+**Highway** is `(1 x top-gear comfort + 3 x engine size + 3 x wind protection) / 7`, each component normalized to 0-1 first so displacement does not swamp the rest. Wind protection is the one subjective number on the page: a 0-5 judgment read off the bodywork, where a bare number plate is 0 and a rally tower with a screen is 5.
 
 Offroad, performance and highway are indices out of ten, not measurements. Hours-based service intervals (KTM 450 EXC-F, Ducati) do not convert to mileage, so the chart places them at a 30 mph working average purely to put them on the same axis. The table always shows the published hours.
 

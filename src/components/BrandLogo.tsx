@@ -1,5 +1,5 @@
 /**
- * Brand marks normalised by cap height, not by bounding box.
+ * Brand marks normalized by cap height, not by bounding box.
  *
  * Every SVG is cropped to its wordmark, so sizing them all to one height makes
  * eight different marks read at the same optical weight. Widths then differ

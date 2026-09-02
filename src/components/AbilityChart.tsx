@@ -82,12 +82,12 @@ export function AbilityChart({ bike }: { bike: Bike }) {
       </svg>
       <figcaption className="mt-1 text-[10px] leading-relaxed text-ink-faint">
         Further out is better. Range is tank size times real-world economy, scored against a fixed
-        500 mile benchmark that nothing here reaches. Offroad combines wet weight and ground
-        clearance at equal weight with seat height at 0.3, all oriented so lighter, taller-riding
-        and lower-seated score higher. Performance is power and torque weighted equally. Highway
-        weights engine size and wind protection 3 each against top-gear comfort 1. Offroad,
-        performance and highway are indices out of ten, not measurements. Hours-based service
-        intervals sit at a 30 mph working average.
+        500-mile benchmark that nothing here reaches. Offroad weights mass and ground clearance
+        equally, with seat height at 0.3, so a lighter bike, more clearance and a lower seat all
+        score higher. Performance is power and torque weighted equally. Highway weights
+        engine size and wind protection 3 each against top-gear comfort 1. Offroad, performance and
+        highway are indices out of ten, not measurements. Hours-based service intervals sit at a
+        30 mph working average.
       </figcaption>
     </figure>
   );

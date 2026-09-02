@@ -60,7 +60,7 @@ const MPG_US: Record<string, number> = {
 /* ---------------------------------------------------------------------------
  * Highway comfort inputs.
  *
- * Displacement comes off the bike itself. Wind protection is a judgement on a 0-5
+ * Displacement comes off the bike itself. Wind protection is a judgment on a 0-5
  * scale, read off the bodywork: a rally tower with a screen shelters you, a number
  * plate does not. It is the one subjective number on the page.
  * ------------------------------------------------------------------------- */
@@ -89,7 +89,7 @@ const WIND: Record<string, number> = {
 };
 
 /**
- * Top-gear comfort. Not min-max normalised: gearboxes here are only ever five or
+ * Top-gear comfort. Not min-max normalized: gearboxes here are only ever five or
  * six speeds, so scaling them to the field would make a single gear worth the
  * entire axis, more than a 112 cc displacement gap. A five-speed still has a top
  * gear, it is just shorter, so it scores low rather than zero.
