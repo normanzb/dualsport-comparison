@@ -18,18 +18,29 @@ Title, then the table, then a single detail panel underneath. The panel starts e
 
 **One manual step before the first run:** in the repo, Settings > Pages > Build and deployment > Source, choose **GitHub Actions**. Without it the workflow builds and then fails at the deploy step.
 
-The site lands at `https://<user>.github.io/<repo>/`.
+The site lands at `https://bikes.norm.im/`, or `https://<user>.github.io/<repo>/` if `public/CNAME` is removed.
 
-### Why the base path matters
+### Custom domain vs project page
 
-Pages serves a project repo from a subdirectory, so the build needs `basePath`. The workflow derives it from the repo name (`NEXT_PUBLIC_BASE_PATH=/${GITHUB_REPOSITORY#*/}`) and local dev leaves it empty, so `pnpm dev` still runs at `/`.
+These serve from different roots, and the build has to match:
+
+| Hosting | Served from | Base path |
+|---|---|---|
+| `bikes.norm.im` (custom domain) | the root | none |
+| `<user>.github.io/<repo>` | `/<repo>` | `/<repo>` |
+
+`public/CNAME` is the switch. The workflow checks for it: present means a custom domain and an empty base path, absent means a project page and a base path derived from the repo name. Deleting the CNAME to fall back to a github.io URL therefore needs no other change.
+
+Getting this wrong fails in a way that looks like a broken deploy rather than a config error: the HTML loads and every asset 404s, so you get unstyled markup with no interactivity. The CNAME also has to be in the artifact, not only in Settings, or an Actions deploy can drop the custom domain.
+
+### Why the base path needs care at all
 
 Next rewrites most URLs for you, but not all, and the gaps are silent:
 
 - **`next/image` skips `basePath` entirely once `images.unoptimized` is set**, which static export requires. Photo sources therefore go through `asset()` from `src/lib/base-path.ts`. Without it every bike photo 404s while the rest of the page looks fine.
 - **URLs built inside a style attribute are never rewritten.** The logo masks go through `asset()` for the same reason.
 
-So any new hand-written asset URL needs `asset()`. To check a change before pushing, build with a base path and serve it from a matching subdirectory:
+So any new hand-written asset URL needs `asset()`. To check a base-path build before pushing, build with one and serve it from a matching subdirectory:
 
 ```bash
 NEXT_PUBLIC_BASE_PATH=/dualsport-comparison pnpm build

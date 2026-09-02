@@ -30,8 +30,17 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - name: Derive base path from the repo name
-        run: echo "NEXT_PUBLIC_BASE_PATH=/${GITHUB_REPOSITORY#*/}" >> "$GITHUB_ENV"
+      # A custom domain serves from the root; a github.io project page serves from
+      # /<repo>. public/CNAME is the signal for which one we are building.
+      - name: Derive base path
+        run: |
+          if [ -f public/CNAME ]; then
+            echo "Custom domain $(cat public/CNAME): building at the root"
+            echo "NEXT_PUBLIC_BASE_PATH=" >> "$GITHUB_ENV"
+          else
+            echo "No CNAME: building for /${GITHUB_REPOSITORY#*/}"
+            echo "NEXT_PUBLIC_BASE_PATH=/${GITHUB_REPOSITORY#*/}" >> "$GITHUB_ENV"
+          fi
 
       - run: pnpm lint
 
