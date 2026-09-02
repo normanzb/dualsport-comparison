@@ -155,28 +155,32 @@ export function DetailPanel({ bike, onClear }: { bike: Bike | null; onClear: () 
     >
       <div aria-hidden className="livery-wash pointer-events-none absolute inset-0" />
 
-      <header className="relative flex flex-wrap items-center justify-between gap-4 border-b border-hair px-5 py-4 md:px-7">
-        <div className="flex items-center gap-4">
-          <span className="flex w-[164px] shrink-0 items-center">
-            <BrandLogo make={bike.make} height={19} tone="livery" />
-          </span>
-          <span aria-hidden className="h-8 w-px bg-hair" />
-          <h2 className="flex items-center gap-2.5 font-display text-3xl leading-none md:text-4xl">
-            {bike.model}
-            {bike.year && <span className="text-ink-dim">&rsquo;{bike.year.slice(2)}</span>}
-            {overallTier && <Crown tier={overallTier} size={17} />}
-          </h2>
-          <span
-            className="border px-2 py-0.5 text-[9px] tracking-[0.18em] uppercase"
-            style={{ borderColor: "var(--livery)", color: "var(--livery)" }}
-          >
-            {bike.condition === "new" ? "New" : "Used"}
-          </span>
-        </div>
+      {/*
+        One flex row that wraps rather than two layouts. On a phone the title is
+        ordered last at full width so it gets a line of its own: inline, the fixed
+        logo slot left it 94px of a 333px header and pushed the condition badge
+        off the screen entirely.
+      */}
+      <header className="relative flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-hair px-5 py-4 md:px-7">
+        <span className="flex shrink-0 items-center md:w-[164px]">
+          <BrandLogo make={bike.make} height={19} tone="livery" />
+        </span>
+        <span aria-hidden className="hidden h-8 w-px bg-hair md:block" />
+        <h2 className="order-last flex w-full min-w-0 items-center gap-2.5 font-display text-3xl leading-none md:order-none md:w-auto md:text-4xl">
+          <span className="truncate">{bike.model}</span>
+          {bike.year && <span className="shrink-0 text-ink-dim">&rsquo;{bike.year.slice(2)}</span>}
+          {overallTier && <Crown tier={overallTier} size={17} className="shrink-0" />}
+        </h2>
+        <span
+          className="shrink-0 border px-2 py-0.5 text-[9px] tracking-[0.18em] uppercase"
+          style={{ borderColor: "var(--livery)", color: "var(--livery)" }}
+        >
+          {bike.condition === "new" ? "New" : "Used"}
+        </span>
         <button
           type="button"
           onClick={onClear}
-          className="text-[10px] tracking-[0.2em] text-ink-faint uppercase transition-colors hover:text-ink"
+          className="ml-auto shrink-0 text-[10px] tracking-[0.2em] text-ink-faint uppercase transition-colors hover:text-ink"
         >
           Clear &times;
         </button>
