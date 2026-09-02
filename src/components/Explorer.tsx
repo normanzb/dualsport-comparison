@@ -30,10 +30,14 @@ export function Explorer() {
     requestAnimationFrame(() => {
       const el = outerRef.current;
       if (!el) return;
-      const r = el.getBoundingClientRect();
-      if (r.top < 0 || r.bottom > window.innerHeight) {
-        el.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
+      const { top } = el.getBoundingClientRect();
+      // "start", never "center". The panel is far taller than a phone screen, so
+      // centring it parked the viewport on the middle of the ability chart with
+      // the bike's name and photograph scrolled off the top. Its top edge is also
+      // the only stable anchor: the height animation moves the bottom for half a
+      // second after the tap, which made a centred target a moving one.
+      const placed = top >= 0 && top < window.innerHeight * 0.5;
+      if (!placed) el.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   }, []);
 

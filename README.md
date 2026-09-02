@@ -168,6 +168,18 @@ Three of them, and the split matters, because only the first is a verdict:
 
 Nothing in any of the three may make a comparative claim. Say what the bike is, not where it ranks. Only assert history and mechanical detail you can source; leaving a fact out costs nothing, and an invented one is indistinguishable from a real one to every reader.
 
+## Comments
+
+`src/components/Comments.tsx` embeds the [Ethereum Comments Protocol](https://ethcomments.xyz) iframe widget. Three things about it are load-bearing:
+
+- **`targetUri` is hardcoded to `https://bikes.norm.im/`**, not read from `window.location`. The URI _is_ the thread's identity, so pointing it at localhost or a `/dualsport-comparison` project-page path would silently open a second, empty thread.
+- **The height comes from a `postMessage` listener we own**, not from ECP's `embedScript.js`. Their script is served off their docs domain; the contract it implements is two lines, so there is no reason to load a third-party script on every page view. `MIN_HEIGHT` is only the guess used before the first message arrives, and is deliberately not a floor: clamping to it left 150px of dead space under an empty thread.
+- **The theme's light and dark palettes hold the same dark values.** The iframe follows the visitor's own `prefers-color-scheme`, not the parent page's, so a visitor on a light OS would otherwise get a white widget dropped into a black page. The headline is themed to `0rem` because the widget prints its own "Comments" title, which duplicated the section heading, and the theme is the only hook the embed exposes for it.
+
+To change the theme, regenerate the blob with the configurator at [docs.ethcomments.xyz](https://docs.ethcomments.xyz/integration-options/embed-comments) and paste the new `config` value in. The comment above `THEME` records the palette that produced the current one.
+
+If this site ever grows a `Content-Security-Policy`, it needs `frame-src https://embed.ethcomments.xyz`. GitHub Pages sends no CSP header today, which is why the embed works without one.
+
 ## Where the numbers come from
 
 The `spec` block reproduces the source comparison table verbatim, approximations and price ranges included, so the researched figures (economy, wind protection) live in `abilities.ts` instead.

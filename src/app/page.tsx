@@ -1,3 +1,4 @@
+import { Comments } from "@/components/Comments";
 import { Explorer } from "@/components/Explorer";
 import { OverallExplainer } from "@/components/OverallExplainer";
 import { MARK_MAKES } from "@/components/BrandLogo";
@@ -35,6 +36,8 @@ export default function Home() {
         <Explorer />
 
         <OverallExplainer />
+
+        <Comments />
       </main>
 
       <footer className="border-t border-hair">
