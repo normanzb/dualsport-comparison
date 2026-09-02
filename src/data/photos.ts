@@ -106,6 +106,21 @@ export const photos: Record<string, PhotoSet> = {
     source: "https://www.motorcyclespecs.co.za/model/husqvana/husqvarna-701-enduro-2023.html",
     note: "2023 studio image; same generation as the 2025.",
   },
+  "kove-450-rally": {
+    views: [{ side: "right", src: "/bikes/kove-450-rally/right.webp" }],
+    credit: "Kove Moto UK",
+    source: "https://koveuk.com/bikes/450-rally/",
+  },
+  "cfmoto-450mt": {
+    views: [{ side: "right", src: "/bikes/cfmoto-450mt/right.webp" }],
+    credit: "CFMOTO UK",
+    source: "https://www.cfmoto.co.uk/motorcycles/450mt/",
+  },
+  "voge-300-rally": {
+    views: [{ side: "right", src: "/bikes/voge-300-rally/right.webp" }],
+    credit: "Voge UK",
+    source: "https://vogemotorcycles.com/model/2026-voge-rally-300-1341",
+  },
 };
 
 export const photosFor = (slug: string): PhotoSet | undefined => photos[slug];
