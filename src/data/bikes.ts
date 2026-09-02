@@ -35,14 +35,15 @@ export type Bike = {
   };
   condition: "new" | "used";
   /**
-   * Which side the chain runs down. Left on every chain-driven bike here, so
-   * "none" is for shaft drive, where there is no drive side to point at.
+   * Which side the final drive runs down, chain or shaft. Left on everything
+   * here. "none" is for a bike with no one-sided drive to point at.
    */
   driveSide?: "left" | "right" | "none";
   /**
    * Which side the silencer sits on. Right on almost everything, but the LC4
-   * 690/701 routes it down the left, alongside the chain, so the right-hand view
-   * of those bikes shows no exhaust at all. "none" where it is not one-sided.
+   * 690/701 and the HP2 route it down the left, alongside the drive, so the
+   * right-hand view of those shows no exhaust at all. "none" where it is not
+   * one-sided.
    */
   exhaustSide?: "left" | "right" | "none";
   /** Brand colour, contrast-checked against the graphite ground. */
@@ -873,8 +874,8 @@ export const bikes: Bike[] = [
       hp: 105,
       nm: 115,
     },
-    driveSide: "none",
-    exhaustSide: "none",
+    driveSide: "left",
+    exhaustSide: "left",
     condition: "used",
     ink: "#5B93F0",
     inkAlt: "#F2F2F2",

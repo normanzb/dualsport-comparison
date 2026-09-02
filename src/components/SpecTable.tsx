@@ -2,8 +2,10 @@
 
 import { BrandLogo } from "@/components/BrandLogo";
 import { BrandSwatch } from "@/components/BrandSwatch";
+import { Crown } from "@/components/Crown";
 import { type Bike, bikes } from "@/data/bikes";
 import { photosFor } from "@/data/photos";
+import { overallRank } from "@/data/superlatives";
 
 const COLS = [
   "Bike",
@@ -80,9 +82,13 @@ export function SpecTable({
                     <span className="flex w-[116px] shrink-0 items-center">
                       <BrandLogo make={b.make} height={13} tone={on ? "livery" : "ink"} />
                     </span>
-                    <span className="text-[13px] whitespace-nowrap">
+                    <span className="flex items-center gap-1.5 text-[13px] whitespace-nowrap">
                       {b.model}
                       {b.year && <span className="text-ink-faint"> ({b.year})</span>}
+                      {(() => {
+                        const tier = overallRank(b);
+                        return tier && <Crown tier={tier} />;
+                      })()}
                     </span>
                     {hasPhoto && <BrandSwatch make={b.make} fallback={b.ink} />}
                   </button>

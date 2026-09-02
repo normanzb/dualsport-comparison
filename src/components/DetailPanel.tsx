@@ -5,9 +5,10 @@ import { useEffect, useState } from "react";
 import { AbilityChart } from "@/components/AbilityChart";
 import { BikeGlyph } from "@/components/BikeGlyph";
 import { BrandLogo } from "@/components/BrandLogo";
+import { Crown } from "@/components/Crown";
 import type { Bike } from "@/data/bikes";
 import { type Side, photosFor } from "@/data/photos";
-import { superlativesFor } from "@/data/superlatives";
+import { overallRank, superlativesFor } from "@/data/superlatives";
 import { asset } from "@/lib/base-path";
 
 /**
@@ -145,6 +146,7 @@ export function DetailPanel({ bike, onClear }: { bike: Bike | null; onClear: () 
   if (!bike) return <Empty />;
 
   const superlatives = superlativesFor(bike);
+  const overallTier = overallRank(bike);
 
   return (
     <article
@@ -159,9 +161,10 @@ export function DetailPanel({ bike, onClear }: { bike: Bike | null; onClear: () 
             <BrandLogo make={bike.make} height={19} tone="livery" />
           </span>
           <span aria-hidden className="h-8 w-px bg-hair" />
-          <h2 className="font-display text-3xl leading-none md:text-4xl">
+          <h2 className="flex items-center gap-2.5 font-display text-3xl leading-none md:text-4xl">
             {bike.model}
-            {bike.year && <span className="ml-2 text-ink-dim">&rsquo;{bike.year.slice(2)}</span>}
+            {bike.year && <span className="text-ink-dim">&rsquo;{bike.year.slice(2)}</span>}
+            {overallTier && <Crown tier={overallTier} size={17} />}
           </h2>
           <span
             className="border px-2 py-0.5 text-[9px] tracking-[0.18em] uppercase"

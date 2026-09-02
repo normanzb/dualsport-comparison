@@ -101,7 +101,10 @@ export function AbilityChart({ bike }: { bike: Bike }) {
         it is awkward to take off road, not because it cannot go. Performance is power and torque
         weighted equally. Highway weights engine size 4, wind protection 3 and top-gear comfort 1.
         Offroad ease, performance and highway are indices out of ten, not measurements. Hours-based
-        service intervals sit at a 30 mph working average.
+        service intervals sit at a 30 mph working average. The overall figure, where a bike claims
+        it, is the area of this shape as a fraction of the full pentagon, so it rewards an
+        all-rounder over a specialist: the easiest bike here to take off road is nowhere near the
+        top of it.
       </figcaption>
     </figure>
   );

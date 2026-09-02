@@ -304,3 +304,21 @@ export function score(bike: Bike, axis: Axis) {
   if (hi === lo) return 1;
   return 0.06 + 0.94 * ((axis.value(bike) - lo) / (hi - lo));
 }
+
+/**
+ * Overall standing: the area of the polygon the chart actually draws, as a
+ * fraction of a full one, square-rooted so a bike scoring x on every axis reads
+ * exactly x rather than x squared.
+ *
+ * Radar area depends on the order of the axes, because the same five scores
+ * arranged differently enclose a different shape. Across all twelve distinct
+ * orders the leader does not change, but its figure moves by about half a point,
+ * so treat this as a summary of the chart as drawn rather than a law. It also
+ * rewards all-rounders over specialists by construction: the best bike here off
+ * road is nowhere near the top of it.
+ */
+export function overall(b: Bike): number {
+  const r = AXES.map((a) => score(b, a));
+  const paired = r.reduce((sum, v, i) => sum + v * r[(i + 1) % r.length], 0);
+  return Math.sqrt(paired / r.length);
+}

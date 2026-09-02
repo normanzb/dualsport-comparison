@@ -42,16 +42,105 @@ body {
 }
 
 .livery-wash {
-  background:
-    radial-gradient(
-      70% 90% at 50% 42%,
-      color-mix(in srgb, var(--livery) 22%, transparent) 0%,
-      transparent 72%
-    );
+  background: radial-gradient(
+    70% 90% at 50% 42%,
+    color-mix(in srgb, var(--livery) 22%, transparent) 0%,
+    transparent 72%
+  );
 }
 
 .panel-shell {
   transition: height 520ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/*
+ * The crown is a CSS mask rather than an inline SVG so the gold sweep and the
+ * glow are both plain CSS, which means one prefers-reduced-motion rule switches
+ * off the pair. The mask sits on the inner span and the filter on the outer one:
+ * masking happens after filtering, so a glow on the masked element would be
+ * clipped to the crown's own silhouette and never seen.
+ */
+.crown {
+  display: inline-block;
+  animation: crown-glow 2600ms ease-in-out infinite;
+}
+
+/* Each tier supplies its own metal and its own glow; the animations are shared. */
+.crown-gold {
+  --crown-metal: linear-gradient(
+    100deg,
+    #8a5a12 0%,
+    #c8912a 22%,
+    #f6d98a 38%,
+    #fff4c9 46%,
+    #f0cd76 54%,
+    #b9821f 74%,
+    #d9a72f 100%
+  );
+  --crown-glow: 255 203 106;
+}
+
+.crown-silver {
+  --crown-metal: linear-gradient(
+    100deg,
+    #5b626b 0%,
+    #98a2ad 22%,
+    #dde4ea 38%,
+    #ffffff 46%,
+    #cbd3db 54%,
+    #7b838d 74%,
+    #b4bcc6 100%
+  );
+  --crown-glow: 216 227 236;
+}
+
+.crown-bronze {
+  --crown-metal: linear-gradient(
+    100deg,
+    #653a17 0%,
+    #a4632c 22%,
+    #dda772 38%,
+    #f3cfa6 46%,
+    #cd8f57 54%,
+    #86491f 74%,
+    #ae6c31 100%
+  );
+  --crown-glow: 226 150 92;
+}
+
+.crown > span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--crown-metal);
+  background-size: 340% 100%;
+  animation: crown-sweep 3600ms linear infinite;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 14'%3E%3Cpath d='M0 1.5 5.5 7.5 11 0 16.5 7.5 22 1.5 22 14 0 14Z'/%3E%3C/svg%3E");
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 14'%3E%3Cpath d='M0 1.5 5.5 7.5 11 0 16.5 7.5 22 1.5 22 14 0 14Z'/%3E%3C/svg%3E");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+}
+
+@keyframes crown-sweep {
+  from {
+    background-position: 150% 0;
+  }
+  to {
+    background-position: -50% 0;
+  }
+}
+
+@keyframes crown-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 1.5px rgb(var(--crown-glow) / 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 4px rgb(var(--crown-glow) / 0.75))
+      drop-shadow(0 0 9px rgb(var(--crown-glow) / 0.32));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -60,5 +149,15 @@ body {
   }
   .panel-shell {
     transition: none;
+  }
+  .crown,
+  .crown > span {
+    animation: none;
+  }
+  .crown {
+    filter: drop-shadow(0 0 2px rgb(var(--crown-glow) / 0.55));
+  }
+  .crown > span {
+    background-position: 40% 0;
   }
 }

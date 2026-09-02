@@ -1,4 +1,4 @@
-import { rangeMiles } from "@/data/abilities";
+import { offroad, overall, rangeMiles } from "@/data/abilities";
 import { type Bike, bikes } from "@/data/bikes";
 
 /**
@@ -19,7 +19,9 @@ import { type Bike, bikes } from "@/data/bikes";
 export type Superlative = {
   label: string;
   value: string;
-  rank: 1 | 2;
+  /** the metric this reads off, for callers that need to test it semantically */
+  of: string;
+  rank: 1 | 2 | 3;
   /** "list" ranks against every bike, "family" only against the same model's other years. */
   scope: "list" | "family";
 };
@@ -32,7 +34,13 @@ type Metric = {
   format: (b: Bike) => string;
   /** which metric this reads off, so a max and its min count as one claim */
   of: string;
+  /** how far down to rank. 2 by default; the overall standing goes to 3 for its medals. */
+  depth?: number;
 };
+
+const ORDINAL = ["", "2nd-", "3rd-"];
+const tenths = (v: number) => Math.round(v * 100) / 10;
+const outOfTen = (v: number) => `${(v * 10).toFixed(1)}/10`;
 
 const METRICS: Metric[] = [
   {
@@ -135,6 +143,30 @@ const METRICS: Metric[] = [
     pick: (b) => b.n.serviceMi,
     format: (b) => b.spec.serviceInterval,
   },
+  // ranked on the rounded figure, so two bikes both shown as 5.0/10 read as joint
+  // rather than being separated by a difference nothing on the page displays
+  {
+    of: "offroad",
+    label: "easiest off road",
+    dir: "max",
+    pick: (b) => tenths(offroad(b)),
+    format: (b) => outOfTen(offroad(b)),
+  },
+  {
+    of: "offroad",
+    label: "hardest off road",
+    dir: "min",
+    pick: (b) => tenths(offroad(b)),
+    format: (b) => outOfTen(offroad(b)),
+  },
+  {
+    of: "overall",
+    depth: 3,
+    label: "best overall",
+    dir: "max",
+    pick: (b) => tenths(overall(b)),
+    format: (b) => outOfTen(overall(b)),
+  },
   {
     of: "gears",
     label: "fewest gears",
@@ -189,7 +221,12 @@ const METRICS: Metric[] = [
  * same thing: it is the base model. Range is left out because within one model
  * it only ever restates the tank.
  */
-const FAMILY_METRICS = ["weight", "price", "seat", "tank", "service"];
+/**
+ * Price is deliberately absent. Within one model the newest year is always the
+ * dearest and the oldest always the cheapest, so the claim carries no
+ * information the year already gives you.
+ */
+const FAMILY_METRICS = ["weight", "seat", "tank", "service"];
 const FAMILY_CAP = 2;
 
 const familyKey = (b: Bike) => `${b.make} ${b.model}`;
@@ -214,10 +251,16 @@ const TABLE: Record<string, Superlative[]> = (() => {
     const scored = score(m, bikes);
     for (const { b, v } of scored) {
       const r = rank(m, scored, v);
-      if (r > 2) continue;
+      if (r > (m.depth ?? 2)) continue;
       const tied = scored.some((x) => x.b !== b && x.v === v);
-      const label = [tied && "joint-", r === 2 && "2nd-", m.label].filter(Boolean).join("");
-      (out[b.slug] ??= []).push({ label, value: m.format(b), rank: r as 1 | 2, scope: "list" });
+      const label = [tied && "joint-", ORDINAL[r - 1], m.label].filter(Boolean).join("");
+      (out[b.slug] ??= []).push({
+        of: m.of,
+        label,
+        value: m.format(b),
+        rank: r as 1 | 2 | 3,
+        scope: "list",
+      });
       (held[b.slug] ??= new Set()).add(m.of);
     }
   }
@@ -236,6 +279,7 @@ const TABLE: Record<string, Superlative[]> = (() => {
         if ((taken[b.slug] ?? 0) >= FAMILY_CAP) continue;
         taken[b.slug] = (taken[b.slug] ?? 0) + 1;
         (out[b.slug] ??= []).push({
+          of: m.of,
           // not "of the 690 Enduro Rs": the chips render uppercase, and the
           // pluralising s then reads as part of the model name
           label: `${m.label} of any ${b.model}`,
@@ -247,10 +291,23 @@ const TABLE: Record<string, Superlative[]> = (() => {
     }
   }
 
-  // whole-list claims first, then runners-up, then the within-model ones
-  const weight = (x: Superlative) => (x.scope === "family" ? 3 : x.rank);
+  // the overall standing leads, then whole-list claims, then runners-up, then
+  // the within-model ones
+  const weight = (x: Superlative) => (x.of === "overall" ? 0 : x.scope === "family" ? 3 : x.rank);
   for (const list of Object.values(out)) list.sort((a, b) => weight(a) - weight(b));
   return out;
 })();
 
 export const superlativesFor = (bike: Bike): Superlative[] => TABLE[bike.slug] ?? [];
+
+/**
+ * 1, 2 or 3 for the top three chart areas, null otherwise. Reads the same table
+ * the chips come from, so a crown and its chip can never disagree.
+ */
+export const overallRank = (bike: Bike): 1 | 2 | 3 | null =>
+  superlativesFor(bike).find((s) => s.of === "overall")?.rank ?? null;
+
+/** The medal holders, best first. */
+export const overallPodium: Bike[] = bikes
+  .filter((b) => overallRank(b) !== null)
+  .sort((a, b) => (overallRank(a) as number) - (overallRank(b) as number));

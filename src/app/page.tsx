@@ -1,4 +1,5 @@
 import { Explorer } from "@/components/Explorer";
+import { OverallExplainer } from "@/components/OverallExplainer";
 import { MARK_MAKES } from "@/components/BrandLogo";
 import { bikes, extremes } from "@/data/bikes";
 
@@ -32,6 +33,8 @@ export default function Home() {
         </header>
 
         <Explorer />
+
+        <OverallExplainer />
       </main>
 
       <footer className="border-t border-hair">

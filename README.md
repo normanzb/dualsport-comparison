@@ -137,15 +137,20 @@ Code identifiers and platform names stay American, because they are not prose: `
 
 Three tiers, and the panel fills the first and outlines the other two so there is still something to read first:
 
-| Tier         | Example                        | Scope                      |
-| ------------ | ------------------------------ | -------------------------- |
-| Outright     | `most power 105 hp`            | best of all bikes          |
-| Runner-up    | `2nd-heaviest ~196 kg`         | second best of all bikes   |
-| Within model | `lightest of any 690 Enduro R` | best of that model's years |
+| Tier         | Example                        | Scope                                            |
+| ------------ | ------------------------------ | ------------------------------------------------ |
+| Overall      | `best overall 5.9/10`          | top three chart areas, listed first, and crowned |
+| Outright     | `most power 105 hp`            | best of all bikes                                |
+| Runner-up    | `2nd-heaviest ~196 kg`         | second best of all bikes                         |
+| Within model | `lightest of any 690 Enduro R` | best of that model's years                       |
 
 Ranking is competition-style: two bikes tied for first are both first, and the value below them is third, so it gets no chip. Nobody is promoted by a tie above them.
 
-The within-model tier exists because the three 690s and three 701s are on the list purely to be told apart, and they are mid-field on everything, so no whole-list claim distinguishes them. It is capped at the best two metrics per bike, in the order weight, price, seat, tank, service; skips any figure every year of that model shares; skips anything the bike already claims outright; and leaves out range, which within one model only restates the tank.
+The within-model tier exists because the three 690s and three 701s are on the list purely to be told apart, and they are mid-field on everything, so no whole-list claim distinguishes them. It is capped at the best two metrics per bike, in the order weight, seat, tank, service; skips any figure every year of that model shares; and skips anything the bike already claims outright.
+
+Two metrics are deliberately absent from that tier. Range, because within one model it only restates the tank. And price, because the newest year is always the dearest and the oldest always the cheapest, so the claim tells you nothing the year has not already.
+
+Derived axes are ranked too, not just table figures: `easiest off road`, `hardest off road` and `best overall` come off the ability chart. Those rank on the figure rounded to the one decimal the page prints, so two bikes both shown as `5.0/10` read as joint rather than being split by a difference nothing displays.
 
 To add a claim, add a `Metric` there, with an `of` key naming the underlying figure so a max and its min count as one claim. Do not write superlatives, ordinals or margins into a bike's prose: hand-written ones went stale every time the set grew.
 
@@ -207,6 +212,23 @@ Engine sits above wind protection at 4 to 3. At equal weight a screen exactly ca
 Top-gear comfort is not min-max normalised either: gearboxes here are only ever five or six speeds, so scaling them to the field would make one gear worth the whole axis, more than a 112 cc gap. A five-speed scores 0.75, worth roughly the 10-15% more revs it turns at speed.
 
 Wind protection is the one subjective number on the page: a 0-5 judgement read off the bodywork, where a bare number plate is 0 and a rally tower with a screen is 5.
+
+### Overall standing
+
+The page explains this to the reader in the `OverallExplainer` section, which derives its wording and its formula from `AXES.length` so it cannot drift if an axis is added.
+
+`overall()` is the area of the polygon the chart draws, as a fraction of the full pentagon, square-rooted so a bike scoring x on every axis reads exactly x rather than x squared. The top two get a `best overall` chip, and the leader also gets a `Crown` beside its name in the table row and the panel heading.
+
+The top three get a crown: gold, silver, bronze. They ask `overallRank()`, and the `OverallExplainer` section builds its podium from `overallPodium`; both read the same derived table the chips come from, so a crown, a chip and the podium can never disagree. Nothing hardcodes a winning slug.
+
+Every other metric stops at second place. The overall standing is the one that goes to three, via `depth: 3` on its `Metric`. Competition ranking still applies, so if two bikes tie for second there is no bronze at all.
+
+Each crown has a gradient sweep and a pulsing glow. Both are CSS animations in `globals.css`, not an inline SVG, so the existing `prefers-reduced-motion` block switches the pair off and leaves a static crown with a soft glow. The tier classes supply `--crown-metal` and `--crown-glow`; the animations are shared. The mask sits on an inner span and the filter on the outer one: masking is applied after filtering, so a glow on the masked element would be clipped to the crown's own silhouette and never seen.
+
+Two caveats worth keeping in mind before quoting it:
+
+- **Radar area depends on the order of the axes.** The same five scores arranged differently enclose a different shape. Across all twelve distinct orders the leader does not change, but its figure moves by roughly half a point, so this summarises the chart as drawn rather than stating a fact about the bike.
+- **It rewards all-rounders over specialists by construction.** Squaring is what does it: a bike strong on two axes and weak on three encloses less than a bike that is middling on all five. The easiest bike here to take off road does not come close to the top of it.
 
 Offroad, performance and highway are indices out of ten, not measurements. Hours-based service intervals (KTM 450 EXC-F, Ducati) do not convert to mileage, so the chart places them at a 30 mph working average purely to put them on the same axis. The table always shows the published hours.
 
