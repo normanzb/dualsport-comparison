@@ -22,6 +22,9 @@ const MARKS: Record<string, Mark> = {
   Yamaha: { file: "/logos/yamaha.svg", aspect: 4.266 },
 };
 
+/** Makes with a real logo file. Everything else falls back to a wordmark. */
+export const MARK_MAKES = Object.keys(MARKS);
+
 export function BrandLogo({
   make,
   height,

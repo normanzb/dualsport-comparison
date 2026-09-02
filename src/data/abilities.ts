@@ -55,6 +55,8 @@ const MPG_US: Record<string, number> = {
   "voge-300-rally": 65,
   // no owner data yet; scored as its class peer, the 450MT twin
   "moto-morini-alltrhike-450": 48,
+  // 600 single, no owner sample; scored between the 450s and the 690
+  "ajp-pr7": 55,
 };
 
 /* ---------------------------------------------------------------------------
@@ -86,6 +88,7 @@ const WIND: Record<string, number> = {
   "cfmoto-450mt": 3,
   "voge-300-rally": 3,
   "moto-morini-alltrhike-450": 3,
+  "ajp-pr7": 3,
 };
 
 /**

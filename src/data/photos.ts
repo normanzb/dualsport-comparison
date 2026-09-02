@@ -121,6 +121,11 @@ export const photos: Record<string, PhotoSet> = {
     credit: "Voge UK",
     source: "https://vogemotorcycles.com/model/2026-voge-rally-300-1341",
   },
+  "ajp-pr7": {
+    views: [{ side: "right", src: "/bikes/ajp-pr7/right.webp" }],
+    credit: "AJP Motos",
+    source: "https://ajpmotos.com/en/bikes/pr7-650-adventure",
+  },
 };
 
 export const photosFor = (slug: string): PhotoSet | undefined => photos[slug];
