@@ -35,8 +35,9 @@ export type Bike = {
   };
   condition: "new" | "used";
   /**
-   * Which side the final drive runs down, chain or shaft. Left on everything
-   * here. "none" is for a bike with no one-sided drive to point at.
+   * Which side the final drive runs down. Left on every chain-driven bike here;
+   * the shaft-drive HP2 runs its drive down the right. "none" is for a bike with
+   * no one-sided drive to point at.
    */
   driveSide?: "left" | "right" | "none";
   /**
@@ -874,7 +875,7 @@ export const bikes: Bike[] = [
       hp: 105,
       nm: 115,
     },
-    driveSide: "left",
+    driveSide: "right",
     exhaustSide: "left",
     condition: "used",
     ink: "#5B93F0",
