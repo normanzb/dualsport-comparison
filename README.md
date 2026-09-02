@@ -118,6 +118,12 @@ The `spec` block reproduces the source comparison table verbatim, approximations
 
 Where a figure has been overridden from another source, leave a comment on the bike naming that source and what it replaced. There are currently no overrides: a 950 mm seat height for the 2018 Husqvarna 701 was tried from motorcyclespecs.co.za and reverted, because it disagreed with Husqvarna's own 910 mm, made the 2018 the tallest of the three 701s, and contradicted the same-chassis KTM 690 at 910 mm.
 
+## Ground clearance
+
+Ducati publishes none for the Desmo450 EDS, so its 310 mm is an estimate and carries a tilde like the other unpublished values here. Everything else in that column is a published figure.
+
+It feeds the offroad axis rather than getting one of its own, which is what stops the chart double-counting: clearance and wet weight correlate at r = -0.75, so as separate spokes they would swell the same lobe of the polygon for what is largely one trait.
+
 ## Ability chart
 
 Five axes: service, range, performance, offroad, highway. Two rules:
@@ -129,7 +135,9 @@ That split is deliberate. Range has a real-world absolute, so scaling it to the 
 
 **Range is tank size times real-world economy**, not tank size. The two are not interchangeable: the CRF300L carries a litre less than the DR-Z4S and still goes 29 miles further.
 
-**Offroad** is half wet weight and half seat height, both inverted. Worth knowing what this hides: a low seat usually means less suspension travel, which cuts the other way on rough ground, so the axis rewards accessibility rather than outright capability.
+**Offroad** combines three figures: wet weight and ground clearance at weight 1 each, seat height at 0.3. Lighter, more clearance and lower seat all score higher.
+
+The weighting is the point. Clearance already carries the suspension-travel part of a tall seat, so seat height's remaining job is just reaching the ground, which is worth less: hence 0.3. Rolling all three together also avoids the r = -0.75 correlation between weight and clearance showing up as two spokes saying one thing.
 
 **Performance** is power and torque weighted equally, normalised across the field.
 

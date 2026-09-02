@@ -142,6 +142,33 @@ export function performance(b: Bike): number {
   return (unit(b.n.hp, HP) + unit(b.n.nm, NM)) / 2;
 }
 
+const WET = span((b) => b.n.wetKg);
+const SEAT = span((b) => b.n.seatMm);
+const CLEAR = span((b) => b.n.clearanceMm ?? 0);
+
+/** Weights for the offroad index. Seat height is a third of the others. */
+const W_LIGHT = 1;
+const W_CLEAR = 1;
+const W_SEAT = 0.3;
+
+/**
+ * How willing the bike is once the tarmac stops: mass and ground clearance
+ * carrying equal weight, seat height a third of that.
+ *
+ * Rolling all three into one axis is what stops the chart double-counting. Wet
+ * weight and clearance correlate at r = -0.75, so as separate spokes they would
+ * swell the same lobe of the polygon for what is largely one trait. Seat height
+ * is scored low-is-better, which is about reaching the ground rather than
+ * capability, and is why it only gets 0.3: clearance already carries the
+ * suspension-travel part of a tall seat.
+ */
+export function offroad(b: Bike): number {
+  const light = 1 - unit(b.n.wetKg, WET);
+  const clear = unit(b.n.clearanceMm ?? 0, CLEAR);
+  const low = 1 - unit(b.n.seatMm, SEAT);
+  return (W_LIGHT * light + W_CLEAR * clear + W_SEAT * low) / (W_LIGHT + W_CLEAR + W_SEAT);
+}
+
 export type Axis = {
   key: string;
   label: string;
@@ -175,13 +202,6 @@ export const AXES: Axis[] = [
     absolute: (b) => rangeMiles(b) / RANGE_FULL_MARKS,
   },
   {
-    key: "highway",
-    label: "Highway",
-    value: highwayComfort,
-    display: (b) => `${(highwayComfort(b) * 10).toFixed(1)}/10`,
-    absolute: highwayComfort,
-  },
-  {
     key: "performance",
     label: "Performance",
     value: performance,
@@ -189,16 +209,18 @@ export const AXES: Axis[] = [
     absolute: performance,
   },
   {
-    key: "seat",
-    label: "Low seat",
-    value: (b) => -b.n.seatMm,
-    display: (b) => b.spec.seatHeight,
+    key: "offroad",
+    label: "Offroad",
+    value: offroad,
+    display: (b) => `${(offroad(b) * 10).toFixed(1)}/10`,
+    absolute: offroad,
   },
   {
-    key: "light",
-    label: "Lightness",
-    value: (b) => -b.n.wetKg,
-    display: (b) => b.spec.wetWeight,
+    key: "highway",
+    label: "Highway",
+    value: highwayComfort,
+    display: (b) => `${(highwayComfort(b) * 10).toFixed(1)}/10`,
+    absolute: highwayComfort,
   },
 ];
 

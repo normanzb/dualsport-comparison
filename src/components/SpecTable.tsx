@@ -12,6 +12,7 @@ const COLS = [
   "Tank",
   "Gears",
   "Seat height",
+  "Clearance",
   "Engine",
   "Power",
   "Torque",
@@ -27,7 +28,7 @@ export function SpecTable({
 }) {
   return (
     <div className="-mx-5 overflow-x-auto px-5 md:mx-0 md:px-0">
-      <table className="w-full min-w-[1290px] border-collapse text-left">
+      <table className="w-full min-w-[1380px] border-collapse text-left">
         <caption className="sr-only">
           Fourteen dual sport motorcycles compared. Select a row to see that bike in detail.
         </caption>
@@ -98,6 +99,7 @@ export function SpecTable({
                 <Cell>{b.spec.tank}</Cell>
                 <Cell>{b.spec.gears}</Cell>
                 <Cell>{b.spec.seatHeight}</Cell>
+                <Cell>{b.spec.clearance}</Cell>
                 <Cell>{b.spec.engine}</Cell>
                 <Cell>{b.spec.power}</Cell>
                 <Cell>{b.spec.torque}</Cell>
