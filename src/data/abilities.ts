@@ -57,6 +57,8 @@ const MPG_US: Record<string, number> = {
   "moto-morini-alltrhike-450": 48,
   // 600 single, no owner sample; scored between the 450s and the 690
   "ajp-pr7": 55,
+  // 1170 air-cooled boxer, and it drinks like one
+  "bmw-hp2-enduro": 45,
 };
 
 /* ---------------------------------------------------------------------------
@@ -89,19 +91,31 @@ const WIND: Record<string, number> = {
   "voge-300-rally": 3,
   "moto-morini-alltrhike-450": 3,
   "ajp-pr7": 3,
+  "bmw-hp2-enduro": 1,
 };
 
 /**
  * Top-gear comfort. Not min-max normalized: gearboxes here are only ever five or
  * six speeds, so scaling them to the field would make a single gear worth the
  * entire axis, more than a 112 cc displacement gap. A five-speed still has a top
- * gear, it is just shorter, so it scores low rather than zero.
+ * gear, just a shorter one, worth maybe 10-15% more revs at speed.
  */
-const GEAR_COMFORT: Record<number, number> = { 5: 0.55, 6: 1 };
+const GEAR_COMFORT: Record<number, number> = { 5: 0.75, 6: 1 };
 
-const CC_LO = 124;
-const CC_HI = 693;
-const WIND_HI = 5;
+// Derived, not hardcoded: a bike outside a fixed range would push a component
+// past 1 and the index past 10, which is how a 1170 boxer once scored 10.2.
+const CC_LO = Math.min(...bikes.map((b) => b.n.cc));
+const CC_HI = Math.max(...bikes.map((b) => b.n.cc));
+const WIND_HI = Math.max(...Object.values(WIND));
+
+/**
+ * Displacement on a log scale. The field spans 124 cc to 1170 cc, nearly ten to
+ * one, so scaling it linearly crushes the small and mid-size bikes into the
+ * bottom of the axis where most of them actually live. It also matches how the
+ * motor feels: 125 to 400 is transformative, 700 to 1170 much less so.
+ */
+const engineScore = (cc: number) =>
+  (Math.log(cc) - Math.log(CC_LO)) / (Math.log(CC_HI) - Math.log(CC_LO));
 
 /**
  * How well the bike settles at road speed, 0 to 1. Weighted 3 parts engine size,
@@ -110,9 +124,8 @@ const WIND_HI = 5;
  */
 export function highwayComfort(b: Bike): number {
   const gear = GEAR_COMFORT[Number(b.spec.gears)] ?? 1;
-  const engine = (b.n.cc - CC_LO) / (CC_HI - CC_LO);
   const wind = WIND[b.slug] / WIND_HI;
-  return (1 * gear + 3 * engine + 3 * wind) / 7;
+  return (1 * gear + 3 * engineScore(b.n.cc) + 3 * wind) / 7;
 }
 
 const L_PER_US_GAL = 3.785;
@@ -185,10 +198,15 @@ export type Axis = {
 /**
  * Hours-based intervals do not convert to mileage, so the chart assumes a 30 mph
  * working average purely to place them on the same axis. The table keeps hours.
+ * The hours are read off the spec string, so a new hours-based bike needs no
+ * change here.
  */
-const HOURS_TO_MILES = 30;
-const serviceMiles = (b: Bike) =>
-  b.n.serviceMi ?? (b.slug === "ktm-450-excf" ? 15 : 30) * HOURS_TO_MILES;
+const MPH = 30;
+const serviceMiles = (b: Bike) => {
+  if (b.n.serviceMi !== null) return b.n.serviceMi;
+  const hours = Number(b.spec.serviceInterval.match(/^(\d+)\s*hr$/)?.[1]);
+  return Number.isFinite(hours) ? hours * MPH : 0;
+};
 
 export const AXES: Axis[] = [
   {

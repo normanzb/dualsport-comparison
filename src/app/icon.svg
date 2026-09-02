@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <title>Dualsport index</title>
+  <rect width="512" height="512" fill="#0B0C0E"/>
+  <g transform="translate(256 256)" fill="#FF7A1A">
+  <rect x="-16" y="-214" width="32" height="34" rx="7" transform="rotate(0.0000)" />
+  <rect x="-16" y="-214" width="32" height="34" rx="7" transform="rotate(25.7143)" />
+  <rect x="-16" y="-214" width="32" height="34" rx="7" transform="rotate(51.4286)" />
+  <rect x="-16" y="-214" width="32" height="34" rx="7" transform="rotate(77.1429)" />
+  <rect x="-16" y="-214" width="32" height="34" rx="7" transform="rotate(102.8571)" />
+  <rect x="-16" y="-214" width="32" height="34" rx="7" transform="rotate(128.5714)" />
+  <rect x="-16" y="-214" width="32" height="34" rx="7" transform="rotate(154.2857)" />
+  <rect x="-16" y="-214" width="32" height="34" rx="7" transform="rotate(180.0000)" />
+  <rect x="-16" y="-214" width="32" height="34" rx="7" transform="rotate(205.7143)" />
+  <rect x="-16" y="-214" width="32" height="34" rx="7" transform="rotate(231.4286)" />
+  <rect x="-16" y="-214" width="32" height="34" rx="7" transform="rotate(257.1429)" />
+  <rect x="-16" y="-214" width="32" height="34" rx="7" transform="rotate(282.8571)" />
+  <rect x="-16" y="-214" width="32" height="34" rx="7" transform="rotate(308.5714)" />
+  <rect x="-16" y="-214" width="32" height="34" rx="7" transform="rotate(334.2857)" />
+  </g>
+  <circle cx="256" cy="256" r="170" fill="none" stroke="#FF7A1A" stroke-width="42"/>
+  <circle cx="256" cy="256" r="58" fill="#FF7A1A"/>
+  <circle cx="256" cy="256" r="23" fill="#0B0C0E"/>
+</svg>

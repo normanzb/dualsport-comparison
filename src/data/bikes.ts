@@ -35,11 +35,16 @@ export type Bike = {
   };
   condition: "new" | "used";
   /**
+   * Which side the chain runs down. Left on every chain-driven bike here, so
+   * "none" is for shaft drive, where there is no drive side to point at.
+   */
+  driveSide?: "left" | "right" | "none";
+  /**
    * Which side the silencer sits on. Right on almost everything, but the LC4
    * 690/701 routes it down the left, alongside the chain, so the right-hand view
-   * of those bikes shows no exhaust at all.
+   * of those bikes shows no exhaust at all. "none" where it is not one-sided.
    */
-  exhaustSide?: "left" | "right";
+  exhaustSide?: "left" | "right" | "none";
   /** Brand color, contrast-checked against the graphite ground. */
   ink: string;
   /** Secondary brand color, used for the section's minor accents. */
@@ -500,7 +505,7 @@ export const bikes: Bike[] = [
     condition: "used",
     ink: "#6FA8FF",
     inkAlt: "#F7D417",
-    note: "The priciest used bike on the list. Two kilos up on the 2018 and 15 mm taller, for a £3,000 premium.",
+    note: "Joint-priciest used bike here, level with the HP2. Two kilos up on the 2018 and 15 mm taller, for a £3,000 premium.",
   },
   {
     slug: "husqvarna-701-enduro-2026",
@@ -672,7 +677,7 @@ export const bikes: Bike[] = [
     condition: "new",
     ink: "#4C9AE8",
     inkAlt: "#F2F2F2",
-    note: "One of two parallel twins here, with the lowest seat at 820 mm. Also the heaviest bike on the list, and 220 mm of clearance caps how far off-road it goes.",
+    note: "One of two parallel twins here, with the lowest seat at 820 mm. Second-heaviest bike on the list, and 220 mm of clearance caps how far off-road it goes.",
   },
   {
     slug: "voge-300-rally",
@@ -772,9 +777,45 @@ export const bikes: Bike[] = [
       nm: 56.1,
     },
     condition: "new",
-    ink: "#86D96B",
-    inkAlt: "#F2F2F2",
+    ink: "#F4F5F7",
+    inkAlt: "#E4322B",
     note: "Third-longest range on the list at 247 miles, with 320 mm of clearance under a 165 kg bike. Low-volume Portuguese, priced against a used 690.",
+  },
+  {
+    slug: "bmw-hp2-enduro",
+    make: "BMW",
+    model: "HP2 Enduro",
+    spec: {
+      serviceInterval: "6,000 mi",
+      dryWeight: "175 kg",
+      wetWeight: "~196 kg",
+      tank: "13 L",
+      gears: "6",
+      seatHeight: "920 mm",
+      clearance: "320 mm",
+      engine: "1,170 cc",
+      power: "105 hp",
+      torque: "115 Nm",
+      price: "~£8,000-13,000 used",
+    },
+    n: {
+      wetKg: 196,
+      dryKg: 175,
+      tankL: 13,
+      seatMm: 920,
+      priceFrom: 8000,
+      serviceMi: 6000,
+      clearanceMm: 320,
+      cc: 1170,
+      hp: 105,
+      nm: 115,
+    },
+    driveSide: "none",
+    exhaustSide: "none",
+    condition: "used",
+    ink: "#5B93F0",
+    inkAlt: "#F2F2F2",
+    note: "The only boxer twin here, and by a wide margin the most power and torque on the list: 105 hp and 115 Nm. Also the heaviest, and 13 liters buys just 155 miles.",
   },
 ];
 

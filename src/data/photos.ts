@@ -126,6 +126,15 @@ export const photos: Record<string, PhotoSet> = {
     credit: "AJP Motos",
     source: "https://ajpmotos.com/en/bikes/pr7-650-adventure",
   },
+  "bmw-hp2-enduro": {
+    views: [
+      { side: "left", src: "/bikes/bmw-hp2-enduro/left.webp" },
+      { side: "right", src: "/bikes/bmw-hp2-enduro/right.webp" },
+    ],
+    credit: "BMW Motorrad",
+    source: "https://www.motorcyclespecs.co.za/model/bmw/bmw-hp2-enduro-06.html",
+    note: "2007 studio images.",
+  },
 };
 
 export const photosFor = (slug: string): PhotoSet | undefined => photos[slug];

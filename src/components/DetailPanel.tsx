@@ -10,13 +10,17 @@ import { type Side, photosFor } from "@/data/photos";
 import { asset } from "@/lib/base-path";
 
 /**
- * The drive side is always the left on these bikes, but the exhaust is not always
- * the right, so the caption has to come off the bike rather than the side.
+ * Captions come off the bike, not the side. The chain is on the left and the
+ * silencer on the right for most of these, but the LC4 690/701 puts both on the
+ * left, and a shaft-drive boxer claims neither.
  */
 function sideLabel(bike: Bike, side: Side) {
-  const exhaustLeft = bike.exhaustSide === "left";
-  if (side === "left") return exhaustLeft ? "Left / drive & exhaust" : "Left / drive";
-  return exhaustLeft ? "Right" : "Right / exhaust";
+  const name = side === "left" ? "Left" : "Right";
+  const on = [
+    (bike.driveSide ?? "left") === side && "drive",
+    (bike.exhaustSide ?? "right") === side && "exhaust",
+  ].filter(Boolean);
+  return on.length ? `${name} / ${on.join(" & ")}` : name;
 }
 
 function Empty() {

@@ -75,8 +75,8 @@ One append to `bikes` in `src/data/bikes.ts` is most of the job. The table, the 
 
 Then add the bike to the two lookup tables in `src/data/abilities.ts`, both keyed by `slug`:
 
-- `MPG_US` — real-world economy in miles per US gallon. Prefer owner-reported data (Fuelly) over a manufacturer claim. Leave a comment naming the source and sample size.
-- `WIND` — wind protection on a 0-5 scale.
+- `MPG_US`: real-world economy in miles per US gallon. Prefer owner-reported data (Fuelly) over a manufacturer claim. Leave a comment naming the source and sample size.
+- `WIND`: wind protection on a 0-5 scale.
 
 Miss either and the bike silently falls back to a default, so add both.
 
@@ -104,7 +104,9 @@ Files go at `public/bikes/<slug>/<side>.webp`, where `<side>` is `left` or `righ
 
 A bike may have one view or two. The switcher renders whatever is listed, and a bike with no entry shows a placeholder naming the directory to drop into.
 
-The captions come off the bike, not the side. The drive (chain) side is always the left here, but the exhaust is not always the right: the LC4 690/701 routes its silencer down the left, alongside the chain, so its right-hand view shows no exhaust at all. Set `exhaustSide: "left"` on those bikes in `bikes.ts` and the captions become `Left / drive & exhaust` and plain `Right`. Check the photo before trusting the convention. **Left is the drive (chain) side, right is the exhaust side** — check the photo rather than trusting the filename. Press galleries sometimes ship a mirrored image rather than a genuine second side; if two views look like flips of each other, compare one against the mirror of the other and see whether the difference collapses.
+Captions come off the bike, not the side. The default is chain on the left and silencer on the right, but neither holds everywhere: the LC4 690/701 runs its silencer down the left alongside the chain, and the shaft-drive BMW has no chain side at all. Set `driveSide` and `exhaustSide` per bike, using `"none"` where it is not one-sided, and the caption composes itself.
+
+Check the photo rather than trusting the convention or the filename. Press galleries sometimes ship a mirrored image instead of a genuine second side, which puts the exhaust on the wrong side of the bike. If two views look like flips of each other, compare one against the mirror of the other: a flip collapses the difference, two real photographs do not.
 
 ### Preparing the image
 
@@ -152,7 +154,13 @@ The weighting is the point. Clearance already carries the suspension-travel part
 
 **Performance** is power and torque weighted equally, normalized across the field.
 
-**Highway** is `(1 x top-gear comfort + 3 x engine size + 3 x wind protection) / 7`, each component normalized to 0-1 first so displacement does not swamp the rest. Wind protection is the one subjective number on the page: a 0-5 judgment read off the bodywork, where a bare number plate is 0 and a rally tower with a screen is 5.
+**Highway** is `(1 x top-gear comfort + 3 x engine size + 3 x wind protection) / 7`.
+
+Displacement is scored on a **log** scale, not linearly. The field spans 124 cc to 1170 cc, nearly ten to one, so a linear scale crushes the small and mid-size bikes into the bottom of the axis where most of them actually live, and it matches how the motor feels: 125 to 400 is transformative, 700 to 1170 much less so. Its bounds are derived from the data, because hardcoding them is how a 1170 boxer once scored 10.2 out of 10.
+
+Top-gear comfort is not min-max normalized either: gearboxes here are only ever five or six speeds, so scaling them to the field would make one gear worth the whole axis, more than a 112 cc gap. A five-speed scores 0.75, worth roughly the 10-15% more revs it turns at speed.
+
+Wind protection is the one subjective number on the page: a 0-5 judgment read off the bodywork, where a bare number plate is 0 and a rally tower with a screen is 5.
 
 Offroad, performance and highway are indices out of ten, not measurements. Hours-based service intervals (KTM 450 EXC-F, Ducati) do not convert to mileage, so the chart places them at a 30 mph working average purely to put them on the same axis. The table always shows the published hours.
 
