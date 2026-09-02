@@ -24,10 +24,10 @@ The site lands at `https://bikes.norm.im/`, or `https://<user>.github.io/<repo>/
 
 These serve from different roots, and the build has to match:
 
-| Hosting | Served from | Base path |
-|---|---|---|
-| `bikes.norm.im` (custom domain) | the root | none |
-| `<user>.github.io/<repo>` | `/<repo>` | `/<repo>` |
+| Hosting                         | Served from | Base path |
+| ------------------------------- | ----------- | --------- |
+| `bikes.norm.im` (custom domain) | the root    | none      |
+| `<user>.github.io/<repo>`       | `/<repo>`   | `/<repo>` |
 
 `public/CNAME` is the switch. The workflow checks for it: present means a custom domain and an empty base path, absent means a project page and a base path derived from the repo name. Deleting the CNAME to fall back to a github.io URL therefore needs no other change.
 
@@ -135,7 +135,19 @@ Code identifiers and platform names stay American, because they are not prose: `
 
 `src/data/superlatives.ts` derives every "lightest", "biggest tank", "longest range" claim from the data at module load, keyed by slug, and the detail panel renders them as chips. Ties are detected rather than assumed, so two bikes sharing the longest service interval both read `joint-longest service`.
 
-To add a claim, add a `Metric` there. Do not write superlatives into a bike's `note`: hand-written ones went stale every time the set grew.
+Three tiers, and the panel fills the first and outlines the other two so there is still something to read first:
+
+| Tier         | Example                        | Scope                      |
+| ------------ | ------------------------------ | -------------------------- |
+| Outright     | `most power 105 hp`            | best of all bikes          |
+| Runner-up    | `2nd-heaviest ~196 kg`         | second best of all bikes   |
+| Within model | `lightest of any 690 Enduro R` | best of that model's years |
+
+Ranking is competition-style: two bikes tied for first are both first, and the value below them is third, so it gets no chip. Nobody is promoted by a tie above them.
+
+The within-model tier exists because the three 690s and three 701s are on the list purely to be told apart, and they are mid-field on everything, so no whole-list claim distinguishes them. It is capped at the best two metrics per bike, in the order weight, price, seat, tank, service; skips any figure every year of that model shares; skips anything the bike already claims outright; and leaves out range, which within one model only restates the tank.
+
+To add a claim, add a `Metric` there, with an `of` key naming the underlying figure so a max and its min count as one claim. Do not write superlatives, ordinals or margins into a bike's `note`: hand-written ones went stale every time the set grew. A `note` is for what the data cannot say, such as why the bike exists, what it is like to own, and what is still unconfirmed.
 
 ## Where the numbers come from
 

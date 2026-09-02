@@ -184,18 +184,28 @@ export function DetailPanel({ bike, onClear }: { bike: Bike | null; onClear: () 
         <div className="min-w-0">
           {superlatives.length > 0 && (
             <ul className="mb-3 flex flex-wrap gap-1.5">
-              {superlatives.map((s) => (
-                <li
-                  key={s.label}
-                  className="px-2 py-1 text-[10px] tracking-[0.14em] uppercase"
-                  style={{
-                    background: "color-mix(in srgb, var(--livery) 16%, transparent)",
-                    color: "var(--livery)",
-                  }}
-                >
-                  {s.label} <span className="text-ink-dim">{s.value}</span>
-                </li>
-              ))}
+              {superlatives.map((s) => {
+                // outright wins are filled, runners-up and within-model wins are
+                // outlined, so six chips still have a first thing to read
+                const top = s.scope === "list" && s.rank === 1;
+                return (
+                  <li
+                    key={s.label}
+                    className="px-2 py-1 text-[10px] tracking-[0.14em] uppercase"
+                    style={{
+                      background: top
+                        ? "color-mix(in srgb, var(--livery) 16%, transparent)"
+                        : "transparent",
+                      boxShadow: top
+                        ? undefined
+                        : "inset 0 0 0 1px color-mix(in srgb, var(--livery) 30%, transparent)",
+                      color: "var(--livery)",
+                    }}
+                  >
+                    {s.label} <span className="text-ink-dim">{s.value}</span>
+                  </li>
+                );
+              })}
             </ul>
           )}
           <p className="mb-4 text-[12px] leading-relaxed text-ink-dim">{bike.note}</p>

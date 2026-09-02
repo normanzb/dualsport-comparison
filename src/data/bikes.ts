@@ -85,7 +85,7 @@ export const bikes: Bike[] = [
     condition: "new",
     ink: "#FF3B4E",
     inkAlt: "#4E8CFF",
-    note: "8,000 miles between services, beaten only by the 2026 690 and 701. Light for a road bike at 142 kg, and much the cheaper of the two Hondas to run.",
+    note: "Eight thousand miles between services, which is the cheap-to-run end of this list. At 142 kg it is light for a road-registered bike, and the tank sets the range long before the chassis runs out of ideas.",
   },
   {
     slug: "yamaha-wr125r",
@@ -119,7 +119,7 @@ export const bikes: Bike[] = [
     condition: "new",
     ink: "#4E8CFF",
     inkAlt: "#FF4D5E",
-    note: "The only 125 on the list, and the least powerful by 8 hp. A1 licence fodder, and priced to match.",
+    note: "A1 licence fodder and priced to match. Learner-legal, which is the whole reason it sits on a list of much bigger bikes.",
   },
   {
     slug: "suzuki-drz4s",
@@ -153,7 +153,7 @@ export const bikes: Bike[] = [
     condition: "new",
     ink: "#FFD900",
     inkAlt: "#5B94FF",
-    note: "One of only two five-speeds here, which you feel at motorway speed. Biggest tank of the Japanese small-bores, with 300 mm of clearance under it.",
+    note: "The missing sixth gear is the one thing you feel at motorway speed. Otherwise a genuinely capable trail bike: 300 mm of clearance, simple, and cheap to keep running.",
   },
   {
     slug: "kove-450-rally",
@@ -187,7 +187,7 @@ export const bikes: Bike[] = [
     condition: "new",
     ink: "#1EB8AE",
     inkAlt: "#F2F2F2",
-    note: "31 litres, half again the next biggest tank, which is the whole point. It still only manages second-longest range, because a rally 450 drinks.",
+    note: "Thirty-one litres is the whole point of it, and a rally 450 drinks hard enough that the range does not follow in proportion. Built for a special stage rather than a commute.",
   },
   {
     slug: "honda-crf450l",
@@ -221,7 +221,7 @@ export const bikes: Bike[] = [
     condition: "used",
     ink: "#FF3B4E",
     inkAlt: "#4E8CFF",
-    note: "600 miles between services, the shortest mileage interval on the list. Third-lightest bike here, and it wants that attention.",
+    note: "Six hundred miles between services, and it genuinely wants that attention: a detuned motocross engine wearing a number plate. The restrictive airbox and exhaust are what cost it so much power on paper.",
   },
   {
     slug: "ktm-450-excf",
@@ -255,7 +255,7 @@ export const bikes: Bike[] = [
     condition: "new",
     ink: "#FF7A1A",
     inkAlt: "#FFFFFF",
-    note: "107 kg dry, the lightest thing on the list by 12 kg, with 347 mm of clearance. Serviced in engine hours rather than miles, which tells you what it actually is.",
+    note: "Serviced in engine hours rather than miles, which tells you what it actually is: a race enduro bike with lights. Road legal, but the range and the seat height make anything beyond a trail day hard work.",
   },
   {
     // Ducati publishes no ground clearance for the EDS; 310 mm is an estimate,
@@ -291,7 +291,7 @@ export const bikes: Bike[] = [
     condition: "new",
     ink: "#FF4757",
     inkAlt: "#F2F2F2",
-    note: "Most expensive here, and double the KTM's service window at 30 hours. Twelve kilos heavier than the EXC-F for the privilege.",
+    note: "Thirty engine hours between services, on a desmodromic 450 single nobody else builds. You are paying for the novelty and the finish as much as the performance.",
   },
   {
     slug: "ccm-gp450",
@@ -325,7 +325,7 @@ export const bikes: Bike[] = [
     condition: "used",
     ink: "#4C79E0",
     inkAlt: "#C9CED6",
-    note: "The most ground clearance on the list at 360 mm, on a seat just 890 mm off the ground. A five-speed and hard to find, but 17 litres for £4,000 buys a lot of range.",
+    note: "A hand-built Bolton frame around a BMW-derived 450 single, with 17 litres of fuel and a seat only 890 mm up. Tiny dealer network, so buy on condition and expect to hunt for parts.",
   },
   {
     slug: "ktm-690-enduro-r-2018",
@@ -361,7 +361,7 @@ export const bikes: Bike[] = [
     condition: "used",
     ink: "#FF7A1A",
     inkAlt: "#FFFFFF",
-    note: "The value pick of the big-single group. Lightest and lowest of the three 690s, and less than half the price of the 2026.",
+    note: "The value pick of the big-single group. This is the pre-2019 LC4, so it goes without the later electronics, and the secondhand money reflects that.",
   },
   {
     slug: "ktm-690-enduro-r-2025",
@@ -397,7 +397,7 @@ export const bikes: Bike[] = [
     condition: "used",
     ink: "#FF7A1A",
     inkAlt: "#FFFFFF",
-    note: "Largest tank of the three 690s. Three kilos and 19 mm of seat height over the 2018, on the same 6,200-mile service interval.",
+    note: "The middle year: the newer engine and electronics on a 6,200-mile service interval, without the 2026 generation's weight or price.",
   },
   {
     slug: "ktm-690-enduro-r-2026",
@@ -433,7 +433,7 @@ export const bikes: Bike[] = [
     condition: "new",
     ink: "#FF7A1A",
     inkAlt: "#FFFFFF",
-    note: "Joint-longest service interval on the list at 9,320 miles, shared with the 701. Heaviest and tallest of the three 690s, which is the trade the 2026 generation asks you to make.",
+    note: "The 15,000 km service interval is the headline. The weight, the seat height and the price are what the 2026 generation asks in return.",
   },
   {
     slug: "husqvarna-701-enduro-2018",
@@ -469,7 +469,7 @@ export const bikes: Bike[] = [
     condition: "used",
     ink: "#6FA8FF",
     inkAlt: "#F7D417",
-    note: "Same platform as the 690: a litre more tank, two kilos more, and identical money secondhand. Pick on livery and dealer.",
+    note: "The same platform as the 690 of the same year, with Husqvarna bodywork and a little more tank. Pick on livery and on whose dealer you would rather deal with.",
   },
   {
     slug: "husqvarna-701-enduro-2025",
@@ -505,7 +505,7 @@ export const bikes: Bike[] = [
     condition: "used",
     ink: "#6FA8FF",
     inkAlt: "#F7D417",
-    note: "Joint-priciest used bike here, level with the HP2. Two kilos up on the 2018 and 15 mm taller, for a £3,000 premium.",
+    note: "The newer engine and electronics, still on the pre-2026 service interval. Sits awkwardly between a cheap 2018 and a warrantied 2026.",
   },
   {
     slug: "husqvarna-701-enduro-2026",
@@ -541,7 +541,7 @@ export const bikes: Bike[] = [
     condition: "new",
     ink: "#6FA8FF",
     inkAlt: "#F7D417",
-    note: "Mechanically the 2026 690 in white and blue, down to the 9,320-mile service interval. Heaviest and tallest of the three 701s.",
+    note: "Mechanically the 2026 690 in white and blue, down to the 15,000 km service interval. Choose between the two on bodywork and dealer, because nothing else separates them.",
   },
   {
     slug: "ktm-390-enduro-r",
@@ -575,7 +575,7 @@ export const bikes: Bike[] = [
     condition: "new",
     ink: "#FF7A1A",
     inkAlt: "#FFFFFF",
-    note: "Splits the difference: 44 hp on a 4,650-mile service interval, at half the money of an EXC-F. Pays for it with only 9 litres of fuel.",
+    note: "Splits the difference: 44 hp and a 4,650-mile service interval on a bike you can actually use on the road, for A2-friendly money. Nine litres of fuel is the compromise.",
   },
   {
     slug: "ktm-390-adventure-r",
@@ -609,7 +609,7 @@ export const bikes: Bike[] = [
     condition: "new",
     ink: "#FF7A1A",
     inkAlt: "#FFFFFF",
-    note: "A screen and 14.5 litres for £6,699, which buys the fourth-longest range in the set. Third-heaviest bike here, and the offroad score shows it.",
+    note: "A screen and 14.5 litres on the 390 platform, which is a lot of range for £6,699. The weight and the road-biased setup are what you give up once the tarmac ends.",
   },
   {
     slug: "rieju-aventura-rally-307",
@@ -643,7 +643,7 @@ export const bikes: Bike[] = [
     condition: "new",
     ink: "#FF6B5B",
     inkAlt: "#F2F2F2",
-    note: "The longest range on the list: 21 litres on a 160 kg bike for £4,599. Nothing else here comes close for the money.",
+    note: "Twenty-one litres on a 160 kg bike for £4,599, which is the cheap way to buy range. The UK dealer network is thin, so factor that in.",
   },
   {
     // Wet weight from independent measurement (195-197 kg), not CFMoto's claim
@@ -678,7 +678,7 @@ export const bikes: Bike[] = [
     condition: "new",
     ink: "#4C9AE8",
     inkAlt: "#F2F2F2",
-    note: "One of three parallel twins here, with the lowest seat at 820 mm. Third-heaviest bike on the list, and 220 mm of clearance caps how far off-road it goes.",
+    note: "A 449 parallel twin with cruise control and a TFT dash for the money of a used single. The low seat and modest clearance say road-to-trail rather than trail.",
   },
   {
     slug: "voge-300-rally",
@@ -712,7 +712,7 @@ export const bikes: Bike[] = [
     condition: "new",
     ink: "#4585E4",
     inkAlt: "#F2F2F2",
-    note: "The cheapest bike here at £3,999, and the cheapest new by six hundred pounds. Rally bodywork and a screen on a 292 single, which is most of the point.",
+    note: "Rally bodywork, a screen and spoked wheels on a 292 single, which is most of the point. The engine is the limit: happy on a B road, out of its depth on a motorway.",
   },
   {
     slug: "moto-morini-alltrhike-450",
@@ -746,7 +746,7 @@ export const bikes: Bike[] = [
     condition: "new",
     ink: "#E03C3C",
     inkAlt: "#F2F2F2",
-    note: "More power than the other 450 twin and the second-lowest seat, for less than the CFMoto. UK bikes land April 2026, so the service interval is still unconfirmed.",
+    note: "UK bikes land in April 2026, so the service interval is still unconfirmed. Low and road-biased, with the suspension travel to match.",
   },
   {
     slug: "ajp-pr7",
@@ -780,7 +780,7 @@ export const bikes: Bike[] = [
     condition: "new",
     ink: "#F4F5F7",
     inkAlt: "#E4322B",
-    note: "Third-longest range on the list at 247 miles, with 320 mm of clearance under a 165 kg bike. Low-volume Portuguese, priced against a used 690.",
+    note: "Low-volume Portuguese, with 320 mm of clearance under a 165 kg bike and a fuel load to match. Priced against a used 690, with a dealer network a fraction the size.",
   },
   {
     slug: "bmw-hp2-enduro",
@@ -816,7 +816,7 @@ export const bikes: Bike[] = [
     condition: "used",
     ink: "#5B93F0",
     inkAlt: "#F2F2F2",
-    note: "The only boxer twin here, and by a wide margin the most power and torque on the list: 105 hp and 115 Nm. Carries its mass low for a 196 kg bike, which lifts it up the offroad-ease order, but 13 litres buys just 155 miles.",
+    note: "A 2005 factory experiment in a big off-road bike: air-damped rear end, no pillion provision, and a boxer twin lying flat under it. Carrying its mass that low is why it scores better off road than 196 kg suggests, but 13 litres does not go far behind that engine.",
   },
   {
     slug: "yamaha-tenere-700",
@@ -850,7 +850,7 @@ export const bikes: Bike[] = [
     condition: "new",
     ink: "#4E8CFF",
     inkAlt: "#F2F2F2",
-    note: "The heaviest bike here at 208 kg, and the hardest to take off the tarmac as a result. A 689 twin on a 875 mm seat with 240 mm of clearance: built for the road to the trail more than the trail.",
+    note: "A 689 twin built for the road to the trail more than the trail itself. Long-legged and comfortable at motorway speed, and a handful the moment the ground turns soft.",
   },
 ];
 

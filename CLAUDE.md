@@ -10,7 +10,7 @@ Every item below is a real error that shipped or nearly shipped here. Read befor
 
 > Superlatives are now derived: `src/data/superlatives.ts` builds a slug-to-claims table from the data at module load, detects ties, and the panel renders them as chips. Add a metric there rather than writing "the lightest" into prose.
 >
-> The hand-written `note` fields still carry some comparative wording. After any change to `bikes`, recompute the rankings and check every note against them. Never write a superlative from memory, and never assume an untouched note is still true.
+> The `note` fields no longer carry comparative wording at all. Every ordinal, margin and "only one here" claim was stripped out; a note now says only what the data cannot: why the bike exists, what it is like to own, what is still unconfirmed. Whole-list rank 1 and rank 2, within-model wins, and joint holders are all derived. If you catch yourself typing "third-lightest", "half again the next biggest" or "less than half the price of the 2026" into a note, add a metric instead or leave the claim out. Never write a superlative from memory.
 
 **Counts hardcoded in copy went stale three times.** The page title said "14 bikes" long after there were 20; the intro, the table caption and the footer's wordmark list all drifted.
 
