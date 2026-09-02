@@ -7,6 +7,17 @@ import { BikeGlyph } from "@/components/BikeGlyph";
 import { BrandLogo } from "@/components/BrandLogo";
 import type { Bike } from "@/data/bikes";
 import { type Side, photosFor } from "@/data/photos";
+import { asset } from "@/lib/base-path";
+
+/**
+ * The drive side is always the left on these bikes, but the exhaust is not always
+ * the right, so the caption has to come off the bike rather than the side.
+ */
+function sideLabel(bike: Bike, side: Side) {
+  const exhaustLeft = bike.exhaustSide === "left";
+  if (side === "left") return exhaustLeft ? "Left / drive & exhaust" : "Left / drive";
+  return exhaustLeft ? "Right" : "Right / exhaust";
+}
 
 function Empty() {
   return (
@@ -46,7 +57,7 @@ function Stack({ bike }: { bike: Bike }) {
         {views.map((v) => (
           <Image
             key={v.side}
-            src={v.src}
+            src={asset(v.src)}
             alt={`${bike.make} ${bike.model}${bike.year ? ` ${bike.year}` : ""}, ${v.side} side`}
             fill
             priority={v.side === views[0].side}
@@ -71,7 +82,9 @@ function Stack({ bike }: { bike: Bike }) {
               className="group flex items-center gap-2 border px-3 py-2 transition-colors"
               style={{
                 borderColor: on ? "var(--livery)" : "var(--color-hair)",
-                background: on ? "color-mix(in srgb, var(--livery) 14%, transparent)" : "transparent",
+                background: on
+                  ? "color-mix(in srgb, var(--livery) 14%, transparent)"
+                  : "transparent",
               }}
             >
               <BikeGlyph
@@ -83,7 +96,7 @@ function Stack({ bike }: { bike: Bike }) {
                 className="text-[10px] tracking-[0.18em] uppercase"
                 style={{ color: on ? "var(--livery)" : "var(--color-ink-dim)" }}
               >
-                {v.side === "left" ? "Left / drive" : "Right / exhaust"}
+                {sideLabel(bike, v.side)}
               </span>
             </button>
           );
@@ -98,7 +111,12 @@ function Stack({ bike }: { bike: Bike }) {
       {set && (
         <p className="mt-2 text-[10px] leading-relaxed text-ink-faint">
           {set.note ? `${set.note} ` : ""}Image ©{" "}
-          <a href={set.source} target="_blank" rel="noreferrer" className="underline hover:text-ink-dim">
+          <a
+            href={set.source}
+            target="_blank"
+            rel="noreferrer"
+            className="underline hover:text-ink-dim"
+          >
             {set.credit}
           </a>
           , used for identification.
@@ -126,9 +144,7 @@ export function DetailPanel({ bike, onClear }: { bike: Bike | null; onClear: () 
           <span aria-hidden className="h-8 w-px bg-hair" />
           <h2 className="font-display text-3xl leading-none md:text-4xl">
             {bike.model}
-            {bike.year && (
-              <span className="ml-2 text-ink-dim">&rsquo;{bike.year.slice(2)}</span>
-            )}
+            {bike.year && <span className="ml-2 text-ink-dim">&rsquo;{bike.year.slice(2)}</span>}
           </h2>
           <span
             className="border px-2 py-0.5 text-[9px] tracking-[0.18em] uppercase"

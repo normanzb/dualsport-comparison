@@ -9,6 +9,8 @@
  * `optical` nudges marks whose bounding box overshoots their cap height, such as
  * Husqvarna carrying a shield and a registered symbol.
  */
+import { asset } from "@/lib/base-path";
+
 type Mark = { file: string; aspect: number; optical?: number };
 
 const MARKS: Record<string, Mark> = {
@@ -56,8 +58,8 @@ export function BrandLogo({
         height: h,
         width: h * mark.aspect,
         backgroundColor: color,
-        WebkitMaskImage: `url(${mark.file})`,
-        maskImage: `url(${mark.file})`,
+        WebkitMaskImage: `url(${asset(mark.file)})`,
+        maskImage: `url(${asset(mark.file)})`,
         WebkitMaskRepeat: "no-repeat",
         maskRepeat: "no-repeat",
         WebkitMaskSize: "100% 100%",

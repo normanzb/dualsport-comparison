@@ -30,6 +30,12 @@ export type Bike = {
     nm: number;
   };
   condition: "new" | "used";
+  /**
+   * Which side the silencer sits on. Right on almost everything, but the LC4
+   * 690/701 routes it down the left, alongside the chain, so the right-hand view
+   * of those bikes shows no exhaust at all.
+   */
+  exhaustSide?: "left" | "right";
   /** Brand colour, contrast-checked against the graphite ground. */
   ink: string;
   /** Secondary brand colour, used for the section's minor accents. */
@@ -322,6 +328,7 @@ export const bikes: Bike[] = [
       priceFrom: 5000,
       serviceMi: 6200,
     },
+    exhaustSide: "left",
     condition: "used",
     ink: "#FF7A1A",
     inkAlt: "#FFFFFF",
@@ -355,6 +362,7 @@ export const bikes: Bike[] = [
       priceFrom: 7500,
       serviceMi: 6200,
     },
+    exhaustSide: "left",
     condition: "used",
     ink: "#FF7A1A",
     inkAlt: "#FFFFFF",
@@ -388,15 +396,13 @@ export const bikes: Bike[] = [
       priceFrom: 10500,
       serviceMi: 9320,
     },
+    exhaustSide: "left",
     condition: "new",
     ink: "#FF7A1A",
     inkAlt: "#FFFFFF",
     note: "Longest service interval on the list at 9,320 miles, and the joint-heaviest bike here. The trade the 2026 generation asks you to make.",
   },
   {
-    // Seat height per motorcyclespecs.co.za, which measures the 2018-19 701 Enduro
-    // at 950 mm. Husqvarna's own spec sheet says 910 mm; the source table followed
-    // Husqvarna. Left as 950 because it is the nominated source of truth.
     slug: "husqvarna-701-enduro-2018",
     make: "Husqvarna",
     model: "701 Enduro",
@@ -407,7 +413,7 @@ export const bikes: Bike[] = [
       wetWeight: "~155 kg",
       tank: "13 L",
       gears: "6",
-      seatHeight: "950 mm",
+      seatHeight: "910 mm",
       engine: "693 cc",
       power: "74 hp",
       torque: "71 Nm",
@@ -417,13 +423,14 @@ export const bikes: Bike[] = [
       wetKg: 155,
       dryKg: 145,
       tankL: 13,
-      seatMm: 950,
+      seatMm: 910,
       cc: 693,
       hp: 74,
       nm: 71,
       priceFrom: 5000,
       serviceMi: 6200,
     },
+    exhaustSide: "left",
     condition: "used",
     ink: "#6FA8FF",
     inkAlt: "#F7D417",
@@ -457,6 +464,7 @@ export const bikes: Bike[] = [
       priceFrom: 8000,
       serviceMi: 6200,
     },
+    exhaustSide: "left",
     condition: "used",
     ink: "#6FA8FF",
     inkAlt: "#F7D417",
@@ -490,6 +498,7 @@ export const bikes: Bike[] = [
       priceFrom: 10500,
       serviceMi: 9320,
     },
+    exhaustSide: "left",
     condition: "new",
     ink: "#6FA8FF",
     inkAlt: "#F7D417",

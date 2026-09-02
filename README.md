@@ -12,6 +12,33 @@ pnpm build
 
 Title, then the table, then a single detail panel underneath. The panel starts empty (a question mark) and grows into the selected bike; clearing collapses it again. Selection lives in `Explorer.tsx`, which also owns the height animation; everything below it is presentational.
 
+## Deploying to GitHub Pages
+
+`.github/workflows/pages.yaml` builds on every push to `main` and publishes to Pages. It lints first, so a lint failure blocks the deploy.
+
+**One manual step before the first run:** in the repo, Settings > Pages > Build and deployment > Source, choose **GitHub Actions**. Without it the workflow builds and then fails at the deploy step.
+
+The site lands at `https://<user>.github.io/<repo>/`.
+
+### Why the base path matters
+
+Pages serves a project repo from a subdirectory, so the build needs `basePath`. The workflow derives it from the repo name (`NEXT_PUBLIC_BASE_PATH=/${GITHUB_REPOSITORY#*/}`) and local dev leaves it empty, so `pnpm dev` still runs at `/`.
+
+Next rewrites most URLs for you, but not all, and the gaps are silent:
+
+- **`next/image` skips `basePath` entirely once `images.unoptimized` is set**, which static export requires. Photo sources therefore go through `asset()` from `src/lib/base-path.ts`. Without it every bike photo 404s while the rest of the page looks fine.
+- **URLs built inside a style attribute are never rewritten.** The logo masks go through `asset()` for the same reason.
+
+So any new hand-written asset URL needs `asset()`. To check a change before pushing, build with a base path and serve it from a matching subdirectory:
+
+```bash
+NEXT_PUBLIC_BASE_PATH=/dualsport-comparison pnpm build
+mkdir -p /tmp/pages/dualsport-comparison && cp -R out/. /tmp/pages/dualsport-comparison/
+cd /tmp/pages && python3 -m http.server 8099
+```
+
+Then open `http://localhost:8099/dualsport-comparison/` and select a bike. The photos only render after a selection, so a bare `pnpm build` and a look at `index.html` will not catch a broken image path.
+
 ---
 
 ## Adding a bike
@@ -64,7 +91,9 @@ Files go at `public/bikes/<slug>/<side>.webp`, where `<side>` is `left` or `righ
 }
 ```
 
-A bike may have one view or two. The switcher renders whatever is listed, and a bike with no entry shows a placeholder naming the directory to drop into. **Left is the drive (chain) side, right is the exhaust side** — check the photo rather than trusting the filename. Press galleries sometimes ship a mirrored image rather than a genuine second side; if two views look like flips of each other, compare one against the mirror of the other and see whether the difference collapses.
+A bike may have one view or two. The switcher renders whatever is listed, and a bike with no entry shows a placeholder naming the directory to drop into.
+
+The captions come off the bike, not the side. The drive (chain) side is always the left here, but the exhaust is not always the right: the LC4 690/701 routes its silencer down the left, alongside the chain, so its right-hand view shows no exhaust at all. Set `exhaustSide: "left"` on those bikes in `bikes.ts` and the captions become `Left / drive & exhaust` and plain `Right`. Check the photo before trusting the convention. **Left is the drive (chain) side, right is the exhaust side** — check the photo rather than trusting the filename. Press galleries sometimes ship a mirrored image rather than a genuine second side; if two views look like flips of each other, compare one against the mirror of the other and see whether the difference collapses.
 
 ### Preparing the image
 
@@ -87,12 +116,7 @@ If a file is a different aspect ratio it still renders (the container is fixed a
 
 The `spec` block reproduces the source comparison table verbatim, approximations and price ranges included, so the researched figures (economy, wind protection) live in `abilities.ts` instead.
 
-Where a figure has been overridden from another source, the bike carries a comment naming that source and what it replaced. One override is live: the 2018 Husqvarna 701 Enduro seat height is **950 mm** per motorcyclespecs.co.za rather than the 910 mm on Husqvarna's own spec sheet. Two things follow from it that are worth knowing before trusting that row:
-
-- It makes the 2018 the *tallest* of the three 701s, above the 2025 (925 mm) and 2026 (935 mm), which is unlikely to be right.
-- The 2018 KTM 690 Enduro R shares that chassis and is still recorded at 910 mm, so the two now disagree by 40 mm.
-
-Fixing either means finding the same source for the other rows rather than assuming a constant offset.
+Where a figure has been overridden from another source, leave a comment on the bike naming that source and what it replaced. There are currently no overrides: a 950 mm seat height for the 2018 Husqvarna 701 was tried from motorcyclespecs.co.za and reverted, because it disagreed with Husqvarna's own 910 mm, made the 2018 the tallest of the three 701s, and contradicted the same-chassis KTM 690 at 910 mm.
 
 ## Ability chart
 
