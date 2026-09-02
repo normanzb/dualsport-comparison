@@ -49,8 +49,32 @@ export type Bike = {
   ink: string;
   /** Secondary brand colour, used for the section's minor accents. */
   inkAlt: string;
+  /** The verdict: what the numbers in the table add up to. */
   note: string;
+  /** Mechanical or historical background specific to this bike. */
+  story?: string;
+  /**
+   * Background shared by every bike on the same platform, written once and
+   * referenced, because six LC4s repeating the same paragraph would drift apart.
+   */
+  platform?: readonly string[];
 };
+
+/**
+ * KTM's 690 and Husqvarna's 701 are the same motorcycle. Pierer Industrie bought
+ * Husqvarna from BMW in 2013, and the 701 has been the LC4 in Swedish colours
+ * ever since, so anything true of one platform quirk is true of all six here.
+ */
+const LC4_690 = [
+  "KTM's parent bought Husqvarna from BMW in 2013, which is why the 690 and the 701 are the same motorcycle in different plastics.",
+  "The tank is the clever part: a polymer moulding sitting low and behind the rider, under the seat rather than over the engine, which doubles as a load-bearing section of the rear subframe. It puts the fuel mass where it helps and deletes a chunk of steel tubing at the same time.",
+  "Twin balancer shafts are what make a single this big tolerable on the road. The clutch is hydraulic, and early slave cylinders were a known weak point; later revisions sorted it, so on a used one it is worth asking what has already been replaced.",
+] as const;
+
+/** KTM's 399 single, built in India with Bajaj, in its two 2025 bodies. */
+const KTM_390 = [
+  "Both 390s run the 399 cc single from the 390 Duke generation, built in India alongside it, which is how a bike this specified reaches A2 money.",
+] as const;
 
 export const bikes: Bike[] = [
   {
@@ -86,6 +110,8 @@ export const bikes: Bike[] = [
     ink: "#FF3B4E",
     inkAlt: "#4E8CFF",
     note: "Eight thousand miles between services, which is the cheap-to-run end of this list. At 142 kg it is light for a road-registered bike, and the tank sets the range long before the chassis runs out of ideas.",
+    story:
+      "The 300 is a longer-stroke development of the CRF250L rather than a new bike: 63 mm instead of 55 mm, which is where the extra displacement comes from. Thai-built and deliberately conventional, which is the point of it.",
   },
   {
     slug: "yamaha-wr125r",
@@ -120,6 +146,8 @@ export const bikes: Bike[] = [
     ink: "#4E8CFF",
     inkAlt: "#FF4D5E",
     note: "A1 licence fodder and priced to match. Learner-legal, which is the whole reason it sits on a list of much bigger bikes.",
+    story:
+      "Built by Yamaha's Italian arm, sharing its liquid-cooled four-valve single with the YZF-R125 of the same era and sold alongside a supermoto sibling, the WR125X. Euro 4 finished it off.",
   },
   {
     slug: "suzuki-drz4s",
@@ -154,6 +182,8 @@ export const bikes: Bike[] = [
     ink: "#FFD900",
     inkAlt: "#5B94FF",
     note: "The missing sixth gear is the one thing you feel at motorway speed. Otherwise a genuinely capable trail bike: 300 mm of clearance, simple, and cheap to keep running.",
+    story:
+      "The DR-Z400S this replaces ran essentially unchanged from 2000 to 2024, which is most of the reason it exists. Fuel injection, ride-by-wire and traction control finally arrive; the five-speed gearbox and the steel cradle frame do not.",
   },
   {
     slug: "kove-450-rally",
@@ -188,6 +218,8 @@ export const bikes: Bike[] = [
     ink: "#1EB8AE",
     inkAlt: "#F2F2F2",
     note: "Thirty-one litres is the whole point of it, and a rally 450 drinks hard enough that the range does not follow in proportion. Built for a special stage rather than a commute.",
+    story:
+      "Kove took a 450 Rally to Dakar in 2023 and finished it, the first Chinese manufacturer to manage that, and the bike you can buy is a thinly disguised version of the same thing. Which is both the appeal and the warning.",
   },
   {
     slug: "honda-crf450l",
@@ -222,6 +254,8 @@ export const bikes: Bike[] = [
     ink: "#FF3B4E",
     inkAlt: "#4E8CFF",
     note: "Six hundred miles between services, and it genuinely wants that attention: a detuned motocross engine wearing a number plate. The restrictive airbox and exhaust are what cost it so much power on paper.",
+    story:
+      "The engine is the CRF450R motocross unit detuned hard enough to pass emissions and survive a service interval: milder cams, lower compression, more flywheel, and a sixth gear the R has never had. The titanium fuel tank is a leftover from that parentage.",
   },
   {
     slug: "ktm-450-excf",
@@ -256,6 +290,8 @@ export const bikes: Bike[] = [
     ink: "#FF7A1A",
     inkAlt: "#FFFFFF",
     note: "Serviced in engine hours rather than miles, which tells you what it actually is: a race enduro bike with lights. Road legal, but the range and the seat height make anything beyond a trail day hard work.",
+    story:
+      "Europe lets a race enduro bike be homologated for the road, and KTM has been exploiting that for decades. This is not a road bike with knobblies; it is the machine people race on Sunday, with lights and a plate.",
   },
   {
     // Ducati publishes no ground clearance for the EDS; 310 mm is an estimate,
@@ -292,6 +328,8 @@ export const bikes: Bike[] = [
     ink: "#FF4757",
     inkAlt: "#F2F2F2",
     note: "Thirty engine hours between services, on a desmodromic 450 single nobody else builds. You are paying for the novelty and the finish as much as the performance.",
+    story:
+      "Ducati's first serious move off-road in its modern history, following the Desmo450 MX into motocross in 2025. Desmodromic valves are closed mechanically rather than by springs, which is Ducati's signature everywhere else in its range and now here too.",
   },
   {
     slug: "ccm-gp450",
@@ -326,6 +364,8 @@ export const bikes: Bike[] = [
     ink: "#4C79E0",
     inkAlt: "#C9CED6",
     note: "A hand-built Bolton frame around a BMW-derived 450 single, with 17 litres of fuel and a seat only 890 mm up. Tiny dealer network, so buy on condition and expect to hunt for parts.",
+    story:
+      "The engine is the 450 single BMW developed for its own G450X enduro and then walked away from. CCM, a small Bolton firm that has been hand-building frames since the early 1970s, put it into an adventure chassis instead.",
   },
   {
     slug: "ktm-690-enduro-r-2018",
@@ -362,6 +402,7 @@ export const bikes: Bike[] = [
     ink: "#FF7A1A",
     inkAlt: "#FFFFFF",
     note: "The value pick of the big-single group. This is the pre-2019 LC4, so it goes without the later electronics, and the secondhand money reflects that.",
+    platform: LC4_690,
   },
   {
     slug: "ktm-690-enduro-r-2025",
@@ -398,6 +439,7 @@ export const bikes: Bike[] = [
     ink: "#FF7A1A",
     inkAlt: "#FFFFFF",
     note: "The middle year: the newer engine and electronics on a 6,200-mile service interval, without the 2026 generation's weight or price.",
+    platform: LC4_690,
   },
   {
     slug: "ktm-690-enduro-r-2026",
@@ -434,6 +476,7 @@ export const bikes: Bike[] = [
     ink: "#FF7A1A",
     inkAlt: "#FFFFFF",
     note: "The 15,000 km service interval is the headline. The weight, the seat height and the price are what the 2026 generation asks in return.",
+    platform: LC4_690,
   },
   {
     slug: "husqvarna-701-enduro-2018",
@@ -470,6 +513,7 @@ export const bikes: Bike[] = [
     ink: "#6FA8FF",
     inkAlt: "#F7D417",
     note: "The same platform as the 690 of the same year, with Husqvarna bodywork and a little more tank. Pick on livery and on whose dealer you would rather deal with.",
+    platform: LC4_690,
   },
   {
     slug: "husqvarna-701-enduro-2025",
@@ -506,6 +550,7 @@ export const bikes: Bike[] = [
     ink: "#6FA8FF",
     inkAlt: "#F7D417",
     note: "The newer engine and electronics, still on the pre-2026 service interval. Sits awkwardly between a cheap 2018 and a warrantied 2026.",
+    platform: LC4_690,
   },
   {
     slug: "husqvarna-701-enduro-2026",
@@ -542,6 +587,7 @@ export const bikes: Bike[] = [
     ink: "#6FA8FF",
     inkAlt: "#F7D417",
     note: "Mechanically the 2026 690 in white and blue, down to the 15,000 km service interval. Choose between the two on bodywork and dealer, because nothing else separates them.",
+    platform: LC4_690,
   },
   {
     slug: "ktm-390-enduro-r",
@@ -576,6 +622,9 @@ export const bikes: Bike[] = [
     ink: "#FF7A1A",
     inkAlt: "#FFFFFF",
     note: "Splits the difference: 44 hp and a 4,650-mile service interval on a bike you can actually use on the road, for A2-friendly money. Nine litres of fuel is the compromise.",
+    story:
+      "New for 2025, and KTM filling a gap it had left wide open between a 390 Duke and a full race enduro bike.",
+    platform: KTM_390,
   },
   {
     slug: "ktm-390-adventure-r",
@@ -610,6 +659,9 @@ export const bikes: Bike[] = [
     ink: "#FF7A1A",
     inkAlt: "#FFFFFF",
     note: "A screen and 14.5 litres on the 390 platform, which is a lot of range for £6,699. The weight and the road-biased setup are what you give up once the tarmac ends.",
+    story:
+      "KTM sells a road-going 390 Adventure alongside this one. The R is what makes it interesting: spoked wheels, longer travel and a 21-inch front, which is most of the difference between the two.",
+    platform: KTM_390,
   },
   {
     slug: "rieju-aventura-rally-307",
@@ -644,6 +696,8 @@ export const bikes: Bike[] = [
     ink: "#FF6B5B",
     inkAlt: "#F2F2F2",
     note: "Twenty-one litres on a 160 kg bike for £4,599, which is the cheap way to buy range. The UK dealer network is thin, so factor that in.",
+    story:
+      "Rieju has built bikes in Figueres since the 1940s, and when GasGas was sold to KTM's parent it took over the off-road production line and much of the staff that came with it. That is the reason a small Spanish firm can price a 21-litre rally bike like this.",
   },
   {
     // Wet weight from independent measurement (195-197 kg), not CFMoto's claim
@@ -679,6 +733,8 @@ export const bikes: Bike[] = [
     ink: "#4C9AE8",
     inkAlt: "#F2F2F2",
     note: "A 449 parallel twin with cruise control and a TFT dash for the money of a used single. The low seat and modest clearance say road-to-trail rather than trail.",
+    story:
+      "The 449 twin is CFMoto's own, shared with its 450-class sports bikes, and CFMoto is the same factory that builds KTM's middleweight twins under a joint venture. That is the context for how much specification is on this bike per pound.",
   },
   {
     slug: "voge-300-rally",
@@ -713,6 +769,8 @@ export const bikes: Bike[] = [
     ink: "#4585E4",
     inkAlt: "#F2F2F2",
     note: "Rally bodywork, a screen and spoked wheels on a 292 single, which is most of the point. The engine is the limit: happy on a B road, out of its depth on a motorway.",
+    story:
+      "Voge is Loncin's own-brand arm, and Loncin is the factory that builds BMW's small singles. The engineering behind it is better than the badge suggests. The dealer network is not.",
   },
   {
     slug: "moto-morini-alltrhike-450",
@@ -747,6 +805,8 @@ export const bikes: Bike[] = [
     ink: "#E03C3C",
     inkAlt: "#F2F2F2",
     note: "UK bikes land in April 2026, so the service interval is still unconfirmed. Low and road-biased, with the suspension travel to match.",
+    story:
+      "Moto Morini is a Bologna name dating to 1937, bought out of a long decline by the Chinese group Zhongneng in 2018. What has come since is Chinese-built with Italian styling input, and priced to reflect it.",
   },
   {
     slug: "ajp-pr7",
@@ -781,6 +841,8 @@ export const bikes: Bike[] = [
     ink: "#F4F5F7",
     inkAlt: "#E4322B",
     note: "Low-volume Portuguese, with 320 mm of clearance under a 165 kg bike and a fuel load to match. Priced against a used 690, with a dealer network a fraction the size.",
+    story:
+      "AJP has been building off-road bikes in Portugal since the late 1980s, in volumes small enough that a PR7 is effectively assembled by hand. That buys you a genuinely different motorcycle and a parts supply to match.",
   },
   {
     slug: "bmw-hp2-enduro",
@@ -797,14 +859,14 @@ export const bikes: Bike[] = [
       engine: "1,170 cc",
       power: "105 hp",
       torque: "115 Nm",
-      price: "~£8,000-13,000 used",
+      price: "~£13,000+ used",
     },
     n: {
       wetKg: 196,
       dryKg: 175,
       tankL: 13,
       seatMm: 920,
-      priceFrom: 8000,
+      priceFrom: 13000,
       serviceMi: 6000,
       clearanceMm: 320,
       cc: 1170,
@@ -816,7 +878,9 @@ export const bikes: Bike[] = [
     condition: "used",
     ink: "#5B93F0",
     inkAlt: "#F2F2F2",
-    note: "A 2005 factory experiment in a big off-road bike: air-damped rear end, no pillion provision, and a boxer twin lying flat under it. Carrying its mass that low is why it scores better off road than 196 kg suggests, but 13 litres does not go far behind that engine.",
+    note: "Carrying its mass that low is why it scores better off road than 196 kg suggests, but 13 litres does not go far behind that engine. Twenty years on, the price is close to academic: £13,000 is a floor rather than a figure, and the real difficulty is finding one for sale at all.",
+    story:
+      "Built from 2005 to 2007 as the first of BMW's HP line, and the only time it has seriously tried to make a boxer work off road. The rear end holds no shock oil at all: an air spring and air damping in one unit, which was as strange then as it reads now. Solo seat, no pillion provision, shaft drive.",
   },
   {
     slug: "yamaha-tenere-700",
@@ -851,6 +915,8 @@ export const bikes: Bike[] = [
     ink: "#4E8CFF",
     inkAlt: "#F2F2F2",
     note: "A 689 twin built for the road to the trail more than the trail itself. Long-legged and comfortable at motorway speed, and a handful the moment the ground turns soft.",
+    story:
+      "The Tenere name goes back to the Paris-Dakar XT600Z of the early 1980s and Yamaha has traded on it ever since. This one wraps the MT-07's CP2 689 twin, an engine drawn up for a naked road bike, in a rally-styled chassis.",
   },
 ];
 

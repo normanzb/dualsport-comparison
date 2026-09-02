@@ -208,7 +208,19 @@ export function DetailPanel({ bike, onClear }: { bike: Bike | null; onClear: () 
               })}
             </ul>
           )}
-          <p className="mb-4 text-[12px] leading-relaxed text-ink-dim">{bike.note}</p>
+          <p className="mb-3 text-[12px] leading-relaxed text-ink-dim">{bike.note}</p>
+          {(bike.story || bike.platform) && (
+            <div className="mb-4 border-l border-hair pl-3">
+              <h4 className="mb-1.5 text-[9px] tracking-[0.18em] text-ink-dim uppercase">
+                Background
+              </h4>
+              {[bike.story, ...(bike.platform ?? [])].filter(Boolean).map((para) => (
+                <p key={para} className="mb-1.5 text-[11px] leading-relaxed text-ink-dim">
+                  {para}
+                </p>
+              ))}
+            </div>
+          )}
           <AbilityChart bike={bike} />
         </div>
       </div>

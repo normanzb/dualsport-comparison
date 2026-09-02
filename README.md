@@ -147,7 +147,21 @@ Ranking is competition-style: two bikes tied for first are both first, and the v
 
 The within-model tier exists because the three 690s and three 701s are on the list purely to be told apart, and they are mid-field on everything, so no whole-list claim distinguishes them. It is capped at the best two metrics per bike, in the order weight, price, seat, tank, service; skips any figure every year of that model shares; skips anything the bike already claims outright; and leaves out range, which within one model only restates the tank.
 
-To add a claim, add a `Metric` there, with an `of` key naming the underlying figure so a max and its min count as one claim. Do not write superlatives, ordinals or margins into a bike's `note`: hand-written ones went stale every time the set grew. A `note` is for what the data cannot say, such as why the bike exists, what it is like to own, and what is still unconfirmed.
+To add a claim, add a `Metric` there, with an `of` key naming the underlying figure so a max and its min count as one claim. Do not write superlatives, ordinals or margins into a bike's prose: hand-written ones went stale every time the set grew.
+
+## Prose fields
+
+Three of them, and the split matters, because only the first is a verdict:
+
+| Field      | Holds                                                                           | Renders as                      |
+| ---------- | ------------------------------------------------------------------------------- | ------------------------------- |
+| `note`     | what the table's numbers add up to for this bike                                | body paragraph                  |
+| `story`    | mechanical or historical background specific to this bike                       | Background block                |
+| `platform` | background shared by every bike on the same platform, as an array of paragraphs | Background block, after `story` |
+
+`platform` exists because six LC4s repeating the same paragraph about the underseat tank would drift apart within two edits. Define the text once as a `const` at the top of `bikes.ts` and reference it from each entry: `LC4_690` covers the three 690 Enduro Rs and three 701 Enduros, `KTM_390` the two 390s.
+
+Nothing in any of the three may make a comparative claim. Say what the bike is, not where it ranks. Only assert history and mechanical detail you can source; leaving a fact out costs nothing, and an invented one is indistinguishable from a real one to every reader.
 
 ## Where the numbers come from
 

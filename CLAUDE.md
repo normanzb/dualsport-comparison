@@ -38,6 +38,12 @@ Every item below is a real error that shipped or nearly shipped here. Read befor
 
 `LOW_COG` divides by a hardcoded `COG_MAX = 4`. When I first wrote it, it divided by `Math.max(...values)`. Norman then asked to drop the HP2 from 4 to 3, and that edit alone would have changed the HP2's score by exactly nothing: it was still the highest value, so it still normalised to 1.0. The only effect would have been to lift every other bike. For a hand-assigned index where the top value carries meaning ("3 out of a possible 4"), divide by the conceptual ceiling. Derive bounds from the data only for measured quantities where the range is whatever the field happens to contain.
 
+### Prose goes in the field that matches its scope
+
+`note` is the verdict on the table's numbers, `story` is this bike's own background, `platform` is background shared across one platform. The last is an array of paragraphs defined once as a `const` and referenced, not copied: the six LC4 690/701 entries would otherwise carry six copies of the same paragraph and drift apart.
+
+Two rules for all three. No comparative claims, ever, in any of them: that is what `superlatives.ts` is for. And assert only history or mechanical detail you can actually source. Omitting a fact costs nothing, whereas a plausible invention reads exactly like a real one and nobody downstream can tell the difference.
+
 ## Deployment
 
 **`next/image` ignores `basePath` once `images.unoptimised` is set**, which static export requires. Every bike photo 404s while the rest of the page looks perfect.
