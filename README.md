@@ -154,9 +154,11 @@ The weighting is the point. Clearance already carries the suspension-travel part
 
 **Performance** is power and torque weighted equally, normalized across the field.
 
-**Highway** is `(1 x top-gear comfort + 3 x engine size + 3 x wind protection) / 7`.
+**Highway** is `(4 x engine size + 3 x wind protection + 1 x top-gear comfort) / 8`.
 
 Displacement is scored on a **log** scale, not linearly. The field spans 124 cc to 1170 cc, nearly ten to one, so a linear scale crushes the small and mid-size bikes into the bottom of the axis where most of them actually live, and it matches how the motor feels: 125 to 400 is transformative, 700 to 1170 much less so. Its bounds are derived from the data, because hardcoding them is how a 1170 boxer once scored 10.2 out of 10.
+
+Engine sits above wind protection at 4 to 3. At equal weight a screen exactly cancelled a 400 cc deficit, which let the 292 cc Voge tie the 693 cc KTM. Weather protection helps, but it cannot make up for an engine that is simply too small.
 
 Top-gear comfort is not min-max normalized either: gearboxes here are only ever five or six speeds, so scaling them to the field would make one gear worth the whole axis, more than a 112 cc gap. A five-speed scores 0.75, worth roughly the 10-15% more revs it turns at speed.
 

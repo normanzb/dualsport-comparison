@@ -1,6 +1,7 @@
 "use client";
 
 import { BrandLogo } from "@/components/BrandLogo";
+import { BrandSwatch } from "@/components/BrandSwatch";
 import { type Bike, bikes } from "@/data/bikes";
 import { photosFor } from "@/data/photos";
 
@@ -83,14 +84,7 @@ export function SpecTable({
                       {b.model}
                       {b.year && <span className="text-ink-faint"> ({b.year})</span>}
                     </span>
-                    {hasPhoto && (
-                      <span
-                        aria-label="photo available"
-                        title="Studio photo available"
-                        className="ml-1 h-1.5 w-1.5 shrink-0 rounded-full"
-                        style={{ background: "var(--livery)" }}
-                      />
-                    )}
+                    {hasPhoto && <BrandSwatch make={b.make} fallback={b.ink} />}
                   </button>
                 </th>
                 <Cell>{b.spec.serviceInterval}</Cell>

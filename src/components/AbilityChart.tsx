@@ -84,8 +84,8 @@ export function AbilityChart({ bike }: { bike: Bike }) {
         Further out is better. Range is tank size times real-world economy, scored against a fixed
         500-mile benchmark that nothing here reaches. Offroad weights mass and ground clearance
         equally, with seat height at 0.3, so a lighter bike, more clearance and a lower seat all
-        score higher. Performance is power and torque weighted equally. Highway weights
-        engine size and wind protection 3 each against top-gear comfort 1. Offroad, performance and
+        score higher. Performance is power and torque weighted equally. Highway weights engine
+        size 4, wind protection 3 and top-gear comfort 1. Offroad, performance and
         highway are indices out of ten, not measurements. Hours-based service intervals sit at a
         30 mph working average.
       </figcaption>

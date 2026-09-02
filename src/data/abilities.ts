@@ -118,14 +118,24 @@ const engineScore = (cc: number) =>
   (Math.log(cc) - Math.log(CC_LO)) / (Math.log(CC_HI) - Math.log(CC_LO));
 
 /**
- * How well the bike settles at road speed, 0 to 1. Weighted 3 parts engine size,
- * 3 parts wind protection, 1 part top-gear comfort: a tall sixth gear is little
- * help if the motor is a 125 and there is nothing to hide behind.
+ * Weights for the highway index. Engine sits above wind protection because at
+ * equal weight a screen fully cancelled a 400 cc deficit, which let a 292 single
+ * tie a 693. Named, and summed for the denominator, so the two cannot drift apart.
+ */
+const W_ENGINE = 4;
+const W_WIND = 3;
+const W_GEAR = 1;
+const W_TOTAL = W_ENGINE + W_WIND + W_GEAR;
+
+/**
+ * How well the bike settles at road speed, 0 to 1. A tall sixth gear is little
+ * help if the motor is a 125 and there is nothing to hide behind, but weather
+ * protection cannot make up for an engine that is simply too small.
  */
 export function highwayComfort(b: Bike): number {
   const gear = GEAR_COMFORT[Number(b.spec.gears)] ?? 1;
   const wind = WIND[b.slug] / WIND_HI;
-  return (1 * gear + 3 * engineScore(b.n.cc) + 3 * wind) / 7;
+  return (W_GEAR * gear + W_ENGINE * engineScore(b.n.cc) + W_WIND * wind) / W_TOTAL;
 }
 
 const L_PER_US_GAL = 3.785;
