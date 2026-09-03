@@ -100,11 +100,13 @@ export function AbilityChart({ bike }: { bike: Bike }) {
         low centre of gravity at 0.5 and a low seat at 0.3. A big adventure bike scores low because
         it is awkward to take off road, not because it cannot go. Performance is power and torque
         weighted equally. Highway weights engine size 4, wind protection 3 and top-gear comfort 1.
-        Offroad ease, performance and highway are indices out of ten, not measurements. Hours-based
-        service intervals sit at a 30 mph working average. The overall figure, where a bike claims
-        it, is the area of this shape as a fraction of the full pentagon, so it rewards an
-        all-rounder over a specialist: the easiest bike here to take off road is nowhere near the
-        top of it.
+        Service runs on a soft knee: full rate up to 6,000 miles, which is about a year&rsquo;s
+        riding, then roughly a third of that rate beyond, because past a year the interval stops
+        changing how often the bike is booked in. Offroad ease, performance and highway are indices
+        out of ten, not measurements. Hours-based service intervals sit at a 30 mph working average.
+        The overall figure, where a bike claims it, is the area of this shape as a fraction of the
+        full pentagon, so it rewards an all-rounder over a specialist: the easiest bike here to take
+        off road is nowhere near the top of it.
       </figcaption>
     </figure>
   );

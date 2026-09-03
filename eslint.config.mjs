@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // the image pipeline's Python env ships bundled TypeScript of its own
+    ".venv-img/**",
   ]),
 ]);
 

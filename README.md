@@ -110,18 +110,20 @@ Check the photo rather than trusting the convention or the filename. Press galle
 
 ### Preparing the image
 
-The set only looks like one shoot because every file meets the same spec:
+Use the scripts. **[IMG_GEN.md](IMG_GEN.md)** has the full method, the canvas spec, and why each part of it is the way it is.
 
-1. **Find a studio side profile.** Two sources cover almost everything here:
-   - **Manufacturer sites** (KTM, Husqvarna, Suzuki) publish PNGs that are already alpha-transparent, so no background removal is needed. View source on the model page and look for `left-side-studio` / `right-side` in the image URLs.
-   - **motorcyclespecs.co.za** has a gallery on every model page, usually including a press side profile on white. The image paths are `Gallery_A-L_16/` on older pages and lowercase `gallery-a-l-23/` on newer ones, so match case-insensitively. These are JPEGs, so they need cutting out (below).
-2. **Cut it out** with `rembg` if it is not already transparent. `u2net` handles a plain white studio background; for a bike composited onto scenery, `isnet-general-use` is markedly better. Check the result rather than trusting it: a bad mask keeps a slab of background and is obvious at a glance.
-3. **Strip floating artwork.** Manufacturer images often carry a warranty badge or award logo in a corner. Keep only the largest connected alpha component; that drops the badge and keeps the bike.
-4. **Crop to the alpha bounding box**, so framing does not depend on the source's padding.
-5. **Fit onto a 1600x960 transparent canvas**, bike centred, scaled to about 94% of the width and no more than 92% of the height.
-6. **Save as WebP** with alpha, quality ~88. Expect roughly 200 KB.
+```bash
+./scripts/img/setup.sh                                                    # once
+.venv-img/bin/python scripts/img/cutout.py photo.jpg <slug>/<side> --preview
+.venv-img/bin/python scripts/img/cutout.py --audit                        # check the set
+```
 
-If a file is a different aspect ratio it still renders (the container is fixed at 1600/960 and the image is `object-contain`), but it will sit at a visibly different scale to the rest.
+Finding a source is the part no script can do. Two cover almost everything here:
+
+- **Manufacturer sites.** KTM, Husqvarna and Suzuki publish PNGs that are already alpha-transparent, so pass `--transparent` and skip the model. View source on the model page and look for `left-side-studio` / `right-side` in the image URLs. Honda's are under a `colour-picker` path in their DAM, one per colourway. Yamaha's live on `cdn2.yamaha-motor.eu` as white-backed JPEGs, named `Studio-00N-03`, where sets 002 and 004 are the two side profiles.
+- **motorcyclespecs.co.za** has a gallery on every model page, usually including a press side profile on white. Paths are `Gallery_A-L_16/` on older pages and lowercase `gallery-a-l-23/` on newer ones, so match case-insensitively.
+
+Source width is what decides whether the result looks sharp. The bike needs to be about 1400 px wide in the original; much under 1100 px and the upscale shows. If a manufacturer only serves a small rendition, it is usually better to leave the bike without a photo than to ship a soft one.
 
 ---
 
@@ -197,9 +199,24 @@ It feeds the offroad axis rather than getting one of its own, which is what stop
 Five axes: service, range, performance, offroad, highway. Two rules:
 
 - **Further out is better**, so weight and seat height are inverted.
-- **Range, performance, offroad and highway are absolute**; only service is scaled against the rest of the field.
+- **Every axis scores against a fixed benchmark**, never against the rest of the field.
 
-That split is deliberate. Range has a real-world absolute, so scaling it to the field would have shown the Kove as perfect when it is only the best of a short-legged group. `RANGE_FULL_MARKS` is 500 miles and nothing here comes close.
+That is deliberate. Min-max scaling gives the best bike on an axis full marks however good it actually is: it would have shown the Kove's range as perfect when it is only the best of a short-legged group, and it handed the service axis to whoever printed the longest interval. `RANGE_FULL_MARKS` is 500 miles and nothing here comes close.
+
+### Service, and the soft knee
+
+Service was the last min-max axis, and it was the most gameable thing on the page. A manufacturer can raise a published interval without changing the motorcycle, and under min-max that bought full marks: the axis was worth **+1.15** of overall score to the 790 Adventure and **+1.06** to the 890 Adventure R, on a podium that spans about half a point.
+
+It now scores on a soft knee:
+
+```
+mi <= 6000:  0.85 * (mi / 6000)
+mi >  6000:  0.85 + 0.15 * (mi - 6000) / (SERVICE_HI - 6000)
+```
+
+6,000 miles is roughly 10,000 km, which is about a year for most riders. KTM's own schedule reads "15,000 km or annually, whichever comes first", so past a year the interval stops changing how often the bike is actually booked in. The slope above the knee is about a third of the slope below it, so a longer interval still earns something, just far less: 6,000 miles scores 8.5, 8,000 scores 9.4, and the 9,320-mile bikes still reach 10.
+
+The ceiling is derived from the data rather than hardcoded, so a bike with a longer interval than anything here cannot push the axis past 1.
 
 **Range is tank size times real-world economy**, not tank size. The two are not interchangeable: the CRF300L carries a litre less than the DR-Z4S and still goes 29 miles further.
 

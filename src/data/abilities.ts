@@ -6,11 +6,10 @@ import { type Bike, bikes } from "@/data/bikes";
  * Two rules run the whole thing:
  *  - every axis is oriented so further out is better, which is why weight and seat
  *    height are inverted;
- *  - range and highway comfort are scored against absolute benchmarks, service,
- *    lightness and seat height against the other thirteen bikes. Range has a real
- *    absolute (a tank either takes you somewhere or it doesn't), so scaling it to
- *    the field would have made the Kove look perfect when it is merely the best of
- *    a short-legged group.
+ *  - every axis scores against a fixed benchmark, never against the rest of the
+ *    field. Scaling to the field makes the best bike on an axis score full marks
+ *    however good it actually is, which flattered the Kove's range and handed the
+ *    service axis to whoever printed the longest interval.
  */
 
 /* ---------------------------------------------------------------------------
@@ -269,12 +268,36 @@ const serviceMiles = (b: Bike) => {
   return Number.isFinite(hours) ? hours * MPH : 0;
 };
 
+/**
+ * Service is scored on a soft knee rather than against the field.
+ *
+ * Min-max scaling handed full marks to whoever published the longest interval,
+ * which is a number a manufacturer can raise without changing the motorcycle.
+ * It was worth over a point of the overall score to the 790 and 890.
+ *
+ * KTM's own schedule reads "15,000 km or annually, whichever comes first", so
+ * once the interval covers a year's riding it stops changing how often the bike
+ * is actually booked in. Past the knee it still counts, at roughly a third of
+ * the rate: 6,000 miles scores 8.5, and the 9,320-mile bikes still reach 10.
+ */
+const SERVICE_KNEE = 6000; // about 10,000 km, a year for most riders
+const SERVICE_AT_KNEE = 0.85;
+const SERVICE_HI = Math.max(...bikes.map(serviceMiles));
+const serviceScore = (mi: number) => {
+  if (mi <= SERVICE_KNEE) return SERVICE_AT_KNEE * (mi / SERVICE_KNEE);
+  if (SERVICE_HI <= SERVICE_KNEE) return 1;
+  return (
+    SERVICE_AT_KNEE + (1 - SERVICE_AT_KNEE) * ((mi - SERVICE_KNEE) / (SERVICE_HI - SERVICE_KNEE))
+  );
+};
+
 export const AXES: Axis[] = [
   {
     key: "service",
     label: "Service",
     value: serviceMiles,
     display: (b) => b.spec.serviceInterval,
+    absolute: (b) => serviceScore(serviceMiles(b)),
   },
   {
     key: "range",

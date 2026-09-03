@@ -43,3 +43,7 @@ next-env.d.ts
 
 # Source images staged for the photo pipeline, not shipped.
 .res/
+
+# Local image pipeline: Python env and background-removal check images.
+.venv-img/
+.img-preview/
