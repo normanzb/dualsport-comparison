@@ -1,7 +1,7 @@
 import { Crown, type Tier } from "@/components/Crown";
 import type { Bike } from "@/data/bikes";
 import { AXES, overall, score } from "@/data/abilities";
-import { overallPodium } from "@/data/superlatives";
+import { overallPodium, overallRank } from "@/data/superlatives";
 
 /**
  * The podium and its wording both come off the same derived table as the chips,
@@ -52,13 +52,13 @@ score = √(area / full ${AXES.length}-sided figure) × 10`}
         </div>
 
         <ol className="space-y-3">
-          {overallPodium.map((b, i) => (
+          {overallPodium.map((b) => (
             <li
               key={b.slug}
               className="flex items-center gap-4 border border-hair px-4 py-3"
               style={{ ["--livery" as string]: b.ink }}
             >
-              <Crown tier={(i + 1) as Tier} size={18} />
+              <Crown tier={overallRank(b) as Tier} size={18} />
               <span className="min-w-0 flex-1">
                 <span className="block truncate text-[13px]">
                   {b.make} {b.model}

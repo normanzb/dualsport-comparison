@@ -48,6 +48,14 @@ const MPG_US: Record<string, number> = {
   // KTM claims 83 imperial mpg on the WMTC cycle; knobblies and real roads cost you
   "ktm-390-enduro-r": 60,
   "ktm-390-adventure-r": 62,
+  // Fuelly CRF300 Rally, same 286 single as the L with more bodywork to push
+  "honda-crf300-rally": 66,
+  // Fuelly Tenere 700, 60+ vehicles: ~52. The variants share the CP2 twin.
+  "yamaha-tenere-700-rally": 52,
+  "yamaha-tenere-700-world-raid": 52,
+  // Fuelly LC8c 790/890 adventure twins: high 40s
+  "ktm-790-adventure": 48,
+  "ktm-890-adventure-r": 46,
   // 293 single with a 21 L tank; makers claim 300+ miles, which lines up
   "rieju-aventura-rally-307": 58,
   // twin: CFMoto quote roughly 200 miles from 17.5 L
@@ -94,6 +102,11 @@ const WIND: Record<string, number> = {
   "ajp-pr7": 3,
   "bmw-hp2-enduro": 1,
   "yamaha-tenere-700": 3,
+  "yamaha-tenere-700-rally": 3,
+  "yamaha-tenere-700-world-raid": 4,
+  "honda-crf300-rally": 3,
+  "ktm-790-adventure": 4,
+  "ktm-890-adventure-r": 3,
 };
 
 /**
@@ -136,7 +149,10 @@ const W_TOTAL = W_ENGINE + W_WIND + W_GEAR;
  */
 export function highwayComfort(b: Bike): number {
   const gear = GEAR_COMFORT[Number(b.spec.gears)] ?? 1;
-  const wind = WIND[b.slug] / WIND_HI;
+  // WIND has no entry for a bike until someone judges it; falling through to
+  // undefined turned the whole index into NaN, so a new bike scores mid-scale
+  // and is obvious on the chart rather than silently poisoning it.
+  const wind = (WIND[b.slug] ?? WIND_HI / 2) / WIND_HI;
   return (W_GEAR * gear + W_ENGINE * engineScore(b.n.cc) + W_WIND * wind) / W_TOTAL;
 }
 
