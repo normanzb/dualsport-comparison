@@ -61,6 +61,14 @@ export const photos: Record<string, PhotoSet> = {
     source:
       "https://www.honda.co.uk/content/dam/central/motorcycles/colour-picker/adventure/crf300l/crf300l_2025/r-292r_extreme_red/25YM_CRF300L_EXTREME-RED_R-292R_RHS.png",
   },
+  "yamaha-tenere-700": {
+    views: [
+      { side: "right", src: "/bikes/yamaha-tenere-700/right.webp" },
+      { side: "left", src: "/bikes/yamaha-tenere-700/left.webp" },
+    ],
+    credit: "Yamaha Motor",
+    source: "https://www.yamaha-motor.eu/gb/en/motorcycles/adventure/pdp/t-n-r-700/",
+  },
   "yamaha-wr125r": {
     views: [
       { side: "right", src: "/bikes/yamaha-wr125r/right.webp" },
