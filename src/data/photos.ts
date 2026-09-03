@@ -98,7 +98,10 @@ export const photos: Record<string, PhotoSet> = {
       "https://images.ctfassets.net/x7j9qwvpvr5s/3jEDT5uRS22eQMEUsmMtxc/07a88194aef5a8934a4fc23c27963329/2026-06-09-Desmo450-EDS-EU-MY27-Model-Preview-1050x650.png",
   },
   "ccm-gp450": {
-    views: [{ side: "right", src: "/bikes/ccm-gp450/right.webp" }],
+    views: [
+      { side: "right", src: "/bikes/ccm-gp450/right.webp" },
+      { side: "left", src: "/bikes/ccm-gp450/left.webp" },
+    ],
     credit: "CCM Motorcycles",
     source: "https://www.motorcyclespecs.co.za/model/ccm/CCM%20GP450%20Adventure.htm",
   },
