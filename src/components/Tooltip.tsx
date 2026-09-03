@@ -33,7 +33,12 @@ export function Tooltip({
   const id = useId();
   const trigger = useRef<Element | null>(null);
   const dialog = useRef<HTMLDialogElement>(null);
-  const [at, setAt] = useState<{ x: number; y: number; above: boolean } | null>(null);
+  const [at, setAt] = useState<{
+    x: number;
+    y: number;
+    above: boolean;
+    via: "hover" | "focus";
+  } | null>(null);
   const [modal, setModal] = useState(false);
   const asDialog = useMediaQuery(DIALOG_BELOW);
 
@@ -41,38 +46,47 @@ export function Tooltip({
     trigger.current = node;
   }, []);
   const hide = useCallback(() => setAt(null), []);
-  const place = useCallback(() => {
+  const place = useCallback((via: "hover" | "focus") => {
     const box = trigger.current?.getBoundingClientRect();
     if (!box) return;
     const above = box.top > 180;
-    setAt({ x: box.left + box.width / 2, y: above ? box.top - 10 : box.bottom + 10, above });
+    setAt({ x: box.left + box.width / 2, y: above ? box.top - 10 : box.bottom + 10, above, via });
   }, []);
 
-  // The bubble is positioned off the trigger's box, so it has to follow anything
-  // that moves it: the page scrolling, the table scrolling sideways, and the jump
-  // that focusing a trigger causes when it was off screen.
-  const open = at !== null;
+  /**
+   * Scrolling means opposite things to the two ways in.
+   *
+   * A hover belongs to where the pointer is. Scroll the page and the trigger
+   * slides out from under it, and the browser will not reliably send a leave
+   * event for that, so the bubble has to close itself.
+   *
+   * A focus belongs to the element. Focusing a trigger that was off screen
+   * scrolls it into view, which would dismiss it before it was ever seen, and
+   * the reader has not gone anywhere, so it follows the trigger instead.
+   */
+  const via = at?.via ?? null;
   useEffect(() => {
-    if (!open) return;
+    if (!via) return;
     let frame = 0;
-    const track = () => {
+    const follow = () => {
       if (frame) return;
       frame = requestAnimationFrame(() => {
         frame = 0;
-        place();
+        place("focus");
       });
     };
+    const onScroll = via === "hover" ? hide : follow;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && hide();
-    window.addEventListener("scroll", track, { passive: true, capture: true });
-    window.addEventListener("resize", track, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true, capture: true });
+    window.addEventListener("resize", hide, { passive: true });
     window.addEventListener("keydown", onKey);
     return () => {
       if (frame) cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", track, { capture: true });
-      window.removeEventListener("resize", track);
+      window.removeEventListener("scroll", onScroll, { capture: true });
+      window.removeEventListener("resize", hide);
       window.removeEventListener("keydown", onKey);
     };
-  }, [open, place, hide]);
+  }, [via, place, hide]);
 
   const shut = useCallback(() => {
     dialog.current?.close();
@@ -110,9 +124,9 @@ export function Tooltip({
           setModal(true);
         }
       : undefined,
-    onPointerEnter: asDialog ? undefined : place,
+    onPointerEnter: asDialog ? undefined : () => place("hover"),
     onPointerLeave: asDialog ? undefined : hide,
-    onFocus: asDialog ? undefined : place,
+    onFocus: asDialog ? undefined : () => place("focus"),
     onBlur: asDialog ? undefined : hide,
     "aria-haspopup": asDialog ? ("dialog" as const) : undefined,
     "aria-describedby": at ? id : undefined,
