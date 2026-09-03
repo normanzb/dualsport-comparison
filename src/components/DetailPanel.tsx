@@ -6,9 +6,10 @@ import { AbilityChart } from "@/components/AbilityChart";
 import { BikeGlyph } from "@/components/BikeGlyph";
 import { BrandLogo } from "@/components/BrandLogo";
 import { Crown } from "@/components/Crown";
+import { Diamond } from "@/components/Diamond";
 import type { Bike } from "@/data/bikes";
 import { type Side, photosFor } from "@/data/photos";
-import { overallRank, superlativesFor } from "@/data/superlatives";
+import { overallRank, ridingRank, superlativesFor } from "@/data/superlatives";
 import { asset } from "@/lib/base-path";
 
 /**
@@ -172,6 +173,7 @@ export function DetailPanel({ bike, onClear }: { bike: Bike | null; onClear: () 
           <span className="truncate">{bike.model}</span>
           {bike.year && <span className="shrink-0 text-ink-dim">&rsquo;{bike.year.slice(2)}</span>}
           {overallTier && <Crown tier={overallTier} size={17} className="shrink-0" />}
+          {ridingRank(bike) === 1 && <Diamond size={16} className="shrink-0" />}
         </h2>
         <span
           className="shrink-0 border px-2 py-0.5 text-[9px] tracking-[0.18em] uppercase"

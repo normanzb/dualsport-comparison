@@ -377,7 +377,29 @@ export function score(bike: Bike, axis: Axis) {
  * road is nowhere near the top of it.
  */
 export function overall(b: Bike): number {
-  const r = AXES.map((a) => score(b, a));
+  return polygonScore(AXES.map((a) => score(b, a)));
+}
+
+/** Area of the polygon those spokes enclose, rooted so a flat x reads as x. */
+function polygonScore(r: number[]): number {
   const paired = r.reduce((sum, v, i) => sum + v * r[(i + 1) % r.length], 0);
   return Math.sqrt(paired / r.length);
+}
+
+/**
+ * How good the bike is to ride, ignoring what it costs to own.
+ *
+ * Performance, offroad ease and highway comfort only: the three axes about being
+ * on the bike. Service interval and range are real considerations, but they are
+ * about running it, and they dominate the overall standing enough that a big
+ * adventure twin can win it while being beaten on every riding axis by a single
+ * half its price.
+ *
+ * Same area shape as the overall standing, over a triangle instead of a
+ * pentagon, so the two numbers are read the same way.
+ */
+const RIDING_AXES = ["performance", "offroad", "highway"];
+
+export function riding(b: Bike): number {
+  return polygonScore(AXES.filter((a) => RIDING_AXES.includes(a.key)).map((a) => score(b, a)));
 }

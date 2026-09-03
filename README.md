@@ -139,12 +139,13 @@ Code identifiers and platform names stay American, because they are not prose: `
 
 Three tiers, and the panel fills the first and outlines the other two so there is still something to read first:
 
-| Tier         | Example                        | Scope                                            |
-| ------------ | ------------------------------ | ------------------------------------------------ |
-| Overall      | `best overall 6.53/10`         | top three chart areas, listed first, and crowned |
-| Outright     | `most power 105 hp`            | best of all bikes                                |
-| Runner-up    | `2nd-heaviest ~196 kg`         | second best of all bikes                         |
-| Within model | `lightest of any 690 Enduro R` | best of that model's years                       |
+| Tier         | Example                        | Scope                                                   |
+| ------------ | ------------------------------ | ------------------------------------------------------- |
+| Overall      | `best overall 6.53/10`         | top three chart areas, listed first, and crowned        |
+| Best to ride | `best to ride 7.03/10`         | top three on the riding axes; the winner gets a diamond |
+| Outright     | `most power 105 hp`            | best of all bikes                                       |
+| Runner-up    | `2nd-heaviest ~196 kg`         | second best of all bikes                                |
+| Within model | `lightest of any 690 Enduro R` | best of that model's years                              |
 
 Ranking is competition-style: two bikes tied for first are both first, and the value below them is third, so it gets no chip. Nobody is promoted by a tie above them.
 
@@ -245,6 +246,12 @@ Engine sits above wind protection at 4 to 3. At equal weight a screen exactly ca
 Top-gear comfort is not min-max normalised either: gearboxes here are only ever five or six speeds, so scaling them to the field would make one gear worth the whole axis, more than a 112 cc gap. A five-speed scores 0.75, worth roughly the 10-15% more revs it turns at speed.
 
 Wind protection is the one subjective number on the page: a 0-5 judgement read off the bodywork, where a bare number plate is 0 and a rally tower with a screen is 5.
+
+### Best to ride
+
+`riding()` is the same area calculation over three axes instead of five: performance, offroad ease and highway comfort. Service interval and range are real considerations, but they are about running a bike rather than being on one, and they carry enough of the overall standing that a big adventure twin can win it while being beaten on every riding axis by a single at half the price. That is exactly what happens: the 890 Adventure R takes the crown, the HP2 takes the diamond, and the top of the riding order is singles.
+
+The top three get a chip. Only the winner gets the diamond, which is deliberate: the crown is a podium, the diamond is a single "this is the one to ride" mark.
 
 ### Overall standing
 

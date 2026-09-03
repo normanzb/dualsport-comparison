@@ -4,9 +4,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
 import { BrandSwatch } from "@/components/BrandSwatch";
 import { Crown } from "@/components/Crown";
+import { Diamond } from "@/components/Diamond";
 import { type Bike, bikes } from "@/data/bikes";
 import { photosFor } from "@/data/photos";
-import { overallRank } from "@/data/superlatives";
+import { overallRank, ridingRank } from "@/data/superlatives";
 
 type Col = {
   label: string;
@@ -238,6 +239,7 @@ export function SpecTable({
                         {b.model}
                         {b.year && <span className="text-ink-faint"> ({b.year})</span>}
                         {tier && <Crown tier={tier} />}
+                        {ridingRank(b) === 1 && <Diamond />}
                       </span>
                       {hasPhoto && <BrandSwatch make={b.make} fallback={b.ink} />}
                     </button>

@@ -118,6 +118,10 @@ export function AbilityChart({ bike }: { bike: Bike }) {
             ],
             ["Highway", "engine size 4, wind protection 3, top-gear comfort 1."],
             [
+              "Best to ride",
+              "performance, offroad ease and highway comfort combined, the same way but over those three axes only. Service and range are about running a bike rather than riding it, and they carry the overall standing enough that a big adventure twin can win it while being beaten on every riding axis.",
+            ],
+            [
               "Overall",
               "where a bike claims it, the area of this shape as a fraction of the full pentagon. It rewards an all-rounder over a specialist: the easiest bike here to take off road is nowhere near the top of it.",
             ],

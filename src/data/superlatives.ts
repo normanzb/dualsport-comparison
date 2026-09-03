@@ -1,4 +1,4 @@
-import { offroad, overall, rangeMiles } from "@/data/abilities";
+import { offroad, overall, rangeMiles, riding } from "@/data/abilities";
 import { type Bike, bikes } from "@/data/bikes";
 
 /**
@@ -172,6 +172,14 @@ const METRICS: Metric[] = [
     format: (b) => outOfTen(offroad(b)),
   },
   {
+    of: "riding",
+    depth: 3,
+    label: "best to ride",
+    dir: "max",
+    pick: (b) => hundredths(riding(b)),
+    format: (b) => outOfTenFine(riding(b)),
+  },
+  {
     of: "overall",
     depth: 3,
     label: "best overall",
@@ -305,7 +313,8 @@ const TABLE: Record<string, Superlative[]> = (() => {
 
   // the overall standing leads, then whole-list claims, then runners-up, then
   // the within-model ones
-  const weight = (x: Superlative) => (x.of === "overall" ? 0 : x.scope === "family" ? 3 : x.rank);
+  const weight = (x: Superlative) =>
+    x.of === "overall" ? -1 : x.of === "riding" ? 0 : x.scope === "family" ? 3 : x.rank;
   for (const list of Object.values(out)) list.sort((a, b) => weight(a) - weight(b));
   return out;
 })();
@@ -320,6 +329,10 @@ export const overallRank = (bike: Bike): 1 | 2 | 3 | null =>
   superlativesFor(bike).find((s) => s.of === "overall")?.rank ?? null;
 
 /** The medal holders, best first. */
+/** 1, 2 or 3 for the three best to ride, null otherwise. */
+export const ridingRank = (bike: Bike): 1 | 2 | 3 | null =>
+  superlativesFor(bike).find((s) => s.of === "riding")?.rank ?? null;
+
 export const overallPodium: Bike[] = bikes
   .filter((b) => overallRank(b) !== null)
   .sort((a, b) => (overallRank(a) as number) - (overallRank(b) as number));
