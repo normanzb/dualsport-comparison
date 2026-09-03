@@ -69,6 +69,28 @@ export const photos: Record<string, PhotoSet> = {
     credit: "Yamaha Motor",
     source: "https://www.yamaha-motor.eu/gb/en/motorcycles/adventure/pdp/t-n-r-700/",
   },
+  "honda-crf300-rally": {
+    views: [{ side: "right", src: "/bikes/honda-crf300-rally/right.webp" }],
+    credit: "Honda",
+    source:
+      "https://www.honda.co.uk/content/dam/central/motorcycles/colour-picker/adventure/crf300_rally/crf300_rally_2025/r-292r_extreme_red/25YM_CRF300-Rally_Studio_EXTREME-RED_R-292R_RHS.png",
+  },
+  "yamaha-tenere-700-rally": {
+    views: [
+      { side: "right", src: "/bikes/yamaha-tenere-700-rally/right.webp" },
+      { side: "left", src: "/bikes/yamaha-tenere-700-rally/left.webp" },
+    ],
+    credit: "Yamaha Motor",
+    source: "https://www.yamaha-motor.eu/gb/en/motorcycles/adventure/pdp/t-n-r-700-rally/",
+  },
+  "yamaha-tenere-700-world-raid": {
+    views: [
+      { side: "right", src: "/bikes/yamaha-tenere-700-world-raid/right.webp" },
+      { side: "left", src: "/bikes/yamaha-tenere-700-world-raid/left.webp" },
+    ],
+    credit: "Yamaha Motor",
+    source: "https://www.yamaha-motor.eu/gb/en/motorcycles/adventure/pdp/t-n-r-700-world-raid/",
+  },
   "yamaha-wr125r": {
     views: [
       { side: "right", src: "/bikes/yamaha-wr125r/right.webp" },
