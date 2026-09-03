@@ -7,9 +7,10 @@ import { BikeGlyph } from "@/components/BikeGlyph";
 import { BrandLogo } from "@/components/BrandLogo";
 import { Crown } from "@/components/Crown";
 import { Diamond } from "@/components/Diamond";
+import { Feather } from "@/components/Feather";
 import type { Bike } from "@/data/bikes";
 import { type Side, photosFor } from "@/data/photos";
-import { overallRank, ridingRank, superlativesFor } from "@/data/superlatives";
+import { offroadEaseRank, overallRank, ridingRank, superlativesFor } from "@/data/superlatives";
 import { asset } from "@/lib/base-path";
 
 /**
@@ -150,6 +151,7 @@ export function DetailPanel({ bike, onClear }: { bike: Bike | null; onClear: () 
 
   const superlatives = superlativesFor(bike);
   const overallTier = overallRank(bike);
+  const easeTier = offroadEaseRank(bike);
 
   return (
     <article
@@ -174,6 +176,7 @@ export function DetailPanel({ bike, onClear }: { bike: Bike | null; onClear: () 
           {bike.year && <span className="shrink-0 text-ink-dim">&rsquo;{bike.year.slice(2)}</span>}
           {overallTier && <Crown tier={overallTier} size={17} className="shrink-0" />}
           {ridingRank(bike) === 1 && <Diamond size={16} className="shrink-0" />}
+          {easeTier && <Feather tier={easeTier} size={19} className="shrink-0" />}
         </h2>
         <span
           className="shrink-0 border px-2 py-0.5 text-[9px] tracking-[0.18em] uppercase"

@@ -21,6 +21,8 @@ export type Superlative = {
   value: string;
   /** the metric this reads off, for callers that need to test it semantically */
   of: string;
+  /** which end of that metric this claim is: a max and a min share an `of` */
+  dir: "min" | "max";
   rank: 1 | 2 | 3;
   /** "list" ranks against every bike, "family" only against the same model's other years. */
   scope: "list" | "family";
@@ -159,6 +161,7 @@ const METRICS: Metric[] = [
   // rather than being separated by a difference nothing on the page displays
   {
     of: "offroad",
+    depth: 3,
     label: "easiest off road",
     dir: "max",
     pick: (b) => tenths(offroad(b)),
@@ -276,6 +279,7 @@ const TABLE: Record<string, Superlative[]> = (() => {
       const label = [tied && "joint-", ORDINAL[r - 1], m.label].filter(Boolean).join("");
       (out[b.slug] ??= []).push({
         of: m.of,
+        dir: m.dir,
         label,
         value: m.format(b),
         rank: r as 1 | 2 | 3,
@@ -300,6 +304,7 @@ const TABLE: Record<string, Superlative[]> = (() => {
         taken[b.slug] = (taken[b.slug] ?? 0) + 1;
         (out[b.slug] ??= []).push({
           of: m.of,
+          dir: m.dir,
           // not "of the 690 Enduro Rs": the chips render uppercase, and the
           // pluralising s then reads as part of the model name
           label: `${m.label} of any ${b.model}`,
@@ -332,6 +337,20 @@ export const overallRank = (bike: Bike): 1 | 2 | 3 | null =>
 /** 1, 2 or 3 for the three best to ride, null otherwise. */
 export const ridingRank = (bike: Bike): 1 | 2 | 3 | null =>
   superlativesFor(bike).find((s) => s.of === "riding")?.rank ?? null;
+
+/**
+ * 1, 2 or 3 for the bikes easiest to take off road, null otherwise.
+ *
+ * Matched on the direction as well as the metric: "easiest" and "hardest" share
+ * an `of`, so testing the metric alone would hand the mark to the heaviest bike.
+ */
+export const offroadEaseRank = (bike: Bike): 1 | 2 | 3 | null =>
+  superlativesFor(bike).find((s) => s.of === "offroad" && s.dir === "max")?.rank ?? null;
+
+/** The three best to ride, best first. */
+export const ridingPodium: Bike[] = bikes
+  .filter((b) => ridingRank(b) !== null)
+  .sort((a, b) => (ridingRank(a) as number) - (ridingRank(b) as number));
 
 export const overallPodium: Bike[] = bikes
   .filter((b) => overallRank(b) !== null)

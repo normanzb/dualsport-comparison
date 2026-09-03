@@ -153,13 +153,14 @@ Code identifiers and platform names stay American, because they are not prose: `
 
 Three tiers, and the panel fills the first and outlines the other two so there is still something to read first:
 
-| Tier         | Example                        | Scope                                                   |
-| ------------ | ------------------------------ | ------------------------------------------------------- |
-| Overall      | `best overall 6.53/10`         | top three chart areas, listed first, and crowned        |
-| Best to ride | `best to ride 7.03/10`         | top three on the riding axes; the winner gets a diamond |
-| Outright     | `most power 105 hp`            | best of all bikes                                       |
-| Runner-up    | `2nd-heaviest ~196 kg`         | second best of all bikes                                |
-| Within model | `lightest of any 690 Enduro R` | best of that model's years                              |
+| Tier             | Example                        | Scope                                                   |
+| ---------------- | ------------------------------ | ------------------------------------------------------- |
+| Overall          | `best overall 6.53/10`         | top three chart areas, listed first, and crowned        |
+| Best to ride     | `best to ride 7.03/10`         | top three on the riding axes; the winner gets a diamond |
+| Easiest off road | `easiest off road 8.3/10`      | top three on the offroad axis, marked with a feather    |
+| Outright         | `most power 105 hp`            | best of all bikes                                       |
+| Runner-up        | `2nd-heaviest ~196 kg`         | second best of all bikes                                |
+| Within model     | `lightest of any 690 Enduro R` | best of that model's years                              |
 
 Ranking is competition-style: two bikes tied for first are both first, and the value below them is third, so it gets no chip. Nobody is promoted by a tie above them.
 
@@ -293,6 +294,22 @@ Wind protection is the one subjective number on the page, judged 0 to 5 off the 
 The scale is absolute and deliberately runs past this field, and it divides by a fixed `WIND_MAX` of 5 rather than by the observed maximum. Taking the observed maximum meant whichever bike was rated highest scored full marks by definition, which is how a narrow rally fairing came to define full weather protection: the Kove 450 Rally sat at 5 and was scoring better on the highway axis than a 790 Adventure. A tall rally tower is not protection if it is no wider than you are. Your shoulders are still in clean air.
 
 The levels are set by how much of the rider is shielded, not by what the bike is called. An R1300GS is an adventure bike and so is a CFMoto 450MT, and they are two levels apart.
+
+### Marks
+
+Three marks, and the split between shape and colour carries the meaning: **shape says which ranking, metal says the position in it.**
+
+| mark       | ranking                             | tiers                |
+| ---------- | ----------------------------------- | -------------------- |
+| 👑 crown   | overall standing, all five axes     | gold, silver, bronze |
+| 💎 diamond | best to ride, the three riding axes | winner only          |
+| 🪶 feather | easiest off road, that axis alone   | gold, silver, bronze |
+
+The diamond is the odd one out on purpose: it is a gem rather than a medal, and it answers a single question rather than ranking a field.
+
+The feather is a feather and not a mountain or a tyre tread because the axis measures lightness and manageability, not terrain capability. It marks the bike you can pick up, not the one that will climb anything.
+
+All three share one CSS-mask construction and one pair of animations in `globals.css`, so a tier class supplies `--crown-metal` and `--crown-glow` and everything else is inherited. That is also why `reduced-motion` switches all three off with a single rule.
 
 ### Best to ride
 
