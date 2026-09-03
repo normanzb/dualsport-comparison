@@ -72,7 +72,7 @@ score = √(area / full ${AXES.length}-sided figure) × 10`}
                 className="font-display text-2xl leading-none"
                 style={{ color: "var(--livery)" }}
               >
-                {(overall(b) * 10).toFixed(1)}
+                {(overall(b) * 10).toFixed(2)}
               </span>
             </li>
           ))}

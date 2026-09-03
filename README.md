@@ -141,7 +141,7 @@ Three tiers, and the panel fills the first and outlines the other two so there i
 
 | Tier         | Example                        | Scope                                            |
 | ------------ | ------------------------------ | ------------------------------------------------ |
-| Overall      | `best overall 5.9/10`          | top three chart areas, listed first, and crowned |
+| Overall      | `best overall 6.53/10`         | top three chart areas, listed first, and crowned |
 | Outright     | `most power 105 hp`            | best of all bikes                                |
 | Runner-up    | `2nd-heaviest ~196 kg`         | second best of all bikes                         |
 | Within model | `lightest of any 690 Enduro R` | best of that model's years                       |
@@ -249,6 +249,8 @@ The page explains this to the reader in the `OverallExplainer` section, which de
 `overall()` is the area of the polygon the chart draws, as a fraction of the full pentagon, square-rooted so a bike scoring x on every axis reads exactly x rather than x squared. The top two get a `best overall` chip, and the leader also gets a `Crown` beside its name in the table row and the panel heading.
 
 The top three get a crown: gold, silver, bronze. They ask `overallRank()`, and the `OverallExplainer` section builds its podium from `overallPodium`; both read the same derived table the chips come from, so a crown, a chip and the podium can never disagree. Nothing hardcodes a winning slug.
+
+The overall standing ranks and prints at **two** decimals where every axis uses one. The axes are read off the chart, so two bikes shown as 5.0 should rank as joint; the overall standing is a podium, and at one decimal the 790 Adventure and the HP2 both rounded to 6.4 and tied for silver on a real gap of 0.055, leaving gold, silver, silver and no bronze. Rank and display move together, so a silver and a bronze can never show the same number.
 
 Every other metric stops at second place. The overall standing is the one that goes to three, via `depth: 3` on its `Metric`. Competition ranking still applies, so if two bikes tie for second there is no bronze at all.
 

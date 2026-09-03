@@ -41,6 +41,18 @@ type Metric = {
 const ORDINAL = ["", "2nd-", "3rd-"];
 const tenths = (v: number) => Math.round(v * 100) / 10;
 const outOfTen = (v: number) => `${(v * 10).toFixed(1)}/10`;
+/**
+ * The overall standing ranks and prints at two decimals, unlike the axes.
+ *
+ * The axes are read off the chart, where a tenth is all the reader gets, so two
+ * bikes shown as 5.0 should rank as joint. The overall standing is a podium: at
+ * one decimal the 790 Adventure and the HP2 both round to 6.4 and tie for
+ * silver, which leaves the medals reading gold, silver, silver and no bronze,
+ * on a real gap of 0.055. Rank and display move together so a silver and a
+ * bronze never show the same number.
+ */
+const hundredths = (v: number) => Math.round(v * 1000) / 100;
+const outOfTenFine = (v: number) => `${(v * 10).toFixed(2)}/10`;
 
 const METRICS: Metric[] = [
   {
@@ -164,8 +176,8 @@ const METRICS: Metric[] = [
     depth: 3,
     label: "best overall",
     dir: "max",
-    pick: (b) => tenths(overall(b)),
-    format: (b) => outOfTen(overall(b)),
+    pick: (b) => hundredths(overall(b)),
+    format: (b) => outOfTenFine(overall(b)),
   },
   {
     of: "gears",
