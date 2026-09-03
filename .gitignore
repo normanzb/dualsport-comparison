@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.res
+
+# Source images staged for the photo pipeline, not shipped.
+.res/

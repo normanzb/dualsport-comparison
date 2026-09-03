@@ -1,4 +1,4 @@
-export type Side = "left" | "right";
+export type Side = "left" | "right" | "front";
 export type View = { side: Side; src: string };
 export type PhotoSet = {
   views: View[];
@@ -74,9 +74,14 @@ export const photos: Record<string, PhotoSet> = {
     source: "https://www.motorcyclespecs.co.za/model/Honda/honda_crf450L_20.html",
   },
   "ducati-desmo450-eds": {
-    views: [{ side: "right", src: "/bikes/ducati-desmo450-eds/right.webp" }],
+    views: [
+      { side: "right", src: "/bikes/ducati-desmo450-eds/right.webp" },
+      { side: "left", src: "/bikes/ducati-desmo450-eds/left.webp" },
+      { side: "front", src: "/bikes/ducati-desmo450-eds/front.webp" },
+    ],
     credit: "Ducati",
-    source: "https://www.motorcyclespecs.co.za/model/ducati/ducadti-desmo-450eds-2027.html",
+    source:
+      "https://images.ctfassets.net/x7j9qwvpvr5s/3jEDT5uRS22eQMEUsmMtxc/07a88194aef5a8934a4fc23c27963329/2026-06-09-Desmo450-EDS-EU-MY27-Model-Preview-1050x650.png",
   },
   "ccm-gp450": {
     views: [{ side: "right", src: "/bikes/ccm-gp450/right.webp" }],

@@ -17,6 +17,8 @@ import { asset } from "@/lib/base-path";
  * left, and a shaft-drive boxer claims neither.
  */
 function sideLabel(bike: Bike, side: Side) {
+  // a head-on view has no side to attribute the drive or the exhaust to
+  if (side === "front") return "Front";
   const name = side === "left" ? "Left" : "Right";
   const on = [
     (bike.driveSide ?? "left") === side && "drive",
