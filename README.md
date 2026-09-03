@@ -230,7 +230,11 @@ It divides by a **fixed ceiling of 4**, not by the observed maximum. Two reasons
 
 Seat height is deliberately the smallest weight. Clearance already carries the suspension-travel part of a tall seat, so seat height's remaining job is just reaching the ground.
 
-**Performance** is power and torque weighted equally, normalised across the field.
+**Performance** is power and torque **per kilogram**, weighted equally, against fixed benchmarks of 0.6 hp/kg and 0.6 Nm/kg that nothing here reaches.
+
+Output on its own says how fast a bike is in a straight line, which is not what makes a dual sport good. What a rider feels is how much of it there is to move: 63 hp in the 126 kg Ducati is a livelier machine than 72 hp in a 208 kg Tenere, and scoring raw output said the opposite. Weight is kerb, not dry, because that is the bike you actually push.
+
+Fixed benchmarks matter here for two reasons. A heavier bike cannot buy the axis back with more engine, and the best bike on it is not handed full marks just for leading the field. The Ducati is the clearest case: 63.5 hp reads as modest until you divide by 126 kg, at which point only the HP2 beats it.
 
 **Highway** is `(4 x engine size + 3 x wind protection + 1 x top-gear comfort) / 8`.
 

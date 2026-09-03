@@ -177,12 +177,38 @@ const span = (pick: (b: Bike) => number) => {
 const unit = (v: number, r: { lo: number; hi: number }) =>
   r.hi === r.lo ? 1 : (v - r.lo) / (r.hi - r.lo);
 
-const HP = span((b) => b.n.hp);
-const NM = span((b) => b.n.nm);
+/**
+ * Full-rate credit up to the knee, then a much shallower slope to the ceiling.
+ *
+ * Used wherever more of something stops mattering past a point. It never docks
+ * the leader, which still reaches 1: it stops the gap between "enough" and "more
+ * than enough" being worth as much as the gap between "little" and "enough".
+ */
+const kneeScore = (v: number, knee: number, ceiling: number, atKnee: number) => {
+  if (v <= knee) return atKnee * (v / knee);
+  if (ceiling <= knee) return 1;
+  return atKnee + (1 - atKnee) * ((v - knee) / (ceiling - knee));
+};
 
-/** Power and torque, weighted equally, against the rest of the field. */
+/**
+ * Performance is power and torque per kilogram, not power and torque.
+ *
+ * Output on its own says how fast a bike is in a straight line, which is not
+ * what makes a dual sport good. What a rider feels is how much of it there is to
+ * move: 63 hp in the 126 kg Ducati is a livelier machine than 72 hp in a 208 kg
+ * Tenere, and scoring raw output said the opposite.
+ *
+ * Weight is kerb, not dry, because that is the bike you actually push.
+ *
+ * Both benchmarks are fixed and neither is reached here, so a heavier bike can
+ * never buy the axis back with more engine, and the best bike on it is not
+ * handed full marks just for leading the field.
+ */
+const PW_FULL_MARKS = 0.6; // hp per kg
+const TW_FULL_MARKS = 0.6; // Nm per kg
+
 export function performance(b: Bike): number {
-  return (unit(b.n.hp, HP) + unit(b.n.nm, NM)) / 2;
+  return (b.n.hp / b.n.wetKg / PW_FULL_MARKS + b.n.nm / b.n.wetKg / TW_FULL_MARKS) / 2;
 }
 
 /**
@@ -283,13 +309,7 @@ const serviceMiles = (b: Bike) => {
 const SERVICE_KNEE = 6000; // about 10,000 km, a year for most riders
 const SERVICE_AT_KNEE = 0.85;
 const SERVICE_HI = Math.max(...bikes.map(serviceMiles));
-const serviceScore = (mi: number) => {
-  if (mi <= SERVICE_KNEE) return SERVICE_AT_KNEE * (mi / SERVICE_KNEE);
-  if (SERVICE_HI <= SERVICE_KNEE) return 1;
-  return (
-    SERVICE_AT_KNEE + (1 - SERVICE_AT_KNEE) * ((mi - SERVICE_KNEE) / (SERVICE_HI - SERVICE_KNEE))
-  );
-};
+const serviceScore = (mi: number) => kneeScore(mi, SERVICE_KNEE, SERVICE_HI, SERVICE_AT_KNEE);
 
 export const AXES: Axis[] = [
   {

@@ -75,6 +75,14 @@ export const photos: Record<string, PhotoSet> = {
     source:
       "https://www.honda.co.uk/content/dam/central/motorcycles/colour-picker/adventure/crf300_rally/crf300_rally_2025/r-292r_extreme_red/25YM_CRF300-Rally_Studio_EXTREME-RED_R-292R_RHS.png",
   },
+  "ktm-890-adventure-r": {
+    views: [
+      { side: "right", src: "/bikes/ktm-890-adventure-r/right.webp" },
+      { side: "left", src: "/bikes/ktm-890-adventure-r/left.webp" },
+    ],
+    credit: "KTM",
+    source: "https://www.ktm.com/en-gb/models/adventure/2026-ktm-890-adventurer.html",
+  },
   "yamaha-tenere-700-rally": {
     views: [
       { side: "right", src: "/bikes/yamaha-tenere-700-rally/right.webp" },

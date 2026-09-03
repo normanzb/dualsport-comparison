@@ -93,20 +93,45 @@ export function AbilityChart({ bike }: { bike: Bike }) {
           );
         })}
       </svg>
-      <figcaption className="mt-1 text-[10px] leading-relaxed text-ink-faint">
-        Further out is better. Range is tank size times real-world economy, scored against a fixed
-        500-mile benchmark that nothing here reaches. Offroad ease is how readily a bike goes off
-        the tarmac, not how capable it is once there: mass and ground clearance weighted equally, a
-        low centre of gravity at 0.5 and a low seat at 0.3. A big adventure bike scores low because
-        it is awkward to take off road, not because it cannot go. Performance is power and torque
-        weighted equally. Highway weights engine size 4, wind protection 3 and top-gear comfort 1.
-        Service runs on a soft knee: full rate up to 6,000 miles, which is about a year&rsquo;s
-        riding, then roughly a third of that rate beyond, because past a year the interval stops
-        changing how often the bike is booked in. Offroad ease, performance and highway are indices
-        out of ten, not measurements. Hours-based service intervals sit at a 30 mph working average.
-        The overall figure, where a bike claims it, is the area of this shape as a fraction of the
-        full pentagon, so it rewards an all-rounder over a specialist: the easiest bike here to take
-        off road is nowhere near the top of it.
+      <figcaption className="mt-2 text-[10px] leading-relaxed text-ink-faint">
+        <p className="text-ink-dim">
+          Further out is better. Each axis scores against a fixed benchmark, never against the rest
+          of the field.
+        </p>
+        <dl className="mt-2 space-y-1.5">
+          {[
+            [
+              "Service",
+              "full rate to 6,000 miles, about a year's riding, then roughly a third of that rate. Past a year the interval stops changing how often the bike is booked in.",
+            ],
+            [
+              "Range",
+              "tank size times real-world economy, against a fixed 500-mile benchmark that nothing here reaches.",
+            ],
+            [
+              "Performance",
+              "power and torque per kilogram, weighted equally, against fixed benchmarks of 0.6 hp/kg and 0.6 Nm/kg that nothing here reaches. Output alone says how fast a bike is in a straight line; what a rider feels is how much of it there is to move.",
+            ],
+            [
+              "Offroad ease",
+              "how readily a bike goes off the tarmac, not how capable it is once there. Mass and clearance weighted equally, a low centre of gravity at 0.5, a low seat at 0.3. A big adventure bike scores low because it is awkward to take off road, not because it cannot go.",
+            ],
+            ["Highway", "engine size 4, wind protection 3, top-gear comfort 1."],
+            [
+              "Overall",
+              "where a bike claims it, the area of this shape as a fraction of the full pentagon. It rewards an all-rounder over a specialist: the easiest bike here to take off road is nowhere near the top of it.",
+            ],
+          ].map(([term, def]) => (
+            <div key={term} className="sm:flex sm:gap-2">
+              <dt className="shrink-0 text-ink-dim sm:w-[86px]">{term}</dt>
+              <dd className="sm:flex-1">{def}</dd>
+            </div>
+          ))}
+        </dl>
+        <p className="mt-2">
+          Offroad ease, performance and highway are indices out of ten, not measurements.
+          Hours-based service intervals sit at a 30 mph working average.
+        </p>
       </figcaption>
     </figure>
   );
