@@ -41,10 +41,9 @@ export type Bike = {
    */
   driveSide?: "left" | "right" | "none";
   /**
-   * Which side the silencer sits on. Right on almost everything, but the LC4
-   * 690/701 and the HP2 route it down the left, alongside the drive, so the
-   * right-hand view of those shows no exhaust at all. "none" where it is not
-   * one-sided.
+   * Which side the silencer sits on. Right on most of these, but the LC4
+   * 690/701, the HP2 and the WR125R route it down the left, so the right-hand
+   * view of those shows no exhaust at all. "none" where it is not one-sided.
    */
   exhaustSide?: "left" | "right" | "none";
   /** Brand colour, contrast-checked against the graphite ground. */
@@ -145,6 +144,7 @@ export const bikes: Bike[] = [
       serviceMi: 3500,
     },
     condition: "new",
+    exhaustSide: "left",
     ink: "#4E8CFF",
     inkAlt: "#FF4D5E",
     note: "A1 licence fodder and priced to match. Learner-legal, which is the whole reason it sits on a list of much bigger bikes.",

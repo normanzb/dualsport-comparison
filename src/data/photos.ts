@@ -58,12 +58,16 @@ export const photos: Record<string, PhotoSet> = {
   "honda-crf300l": {
     views: [{ side: "right", src: "/bikes/honda-crf300l/right.webp" }],
     credit: "Honda",
-    source: "https://www.motorcyclespecs.co.za/model/Honda/honda-crf300l-2025.html",
+    source:
+      "https://www.honda.co.uk/content/dam/central/motorcycles/colour-picker/adventure/crf300l/crf300l_2025/r-292r_extreme_red/25YM_CRF300L_EXTREME-RED_R-292R_RHS.png",
   },
   "yamaha-wr125r": {
-    views: [{ side: "right", src: "/bikes/yamaha-wr125r/right.webp" }],
+    views: [
+      { side: "right", src: "/bikes/yamaha-wr125r/right.webp" },
+      { side: "left", src: "/bikes/yamaha-wr125r/left.webp" },
+    ],
     credit: "Yamaha Motor",
-    source: "https://www.motorcyclespecs.co.za/model/yamaha/Yamaha-wr-125r-2026.htm",
+    source: "https://www.yamaha-motor.eu/gb/en/motorcycles/adventure/pdp/wr125r/",
   },
   "honda-crf450l": {
     views: [
@@ -71,7 +75,9 @@ export const photos: Record<string, PhotoSet> = {
       { side: "right", src: "/bikes/honda-crf450l/right.webp" },
     ],
     credit: "Honda",
-    source: "https://www.motorcyclespecs.co.za/model/Honda/honda_crf450L_20.html",
+    // right view is Honda's own studio asset; the left is the older press shot
+    source:
+      "https://www.honda.co.uk/content/dam/central/motorcycles/colour-picker/off-road/crf450l/crf450l_2019_nv/ered/crf450l_2019_nv_ered.png",
   },
   "ducati-desmo450-eds": {
     views: [
