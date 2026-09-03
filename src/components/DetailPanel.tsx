@@ -11,6 +11,7 @@ import { Feather } from "@/components/Feather";
 import { ShareButton } from "@/components/ShareButton";
 import type { Bike } from "@/data/bikes";
 import { type Side, photosFor } from "@/data/photos";
+import { SPEC_FIELDS } from "@/data/spec-fields";
 import { offroadEaseRank, overallRank, ridingRank, superlativesFor } from "@/data/superlatives";
 import { asset } from "@/lib/base-path";
 
@@ -199,9 +200,18 @@ export function DetailPanel({ bike, onClear }: { bike: Bike | null; onClear: () 
         />
       </header>
 
-      <div className="relative grid gap-8 px-5 py-6 md:px-7 lg:grid-cols-[1.35fr_1fr] lg:gap-10">
-        <Stack key={bike.slug} bike={bike} />
-        <div className="min-w-0">
+      {/*
+        Three grid children, so the phone gets photo, pills, chart, then the
+        reading. On a wide screen the right-hand column spans both rows, which
+        puts the pills level with the top of the photograph and drops the prose
+        under it rather than beside it.
+      */}
+      <div className="relative grid gap-8 px-5 py-6 md:px-7 lg:grid-cols-[1.35fr_1fr] lg:gap-x-10">
+        <div className="min-w-0 lg:col-start-1 lg:row-start-1">
+          <Stack key={bike.slug} bike={bike} />
+        </div>
+
+        <div className="min-w-0 lg:col-start-2 lg:row-span-2 lg:row-start-1">
           {superlatives.length > 0 && (
             <ul className="mb-3 flex flex-wrap gap-1.5">
               {superlatives.map((s) => {
@@ -228,6 +238,10 @@ export function DetailPanel({ bike, onClear }: { bike: Bike | null; onClear: () 
               })}
             </ul>
           )}
+          <AbilityChart bike={bike} />
+        </div>
+
+        <div className="min-w-0 lg:col-start-1 lg:row-start-2">
           <p className="mb-3 text-[12px] leading-relaxed text-ink-dim">{bike.note}</p>
           {(bike.story || bike.platform) && (
             <div className="mb-4 border-l border-hair pl-3">
@@ -241,7 +255,21 @@ export function DetailPanel({ bike, onClear }: { bike: Bike | null; onClear: () 
               ))}
             </div>
           )}
-          <AbilityChart bike={bike} />
+
+          <h4 className="mb-2 text-[9px] tracking-[0.18em] text-ink-dim uppercase">
+            Specification
+          </h4>
+          <dl className="grid gap-x-8 sm:grid-cols-2">
+            {SPEC_FIELDS.map((f) => (
+              <div
+                key={f.label}
+                className="flex items-baseline justify-between gap-3 border-b border-hair py-1.5"
+              >
+                <dt className="text-[9px] tracking-[0.14em] text-ink-faint uppercase">{f.label}</dt>
+                <dd className="text-right text-[11px] text-ink-dim tabular-nums">{f.cell(bike)}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </article>

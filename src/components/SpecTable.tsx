@@ -8,6 +8,7 @@ import { Diamond } from "@/components/Diamond";
 import { Feather } from "@/components/Feather";
 import { type Bike, bikes } from "@/data/bikes";
 import { photosFor } from "@/data/photos";
+import { SPEC_FIELDS } from "@/data/spec-fields";
 import { offroadEaseRank, overallRank, ridingRank } from "@/data/superlatives";
 
 type Col = {
@@ -19,17 +20,7 @@ type Col = {
 
 const COLS: Col[] = [
   { label: "Bike", value: (b) => `${b.model} ${b.year ?? ""}`.trim() },
-  { label: "Service interval", value: (b) => b.n.serviceMi, cell: (b) => b.spec.serviceInterval },
-  { label: "Dry / no-fuel", value: (b) => b.n.dryKg, cell: (b) => b.spec.dryWeight },
-  { label: "Wet / kerb", value: (b) => b.n.wetKg, cell: (b) => b.spec.wetWeight },
-  { label: "Tank", value: (b) => b.n.tankL, cell: (b) => b.spec.tank },
-  { label: "Gears", value: (b) => Number(b.spec.gears), cell: (b) => b.spec.gears },
-  { label: "Seat height", value: (b) => b.n.seatMm, cell: (b) => b.spec.seatHeight },
-  { label: "Clearance", value: (b) => b.n.clearanceMm, cell: (b) => b.spec.clearance },
-  { label: "Engine", value: (b) => b.n.cc, cell: (b) => b.spec.engine },
-  { label: "Power", value: (b) => b.n.hp, cell: (b) => b.spec.power },
-  { label: "Torque", value: (b) => b.n.nm, cell: (b) => b.spec.torque },
-  { label: "Typical UK price", value: (b) => b.n.priceFrom, cell: (b) => b.spec.price },
+  ...SPEC_FIELDS.map((f) => ({ label: f.label, value: f.sort, cell: f.cell })),
 ];
 
 type Sort = { col: number; dir: "asc" | "desc" };
