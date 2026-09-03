@@ -8,6 +8,7 @@ import { BrandLogo } from "@/components/BrandLogo";
 import { Crown } from "@/components/Crown";
 import { Diamond } from "@/components/Diamond";
 import { Feather } from "@/components/Feather";
+import { ShareButton } from "@/components/ShareButton";
 import type { Bike } from "@/data/bikes";
 import { type Side, photosFor } from "@/data/photos";
 import { offroadEaseRank, overallRank, ridingRank, superlativesFor } from "@/data/superlatives";
@@ -191,6 +192,11 @@ export function DetailPanel({ bike, onClear }: { bike: Bike | null; onClear: () 
         >
           Clear &times;
         </button>
+        <ShareButton
+          key={bike.slug}
+          slug={bike.slug}
+          title={`${bike.make} ${bike.model}${bike.year ? ` ${bike.year}` : ""}`}
+        />
       </header>
 
       <div className="relative grid gap-8 px-5 py-6 md:px-7 lg:grid-cols-[1.35fr_1fr] lg:gap-10">

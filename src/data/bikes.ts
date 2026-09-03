@@ -1104,6 +1104,20 @@ export const bikes: Bike[] = [
   },
 ];
 
+/** A slug with its trailing model year taken off; unchanged for a bike without one. */
+export const familyStem = (slug: string) => slug.replace(/-\d{4}$/, "");
+
+/** Year-less slugs that no bike answers to, so /bikes/<stem>/ has somewhere to send a reader. */
+export const stems = [...new Set(bikes.map((b) => familyStem(b.slug)))].filter(
+  (stem) => !bikes.some((b) => b.slug === stem),
+);
+
+/** The current model of a family. Years are strings here, so compare them as numbers. */
+export const latestInFamily = (stem: string): Bike | undefined =>
+  bikes
+    .filter((b) => familyStem(b.slug) === stem && b.slug !== stem)
+    .sort((a, b) => Number(b.year ?? 0) - Number(a.year ?? 0))[0];
+
 export const extremes = {
   lightestWet: Math.min(...bikes.map((b) => b.n.wetKg)),
   heaviestWet: Math.max(...bikes.map((b) => b.n.wetKg)),
