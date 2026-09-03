@@ -1,3 +1,7 @@
+"use client";
+
+import { Tooltip } from "@/components/Tooltip";
+
 /**
  * Marks the bike that scores highest on the three riding axes.
  *
@@ -10,14 +14,18 @@ const H = 18;
 
 export function Diamond({ size = 10, className }: { size?: number; className?: string }) {
   return (
-    <span
-      className={`crown gem${className ? ` ${className}` : ""}`}
-      style={{ height: size, width: (size * W) / H }}
-      role="img"
-      aria-label="Best to ride"
-      title="Best to ride: performance, offroad ease and highway comfort combined"
+    <Tooltip
+      title="Best to ride"
+      content="Ranked on the area of the three riding axes only: performance, offroad ease and highway comfort. Service interval and range are left out."
     >
-      <span aria-hidden />
-    </span>
+      <span
+        className={`crown gem${className ? ` ${className}` : ""}`}
+        style={{ height: size, width: (size * W) / H }}
+        role="img"
+        aria-label="Best to ride"
+      >
+        <span aria-hidden />
+      </span>
+    </Tooltip>
   );
 }

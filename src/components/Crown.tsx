@@ -1,3 +1,7 @@
+"use client";
+
+import { Tooltip } from "@/components/Tooltip";
+
 /**
  * Marks a bike in the top three by ability-chart area: gold, silver, bronze.
  *
@@ -14,6 +18,9 @@ const TIERS = {
   3: { metal: "bronze", name: "Third best overall" },
 } as const;
 
+const WHY =
+  "Ranked on the area of its ability chart across all five axes: service interval, range, performance, offroad ease and highway comfort.";
+
 export type Tier = keyof typeof TIERS;
 
 export function Crown({
@@ -27,14 +34,15 @@ export function Crown({
 }) {
   const { metal, name } = TIERS[tier];
   return (
-    <span
-      className={`crown crown-${metal}${className ? ` ${className}` : ""}`}
-      style={{ height: size, width: size * ASPECT }}
-      role="img"
-      aria-label={name}
-      title={`${name} by ability-chart area`}
-    >
-      <span aria-hidden />
-    </span>
+    <Tooltip title={name} content={WHY}>
+      <span
+        className={`crown crown-${metal}${className ? ` ${className}` : ""}`}
+        style={{ height: size, width: size * ASPECT }}
+        role="img"
+        aria-label={name}
+      >
+        <span aria-hidden />
+      </span>
+    </Tooltip>
   );
 }

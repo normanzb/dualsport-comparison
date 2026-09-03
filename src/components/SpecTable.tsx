@@ -8,10 +8,14 @@ import { Diamond } from "@/components/Diamond";
 import { Feather } from "@/components/Feather";
 import { type Bike, bikes } from "@/data/bikes";
 import { photosFor } from "@/data/photos";
-import { SPEC_FIELDS } from "@/data/spec-fields";
+import { TABLE_FIELDS, specField } from "@/data/spec-fields";
+import { Tooltip } from "@/components/Tooltip";
+import { useMediaQuery } from "@/lib/use-media-query";
 import { offroadEaseRank, overallRank, ridingRank } from "@/data/superlatives";
 
 type Col = {
+  key?: string;
+  className?: string;
   label: string;
   /** null sorts last whichever way the column is pointing */
   value: (b: Bike) => number | string | null;
@@ -20,7 +24,15 @@ type Col = {
 
 const COLS: Col[] = [
   { label: "Bike", value: (b) => `${b.model} ${b.year ?? ""}`.trim() },
-  ...SPEC_FIELDS.map((f) => ({ label: f.label, value: f.sort, cell: f.cell })),
+  ...TABLE_FIELDS.map((f) => ({
+    key: f.key,
+    label: f.label,
+    value: f.sort,
+    cell: f.cell,
+    // wide enough for the whole sheet to fit: the wet figure folds into the dry
+    // cell's tooltip and the column comes out, which is what clears the scrollbar
+    className: f.key === "wet" ? "wide:hidden" : undefined,
+  })),
 ];
 
 type Sort = { col: number; dir: "asc" | "desc" };
@@ -46,7 +58,7 @@ function HeaderRow({
             style={widths ? { width: widths[i], minWidth: widths[i] } : undefined}
             className={`bg-ground py-3 pr-4 text-[10px] font-medium tracking-[0.18em] uppercase ${
               i === 0 ? "pl-3" : "text-right"
-            } ${active ? "text-ink" : "text-ink-dim"}`}
+            } ${active ? "text-ink" : "text-ink-dim"} ${c.className ?? ""}`}
           >
             <button
               type="button"
@@ -78,6 +90,9 @@ export function SpecTable({
   onSelect: (b: Bike) => void;
 }) {
   const [sort, setSort] = useState<Sort>({ col: 0, dir: "asc" });
+  const foldWet = useMediaQuery("(min-width: 1400px)");
+  // travel hangs off a hover, so on a touch screen the cell keeps selecting the row
+  const canHover = useMediaQuery("(hover: hover)");
   const tableRef = useRef<HTMLTableElement>(null);
   const headRef = useRef<HTMLTableSectionElement>(null);
 
@@ -177,14 +192,17 @@ export function SpecTable({
         className="pointer-events-auto fixed z-30 overflow-x-hidden bg-ground"
         style={{ visibility: "hidden" }}
       >
-        <table className="w-full min-w-[1380px] border-collapse text-left">
+        <table className="w-full min-w-[1400px] border-collapse text-left wide:min-w-[1330px]">
           <thead>
             <HeaderRow sort={sort} onSort={onSort} widths={widths} />
           </thead>
         </table>
       </div>
       <div ref={wrapRef} className="-mx-5 overflow-x-auto px-5 md:mx-0 md:px-0">
-        <table ref={tableRef} className="w-full min-w-[1380px] border-collapse text-left">
+        <table
+          ref={tableRef}
+          className="w-full min-w-[1400px] border-collapse text-left wide:min-w-[1330px]"
+        >
           <caption className="sr-only">
             {bikes.length} dual sport motorcycles compared, sorted by {COLS[sort.col].label}. Select
             a row to see that bike in detail.
@@ -210,38 +228,54 @@ export function SpecTable({
                       : undefined,
                   }}
                 >
+                  {/* the marks sit outside the button: a tooltip trigger is
+                      interactive, and interactive content cannot nest */}
                   <th scope="row" className="py-2.5 pr-4 pl-3 font-normal">
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onSelect(b);
-                      }}
-                      className="flex w-full items-center gap-3 text-left"
-                    >
-                      <span
-                        aria-hidden
-                        className="block h-8 w-[3px] shrink-0 transition-colors"
-                        style={{ background: on ? "var(--livery)" : "transparent" }}
-                      />
-                      <span className="flex w-[116px] shrink-0 items-center">
-                        <BrandLogo make={b.make} height={13} tone={on ? "livery" : "ink"} />
-                      </span>
-                      <span className="flex items-center gap-1.5 text-[13px] whitespace-nowrap">
-                        {b.model}
-                        {b.year && <span className="text-ink-faint"> ({b.year})</span>}
-                        {tier && <Crown tier={tier} />}
-                        {ridingRank(b) === 1 && <Diamond />}
-                        {(() => {
-                          const ease = offroadEaseRank(b);
-                          return ease && <Feather tier={ease} />;
-                        })()}
-                      </span>
-                      {hasPhoto && <BrandSwatch make={b.make} fallback={b.ink} />}
-                    </button>
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onSelect(b);
+                        }}
+                        className="flex items-center gap-3 text-left"
+                      >
+                        <span
+                          aria-hidden
+                          className="block h-8 w-[3px] shrink-0 transition-colors"
+                          style={{ background: on ? "var(--livery)" : "transparent" }}
+                        />
+                        <span className="flex w-[116px] shrink-0 items-center">
+                          <BrandLogo make={b.make} height={13} tone={on ? "livery" : "ink"} />
+                        </span>
+                        <span className="text-[13px] whitespace-nowrap">
+                          {b.model}
+                          {b.year && <span className="text-ink-faint"> ({b.year})</span>}
+                        </span>
+                      </button>
+                      {tier && <Crown tier={tier} />}
+                      {ridingRank(b) === 1 && <Diamond />}
+                      {(() => {
+                        const ease = offroadEaseRank(b);
+                        return ease && <Feather tier={ease} />;
+                      })()}
+                      {hasPhoto && (
+                        <span className="ml-1.5 flex">
+                          <BrandSwatch make={b.make} fallback={b.ink} />
+                        </span>
+                      )}
+                    </div>
                   </th>
                   {COLS.slice(1).map((c) => (
-                    <Cell key={c.label}>{c.cell?.(b)}</Cell>
+                    <Cell key={c.label} className={c.className}>
+                      {c.key === "dry" ? (
+                        <DryCell bike={b} tip={foldWet} />
+                      ) : c.key === "clearance" ? (
+                        <ClearanceCell bike={b} tip={canHover} />
+                      ) : (
+                        c.cell?.(b)
+                      )}
+                    </Cell>
                   ))}
                 </tr>
               );
@@ -253,10 +287,46 @@ export function SpecTable({
   );
 }
 
-function Cell({ children }: { children: React.ReactNode }) {
+function Cell({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <td className="py-2.5 pr-4 text-right text-[13px] whitespace-nowrap tabular-nums text-ink">
+    <td
+      className={`py-2.5 pr-4 text-right text-[13px] whitespace-nowrap tabular-nums text-ink ${className ?? ""}`}
+    >
       {children}
     </td>
+  );
+}
+
+/** The travel figure lives here on a pointer, and in the panel's list for everyone. */
+function ClearanceCell({ bike, tip }: { bike: Bike; tip: boolean }) {
+  const travel = specField("travel").cell(bike);
+  return (
+    <Tooltip
+      disabled={!tip || travel === "n/a"}
+      title="Suspension travel"
+      content={`${travel}, front and rear`}
+      className="cursor-help underline decoration-ink-faint decoration-dotted underline-offset-4"
+    >
+      {bike.spec.clearance}
+    </Tooltip>
+  );
+}
+
+/** Carries the wet figure only while the wet column is folded away. */
+function DryCell({ bike, tip }: { bike: Bike; tip: boolean }) {
+  const wet = specField("wet");
+  return (
+    <Tooltip
+      disabled={!tip}
+      title={`${bike.model}${bike.year ? ` ${bike.year}` : ""}`}
+      content={
+        <>
+          {wet.label} <span className="text-ink">{wet.cell(bike)}</span>
+        </>
+      }
+      className="cursor-help underline decoration-ink-faint decoration-dotted underline-offset-4"
+    >
+      {specField("dry").cell(bike)}
+    </Tooltip>
   );
 }

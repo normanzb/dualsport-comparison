@@ -1,3 +1,7 @@
+"use client";
+
+import { Tooltip } from "@/components/Tooltip";
+
 /**
  * Marks the bike easiest to take off road.
  *
@@ -25,6 +29,9 @@ const TIERS = {
 
 export type Tier = keyof typeof TIERS;
 
+const WHY =
+  "Ranked on the offroad ease axis alone: how readily the bike goes off the tarmac, which weight dominates. Not how capable it is once there.";
+
 export function Feather({
   tier,
   size = 14,
@@ -36,14 +43,15 @@ export function Feather({
 }) {
   const { metal, name } = TIERS[tier];
   return (
-    <span
-      className={`crown plume crown-${metal}${className ? ` ${className}` : ""}`}
-      style={{ height: size, width: (size * W) / H }}
-      role="img"
-      aria-label={name}
-      title={`${name}: lightest to handle, not the most capable`}
-    >
-      <span aria-hidden />
-    </span>
+    <Tooltip title={name} content={WHY}>
+      <span
+        className={`crown plume crown-${metal}${className ? ` ${className}` : ""}`}
+        style={{ height: size, width: (size * W) / H }}
+        role="img"
+        aria-label={name}
+      >
+        <span aria-hidden />
+      </span>
+    </Tooltip>
   );
 }

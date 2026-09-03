@@ -1118,6 +1118,48 @@ export const latestInFamily = (stem: string): Bike | undefined =>
     .filter((b) => familyStem(b.slug) === stem && b.slug !== stem)
     .sort((a, b) => Number(b.year ?? 0) - Number(a.year ?? 0))[0];
 
+/**
+ * Wheel diameters front/rear in inches, and suspension travel front/rear in mm.
+ *
+ * Every bike here runs a 21-inch front and an 18-inch rear, so wheels carry a
+ * default rather than 28 identical lines. Travel is the patchy one: a slug is
+ * listed only where the figure is confirmed, and the rest read as unpublished
+ * rather than being guessed at.
+ */
+const WHEELS_DEFAULT = "21/18";
+/** A bike that breaks the pattern goes in here; nothing on the list does yet. */
+const WHEELS: Record<string, string> = {};
+
+const TRAVEL: Record<string, string> = {
+  "honda-crf300-rally": "260 / 260 mm",
+  "honda-crf300l": "206 / 260 mm",
+  "honda-crf450l": "305 / 315 mm",
+  "husqvarna-701-enduro-2017": "250 / 250 mm",
+  "husqvarna-701-enduro-2020": "250 / 250 mm",
+  "ktm-450-excf": "300 / 310 mm",
+  "ktm-690-enduro-r-2019": "250 / 250 mm",
+  "ktm-690-enduro-r-2021": "250 / 250 mm",
+  "ktm-790-adventure": "200 / 200 mm",
+  "ktm-890-adventure-r": "240 / 240 mm",
+  "yamaha-tenere-700": "210 / 200 mm",
+  "yamaha-tenere-700-rally": "230 / 220 mm",
+  "yamaha-tenere-700-world-raid": "230 / 220 mm",
+};
+
+export const wheelsOf = (slug: string) => WHEELS[slug] ?? WHEELS_DEFAULT;
+export const travelOf = (slug: string) => TRAVEL[slug] ?? "n/a";
+
+/** 21/18 sorts above 21/19. */
+export const wheelSort = (slug: string) => {
+  const [front, rear] = wheelsOf(slug).split("/").map(Number);
+  return front + rear / 100;
+};
+
+export const travelSort = (slug: string) => {
+  const pair = TRAVEL[slug];
+  return pair ? Number.parseInt(pair, 10) : null;
+};
+
 export const extremes = {
   lightestWet: Math.min(...bikes.map((b) => b.n.wetKg)),
   heaviestWet: Math.max(...bikes.map((b) => b.n.wetKg)),
