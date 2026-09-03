@@ -47,6 +47,37 @@ def cut(img, model):
     return remove(img.convert("RGB"), session=new_session(model, providers=["CPUExecutionProvider"]))
 
 
+def grey_point(img):
+    """Mean of the bike's neutral mid-tones: its bodywork grey, near enough."""
+    import numpy as np
+
+    a = np.asarray(img.getchannel("A"))
+    px = np.asarray(img.convert("RGB"), dtype=float)[a > 200]
+    lum = px.mean(axis=1)
+    neutral = px[(lum > 90) & (lum < 170) & (px.max(axis=1) - px.min(axis=1) < 25)]
+    if len(neutral) < 200:
+        raise SystemExit("not enough neutral mid-tone to colour match against")
+    return neutral.mean(axis=0)
+
+
+def match_colour(img, ref_path):
+    """Correct a colour cast by matching this shot's grey point to another's.
+
+    Per-channel gain with no offset, so black stays black. An offset term fits
+    the highlights better but lifts the shadows, which turned a blue frame
+    violet. Only the cast is corrected: if a part is genuinely a different shade
+    between two shoots, it stays different, because repainting the subject would
+    misrepresent the bike.
+    """
+    import numpy as np
+
+    ref = Image.open(ref_path).convert("RGBA")
+    gain = grey_point(ref) / grey_point(img)
+    rgb = np.asarray(img.convert("RGB"), dtype=float) * gain
+    corrected = Image.fromarray(np.clip(rgb, 0, 255).astype(np.uint8))
+    return Image.merge("RGBA", (*corrected.split(), img.getchannel("A"))), gain
+
+
 def place(img):
     """Scale to the shared canvas and sit the bike on the baseline."""
     alpha = img.getchannel("A")
@@ -130,6 +161,11 @@ def main():
     ap.add_argument("--transparent", action="store_true", help="source already has alpha; skip the model")
     ap.add_argument("--model", default=DEFAULT_MODEL, help=f"rembg model (default {DEFAULT_MODEL})")
     ap.add_argument("--preview", action="store_true", help="also write a magenta-backed .preview.png")
+    ap.add_argument(
+        "--match",
+        metavar="SLUG/SIDE",
+        help="correct a colour cast by matching this shot's grey point to an existing image",
+    )
     ap.add_argument("--audit", action="store_true", help="report alignment and mask quality, change nothing")
     args = ap.parse_args()
 
@@ -140,6 +176,10 @@ def main():
 
     img = Image.open(args.source)
     img = img.convert("RGBA") if args.transparent else cut(img, args.model).convert("RGBA")
+
+    if args.match:
+        img, gain = match_colour(img, os.path.join(OUT_DIR, args.match + ".webp"))
+        print(f"colour matched to {args.match}: gain {tuple(round(g, 3) for g in gain)}")
 
     canvas, w, h, scale = place(img)
     dest = os.path.join(OUT_DIR, args.target + ".webp")

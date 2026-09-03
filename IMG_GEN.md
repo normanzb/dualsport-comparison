@@ -50,6 +50,30 @@ upscale by more than 1.25x.
 Output goes to `public/bikes/<slug>/<side>.webp`. Sides are `left`, `right` or
 `front`.
 
+### Two views from different shoots
+
+When a bike's two sides come from different photo sessions, one usually carries a
+colour cast and the pair looks like two different motorcycles. `--match` corrects
+the new image against one already in the set:
+
+```bash
+.venv-img/bin/python scripts/img/cutout.py photo.jpg <slug>/right --match <slug>/left
+```
+
+It measures each image's grey point, the mean of its neutral mid-tones, and
+applies a per-channel gain. No offset term: an offset fits the highlights better
+but lifts the shadows, which on the HP2 turned a blue frame violet.
+
+It corrects a cast and nothing else. If a part is genuinely a different shade
+between two shoots, it stays different, because repainting the subject would
+misrepresent the bike.
+
+**Off by default, and worth checking before you keep it.** On the HP2 it
+neutralised the bodywork but the pair still did not match, because the frame blue
+differs between the two shoots for reasons white balance cannot touch. Correcting
+half the difference can look worse than leaving the shot as the photographer
+graded it. Compare both and keep whichever actually reads better.
+
 **Always check a cutout with `--preview`.** It writes a copy on magenta into
 `.img-preview/` (gitignored). Magenta should show through only where the bike is
 genuinely see-through: between spokes, through a drilled brake disc, gaps in the
