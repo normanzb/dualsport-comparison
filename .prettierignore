@@ -1,0 +1,9 @@
+.next/
+out/
+node_modules/
+pnpm-lock.yaml
+# local image pipeline: a Python env and its check images
+.venv-img/
+.img-preview/
+# source photos staged for the pipeline, not part of the site
+.res/

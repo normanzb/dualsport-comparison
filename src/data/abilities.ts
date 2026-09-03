@@ -76,36 +76,58 @@ const MPG_US: Record<string, number> = {
  * scale, read off the bodywork: a rally tower with a screen shelters you, a number
  * plate does not. It is the one subjective number on the page.
  * ------------------------------------------------------------------------- */
-/** 0 = bare number plate, 5 = full rally tower and screen */
+/**
+ * Wind protection, 0 to 5, judged off the bodywork. The one subjective number here.
+ *
+ * The scale is absolute and deliberately runs past this field:
+ *
+ *   0  nothing: a number board, a bare competition enduro
+ *   1  a headlight cowl or small number-board fairing, no screen
+ *   2  a slim rally tower or half fairing: something ahead of you, no wider than you
+ *   3  fairing and screen wide enough to lift the blast off your chest, with your
+ *      shoulders and helmet still out in it. The best on this list.
+ *   4  bodywork wider than the rider and a tall adjustable screen, holding a real
+ *      pocket of still air: an R1300GS. Nothing here.
+ *   5  built around weather protection, a full touring fairing and lowers.
+ *      Nothing here.
+ *
+ * Nothing on this list gets past 3. A tall rally tower is not protection if it is
+ * narrow: the Kove is a slim bike behind a slim fairing and your shoulders are in
+ * clean air, which is why it sits at 2 rather than the 5 it used to hold.
+ */
 const WIND: Record<string, number> = {
-  "honda-crf300l": 1,
-  "yamaha-wr125r": 1,
-  "suzuki-drz4s": 1,
-  "kove-450-rally": 5,
+  // 0: nothing in front of you
+  "ducati-desmo450-eds": 0,
   "honda-crf450l": 0,
   "ktm-450-excf": 0,
-  "ducati-desmo450-eds": 0,
-  "ccm-gp450": 3,
-  "ktm-690-enduro-r-2018": 1,
-  "ktm-690-enduro-r-2025": 1,
-  "ktm-690-enduro-r-2026": 1,
+  // 1: a cowl or a number board
+  "bmw-hp2-enduro": 1,
+  "honda-crf300l": 1,
   "husqvarna-701-enduro-2018": 1,
   "husqvarna-701-enduro-2025": 1,
   "husqvarna-701-enduro-2026": 1,
   "ktm-390-enduro-r": 1,
-  "ktm-390-adventure-r": 3,
-  "rieju-aventura-rally-307": 4,
+  "ktm-690-enduro-r-2018": 1,
+  "ktm-690-enduro-r-2025": 1,
+  "ktm-690-enduro-r-2026": 1,
+  "suzuki-drz4s": 1,
+  "yamaha-wr125r": 1,
+  // 2: a rally tower or half fairing, narrow
+  "ajp-pr7": 2,
+  "ccm-gp450": 2,
+  "honda-crf300-rally": 2,
+  "ktm-890-adventure-r": 2,
+  "kove-450-rally": 2,
+  "rieju-aventura-rally-307": 2,
+  "voge-300-rally": 2,
+  "yamaha-tenere-700": 2,
+  "yamaha-tenere-700-rally": 2,
+  // 3: wide enough to lift the blast off your chest
   "cfmoto-450mt": 3,
-  "voge-300-rally": 3,
+  "ktm-390-adventure-r": 3,
+  "ktm-790-adventure": 3,
   "moto-morini-alltrhike-450": 3,
-  "ajp-pr7": 3,
-  "bmw-hp2-enduro": 1,
-  "yamaha-tenere-700": 3,
-  "yamaha-tenere-700-rally": 3,
-  "yamaha-tenere-700-world-raid": 4,
-  "honda-crf300-rally": 3,
-  "ktm-790-adventure": 4,
-  "ktm-890-adventure-r": 3,
+  "yamaha-tenere-700-world-raid": 3,
 };
 
 /**
@@ -120,7 +142,12 @@ const GEAR_COMFORT: Record<number, number> = { 5: 0.75, 6: 1 };
 // past 1 and the index past 10, which is how a 1170 boxer once scored 10.2.
 const CC_LO = Math.min(...bikes.map((b) => b.n.cc));
 const CC_HI = Math.max(...bikes.map((b) => b.n.cc));
-const WIND_HI = Math.max(...Object.values(WIND));
+/**
+ * The top of the scale, not the best bike here. Taking the observed maximum made
+ * whichever bike I rated highest score full marks by definition, which is how a
+ * narrow rally fairing came to define "full weather protection".
+ */
+const WIND_MAX = 5;
 
 /**
  * Displacement on a log scale. The field spans 124 cc to 1170 cc, nearly ten to
@@ -151,7 +178,7 @@ export function highwayComfort(b: Bike): number {
   // WIND has no entry for a bike until someone judges it; falling through to
   // undefined turned the whole index into NaN, so a new bike scores mid-scale
   // and is obvious on the chart rather than silently poisoning it.
-  const wind = (WIND[b.slug] ?? WIND_HI / 2) / WIND_HI;
+  const wind = (WIND[b.slug] ?? WIND_MAX / 2) / WIND_MAX;
   return (W_GEAR * gear + W_ENGINE * engineScore(b.n.cc) + W_WIND * wind) / W_TOTAL;
 }
 
@@ -203,12 +230,33 @@ const kneeScore = (v: number, knee: number, ceiling: number, atKnee: number) => 
  * Both benchmarks are fixed and neither is reached here, so a heavier bike can
  * never buy the axis back with more engine, and the best bike on it is not
  * handed full marks just for leading the field.
+ *
+ * Stopping is the third term. Textbook braking is mass-independent, because
+ * deceleration is the friction coefficient times gravity and the mass cancels.
+ * That assumes the coefficient is constant, and it is not: grip falls as the
+ * tyre is loaded harder. On a 21-inch knobbly the contact patch is small to
+ * begin with, so the load per unit area climbs quickly with the weight of the
+ * bike, and a heavy one runs out of grip sooner. Over this field's range, 114 kg
+ * to 220 kg, that is not a rounding error.
+ *
+ * It carries half the weight of the other two. At equal weight a light 125
+ * reaches the middle of the axis on the strength of stopping well, which reads
+ * as performance it does not have; and weight is already this axis's strongest
+ * input through the two ratios above, before it appears again in offroad ease.
  */
 const PW_FULL_MARKS = 0.6; // hp per kg
 const TW_FULL_MARKS = 0.6; // Nm per kg
+const BRAKE_FULL_MARKS = 110; // kg at which the grip-limited term scores full marks
+const W_BRAKE = 0.5;
+const W_PERF = 1 + 1 + W_BRAKE;
 
 export function performance(b: Bike): number {
-  return (b.n.hp / b.n.wetKg / PW_FULL_MARKS + b.n.nm / b.n.wetKg / TW_FULL_MARKS) / 2;
+  return (
+    (b.n.hp / b.n.wetKg / PW_FULL_MARKS +
+      b.n.nm / b.n.wetKg / TW_FULL_MARKS +
+      W_BRAKE * Math.min(1, BRAKE_FULL_MARKS / b.n.wetKg)) /
+    W_PERF
+  );
 }
 
 /**
@@ -240,12 +288,50 @@ const COG_MAX = 4;
 /** Scored absolutely, so the 1 that most bikes sit at is a baseline, not a zero. */
 const cogScore = (slug: string) => Math.min(1, (LOW_COG[slug] ?? COG_BASE) / COG_MAX);
 
-const WET = span((b) => b.n.wetKg);
+/**
+ * Weight is a penalty, not a credit.
+ *
+ * Every bike starts from OFFROAD_BASE and weight takes away from it, because
+ * nobody wants mass off road: there is no amount of it that helps. 100 kg dry is
+ * where it starts costing, and every kilogram past that is a kilogram to pick up,
+ * turn, and stop. Nothing on this list is under 100 kg, so every bike here is
+ * paying something.
+ *
+ * The other three factors work the other way, earning back what weight takes.
+ * That is why the base sits mid-scale: a bike with good clearance, a low centre
+ * of gravity and a reachable seat can climb back above it, and a heavy one cannot.
+ *
+ * Dry weight, not kerb: it is the published figure that does not move with tank
+ * size, so a 23-litre bike is not marked down twice for carrying its own range.
+ * The braking term still uses kerb, because braking loads the fuel too.
+ *
+ * A kilogram is worth 1/LIGHT_SPAN, floored so one term cannot run away with the
+ * axis.
+ */
+// 0.6, not 0.5: at 0.5 the heaviest bikes bottomed out at zero and stopped being
+// told apart, and a Tenere 700 reading 0.3 said it cannot be taken off road at
+// all rather than that it is hard work. The base is an offset, so this lifts the
+// whole axis without changing any bike's position relative to another.
+const OFFROAD_BASE = 0.6;
+const LIGHT_ZERO = 100; // kg dry: past here weight counts against the bike
+// kg over the threshold for a full point of penalty. 85 rather than a round 100:
+// the span sets how hard weight bites, and at 100 it quietly cancelled the rise
+// in W_LIGHT, making a kilogram cost less than it did before the change.
+const LIGHT_SPAN = 85;
+const LIGHT_MIN = -1.5;
 const SEAT = span((b) => b.n.seatMm);
 const CLEAR = span((b) => b.n.clearanceMm ?? 0);
 
-/** Weights for the offroad index. Mass and clearance lead; the rest temper them. */
-const W_LIGHT = 1;
+/**
+ * Weights for the offroad index. Mass leads, clearance follows, the rest temper.
+ *
+ * Lightness outweighs clearance because the axis measures ease, not capability.
+ * You can pick a line around an obstacle a low bike would ground on; you cannot
+ * pick a 220 kg bike out of a rut. Weight is also what agility is made of: roll
+ * inertia scales with it, so a light bike changes direction for less effort
+ * everywhere, not only where the ground is rough.
+ */
+const W_LIGHT = 2;
 const W_CLEAR = 1;
 const W_COG = 0.5;
 const W_SEAT = 0.3;
@@ -264,11 +350,16 @@ const W_OFFROAD = W_LIGHT + W_CLEAR + W_COG + W_SEAT;
  * suspension-travel part of a tall seat.
  */
 export function offroad(b: Bike): number {
-  const light = 1 - unit(b.n.wetKg, WET);
+  const light = Math.min(1, Math.max(LIGHT_MIN, (LIGHT_ZERO - b.n.dryKg) / LIGHT_SPAN));
   const clear = unit(b.n.clearanceMm ?? 0, CLEAR);
   const low = 1 - unit(b.n.seatMm, SEAT);
   const cog = cogScore(b.slug);
-  return (W_LIGHT * light + W_CLEAR * clear + W_COG * cog + W_SEAT * low) / W_OFFROAD;
+  const raw =
+    OFFROAD_BASE + (W_LIGHT * light + W_CLEAR * clear + W_COG * cog + W_SEAT * low) / W_OFFROAD;
+  // the weight penalty is allowed to go negative, but the axis itself is not: a
+  // bike being hard work is the bottom of the scale, and the figure is printed
+  // straight onto the chart.
+  return Math.min(1, Math.max(0, raw));
 }
 
 export type Axis = {
@@ -309,7 +400,22 @@ const serviceMiles = (b: Bike) => {
 const SERVICE_KNEE = 6000; // about 10,000 km, a year for most riders
 const SERVICE_AT_KNEE = 0.85;
 const SERVICE_HI = Math.max(...bikes.map(serviceMiles));
-const serviceScore = (mi: number) => kneeScore(mi, SERVICE_KNEE, SERVICE_HI, SERVICE_AT_KNEE);
+
+/**
+ * The axis sits in a band rather than running to zero.
+ *
+ * Service was creating 75% of the spread in the overall standing, three times
+ * the next axis, because it was the only one using its full range: intervals run
+ * 20 to 1 across this field while every other axis lives inside five points.
+ * That let one figure decide the order.
+ *
+ * The floor also says something true. A 600-mile interval is expensive, not
+ * worthless, and scoring it 0.8 read as though the bike could not be serviced at
+ * all. Ordering is untouched; the axis simply stops being the whole argument.
+ */
+const SERVICE_FLOOR = 0.3;
+const serviceScore = (mi: number) =>
+  SERVICE_FLOOR + (1 - SERVICE_FLOOR) * kneeScore(mi, SERVICE_KNEE, SERVICE_HI, SERVICE_AT_KNEE);
 
 export const AXES: Axis[] = [
   {

@@ -44,6 +44,12 @@ Every item below is a real error that shipped or nearly shipped here. Read befor
 
 Two rules for all three. No comparative claims, ever, in any of them: that is what `superlatives.ts` is for. And assert only history or mechanical detail you can actually source. Omitting a fact costs nothing, whereas a plausible invention reads exactly like a real one and nobody downstream can tell the difference.
 
+### Format with the project's own config, never with CLI flags
+
+For a long stretch I formatted edited files with `npx prettier@3 --tab-width=2 --print-width=100`, passing the width on the command line because the project had no formatter config. That downloads an unpinned Prettier, applies settings that exist only in my shell history, and leaves every untouched file in whatever style it was already in. The result is files that reformat differently depending on who last edited them.
+
+The project now pins Prettier, sets `printWidth: 100` in `.prettierrc.json`, and runs `prettier --check .` as the first half of `pnpm lint`. Use `pnpm format`. If a formatting setting needs to change, change the config file.
+
 ## Deployment
 
 **`next/image` ignores `basePath` once `images.unoptimised` is set**, which static export requires. Every bike photo 404s while the rest of the page looks perfect.

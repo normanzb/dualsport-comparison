@@ -52,6 +52,20 @@ Then open `http://localhost:8099/dualsport-comparison/` and select a bike. The p
 
 ---
 
+## Formatting
+
+Prettier, pinned in `devDependencies`, configured by `.prettierrc.json`. The only
+non-default is `printWidth: 100`.
+
+```bash
+pnpm format   # write
+pnpm lint     # prettier --check . && eslint
+```
+
+`lint` checks formatting before it runs ESLint, so drift fails rather than
+accumulating. Do not format with ad-hoc CLI flags: that is how the files started
+churning between edits in the first place.
+
 ## Adding a bike
 
 One append to `bikes` in `src/data/bikes.ts` is most of the job. The table, the detail panel, and the `extremes` min/max ranges all derive from that array.
@@ -217,13 +231,27 @@ mi >  6000:  0.85 + 0.15 * (mi - 6000) / (SERVICE_HI - 6000)
 
 6,000 miles is roughly 10,000 km, which is about a year for most riders. KTM's own schedule reads "15,000 km or annually, whichever comes first", so past a year the interval stops changing how often the bike is actually booked in. The slope above the knee is about a third of the slope below it, so a longer interval still earns something, just far less: 6,000 miles scores 8.5, 8,000 scores 9.4, and the 9,320-mile bikes still reach 10.
 
+The axis also sits in a **band from 3 to 10** rather than running to zero. Service was creating 75% of the spread in the overall standing, three times the next axis, because it was the only one using its full range: intervals run 20 to 1 across this field while every other axis lives inside about five points. One figure was deciding the order.
+
+Scaling it into a band cuts its standard deviation from 2.91 to 2.04, in line with the others, and its share of the spread from 75% to 52%. Ordering is untouched. The floor says something true as well: a 600-mile interval is expensive, not worthless, and scoring it 0.8 read as though the bike could not be serviced at all.
+
+Worth knowing that shares are relative, so damping one axis promotes the rest. Highway went from 47% to 66% and is now the second-biggest decider, on engine size plus a subjective wind judgement.
+
 The ceiling is derived from the data rather than hardcoded, so a bike with a longer interval than anything here cannot push the axis past 1.
 
 **Range is tank size times real-world economy**, not tank size. The two are not interchangeable: the CRF300L carries a litre less than the DR-Z4S and still goes 29 miles further.
 
 **Offroad ease** is how readily a bike goes off the tarmac, not how capable it is once there. That distinction matters: a big adventure bike scores low because it is awkward to take off road, not because it cannot go.
 
-Four figures: wet weight and ground clearance at weight 1 each, centre of gravity at 0.5, seat height at 0.3. Lighter, more clearance, weight carried lower and a lower seat all score higher.
+**Weight is a penalty, not a credit.** Every bike starts at a base of 6 and weight takes away from it. There is no amount of mass that helps off road, so there is nothing to credit: 100 kg dry is where it starts costing, and nothing on this list is under that, so every bike here is paying something. Clearance at 1, centre of gravity at 0.5 and a low seat at 0.3 earn it back. Weight at 2 is what takes it away.
+
+That is why the base sits mid-scale rather than at zero. A bike with good clearance, a low centre of gravity and a reachable seat climbs back above it; a heavy one cannot.
+
+The base is 6 rather than 5 because at 5 the two heaviest bikes bottomed out at zero and stopped being told apart, and a Tenere 700 reading 0.3 said it cannot be taken off road at all rather than that it is hard work. Being an offset, it lifts the whole axis without changing any bike's position relative to another.
+
+Dry weight, not kerb, so a 23-litre bike is not marked down twice for carrying its own range. The braking term in performance still uses kerb, because braking loads the fuel too.
+
+`LIGHT_SPAN` is 85 kg per full point of penalty, not a round 100. The span is what sets how hard weight bites, and at 100 it quietly cancelled the rise in `W_LIGHT` from 1.5 to 2: a kilogram ended up costing 0.526 points per 10 kg against 0.606 before the change, so the heavy bikes gained. At 85 it costs 0.619, and only two bikes bottom out.
 
 Centre of gravity is `LOW_COG` in `abilities.ts`, a hidden 1-to-4 index that appears nowhere in the table. 1 is the norm, the LC4 690/701 sit at 2 for their underseat tank, and the boxer HP2 is 3.
 
@@ -235,6 +263,12 @@ Seat height is deliberately the smallest weight. Clearance already carries the s
 
 Output on its own says how fast a bike is in a straight line, which is not what makes a dual sport good. What a rider feels is how much of it there is to move: 63 hp in the 126 kg Ducati is a livelier machine than 72 hp in a 208 kg Tenere, and scoring raw output said the opposite. Weight is kerb, not dry, because that is the bike you actually push.
 
+Stopping is the third term, at half the weight of the other two, scored as `110 kg / kerb`.
+
+Textbook braking is mass-independent: deceleration is the friction coefficient times gravity, and the mass cancels. That assumes the coefficient is constant, and it is not. Grip falls as a tyre is loaded harder, and on a 21-inch knobbly the contact patch is small to begin with, so the load per unit area climbs quickly with the weight of the bike and a heavy one runs out of grip sooner. Across 114 kg to 220 kg that is not a rounding error.
+
+It carries half weight for two reasons. At equal weight a light 125 reaches the middle of the axis on the strength of stopping well, which reads as performance it does not have. And weight is already the strongest input here through the two ratios, before it appears again in offroad ease.
+
 Fixed benchmarks matter here for two reasons. A heavier bike cannot buy the axis back with more engine, and the best bike on it is not handed full marks just for leading the field. The Ducati is the clearest case: 63.5 hp reads as modest until you divide by 126 kg, at which point only the HP2 beats it.
 
 **Highway** is `(4 x engine size + 3 x wind protection + 1 x top-gear comfort) / 8`.
@@ -245,7 +279,20 @@ Engine sits above wind protection at 4 to 3. At equal weight a screen exactly ca
 
 Top-gear comfort is not min-max normalised either: gearboxes here are only ever five or six speeds, so scaling them to the field would make one gear worth the whole axis, more than a 112 cc gap. A five-speed scores 0.75, worth roughly the 10-15% more revs it turns at speed.
 
-Wind protection is the one subjective number on the page: a 0-5 judgement read off the bodywork, where a bare number plate is 0 and a rally tower with a screen is 5.
+Wind protection is the one subjective number on the page, judged 0 to 5 off the bodywork:
+
+|     |                                                                                                                               |
+| --- | ----------------------------------------------------------------------------------------------------------------------------- |
+| 0   | nothing: a number board, a bare competition enduro                                                                            |
+| 1   | a headlight cowl or small number-board fairing, no screen                                                                     |
+| 2   | a slim rally tower or half fairing: something ahead of you, no wider than you                                                 |
+| 3   | fairing and screen wide enough to lift the blast off your chest, shoulders and helmet still out in it. The best on this list. |
+| 4   | bodywork wider than the rider and a tall adjustable screen, holding a real pocket of still air: an R1300GS. Nothing here.     |
+| 5   | built around weather protection, a full touring fairing and lowers. Nothing here.                                             |
+
+The scale is absolute and deliberately runs past this field, and it divides by a fixed `WIND_MAX` of 5 rather than by the observed maximum. Taking the observed maximum meant whichever bike was rated highest scored full marks by definition, which is how a narrow rally fairing came to define full weather protection: the Kove 450 Rally sat at 5 and was scoring better on the highway axis than a 790 Adventure. A tall rally tower is not protection if it is no wider than you are. Your shoulders are still in clean air.
+
+The levels are set by how much of the rider is shielded, not by what the bike is called. An R1300GS is an adventure bike and so is a CFMoto 450MT, and they are two levels apart.
 
 ### Best to ride
 
