@@ -8,6 +8,11 @@
  * Same CSS-mask construction as the crown and the diamond, so the three read as
  * a set, and it borrows the crown's tier metals: the metal says the rank, the
  * shape says which ranking.
+ *
+ * Barbs down one edge and a bare quill below the vane, because without them the
+ * silhouette is a leaf. They need about 14px to survive, so it renders taller
+ * than the crown and the diamond; a feather is narrow, so the ink works out
+ * about the same.
  */
 const W = 20;
 const H = 22;
@@ -22,7 +27,7 @@ export type Tier = keyof typeof TIERS;
 
 export function Feather({
   tier,
-  size = 12,
+  size = 14,
   className,
 }: {
   tier: Tier;

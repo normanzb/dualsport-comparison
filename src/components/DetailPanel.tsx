@@ -176,7 +176,7 @@ export function DetailPanel({ bike, onClear }: { bike: Bike | null; onClear: () 
           {bike.year && <span className="shrink-0 text-ink-dim">&rsquo;{bike.year.slice(2)}</span>}
           {overallTier && <Crown tier={overallTier} size={17} className="shrink-0" />}
           {ridingRank(bike) === 1 && <Diamond size={16} className="shrink-0" />}
-          {easeTier && <Feather tier={easeTier} size={19} className="shrink-0" />}
+          {easeTier && <Feather tier={easeTier} size={22} className="shrink-0" />}
         </h2>
         <span
           className="shrink-0 border px-2 py-0.5 text-[9px] tracking-[0.18em] uppercase"
