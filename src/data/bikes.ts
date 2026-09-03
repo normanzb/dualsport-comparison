@@ -406,10 +406,10 @@ export const bikes: Bike[] = [
       "The engine is the 450 single BMW developed for its own G450X enduro and then walked away from. CCM, a small Bolton firm that has been hand-building frames since the early 1970s, put it into an adventure chassis instead.",
   },
   {
-    slug: "ktm-690-enduro-r-2018",
+    slug: "ktm-690-enduro-r-2019",
     make: "KTM",
     model: "690 Enduro R",
-    year: "2018",
+    year: "2019",
     spec: {
       serviceInterval: "6,200 mi",
       dryWeight: "143 kg",
@@ -439,14 +439,14 @@ export const bikes: Bike[] = [
     condition: "used",
     ink: "#FF7A1A",
     inkAlt: "#FFFFFF",
-    note: "The value pick of the big-single group. This is the pre-2019 LC4, so it goes without the later electronics, and the secondhand money reflects that.",
+    note: "The value pick of the big-single group. The 2019 revision is where the current engine and electronics arrive; the suspension and the long service interval came later, and the secondhand money reflects that.",
     platform: LC4_690,
   },
   {
-    slug: "ktm-690-enduro-r-2025",
+    slug: "ktm-690-enduro-r-2021",
     make: "KTM",
     model: "690 Enduro R",
-    year: "2025",
+    year: "2021",
     spec: {
       serviceInterval: "6,200 mi",
       dryWeight: "146 kg",
@@ -476,7 +476,7 @@ export const bikes: Bike[] = [
     condition: "used",
     ink: "#FF7A1A",
     inkAlt: "#FFFFFF",
-    note: "The middle year: the newer engine and electronics on a 6,200-mile service interval, without the 2026 generation's weight or price.",
+    note: "The 2021 revision brought the longer suspension and the extra clearance, on the same 6,200-mile service interval, without the 2026 generation's weight or price.",
     platform: LC4_690,
   },
   {
@@ -517,10 +517,10 @@ export const bikes: Bike[] = [
     platform: LC4_690,
   },
   {
-    slug: "husqvarna-701-enduro-2018",
+    slug: "husqvarna-701-enduro-2017",
     make: "Husqvarna",
     model: "701 Enduro",
-    year: "2018",
+    year: "2017",
     spec: {
       serviceInterval: "6,200 mi",
       dryWeight: "145 kg",
@@ -550,14 +550,14 @@ export const bikes: Bike[] = [
     condition: "used",
     ink: "#6FA8FF",
     inkAlt: "#F7D417",
-    note: "The same platform as the 690 of the same year, with Husqvarna bodywork and a little more tank. Pick on livery and on whose dealer you would rather deal with.",
+    note: "The 2017 update to the 701, and the same platform as the 690 underneath, with Husqvarna bodywork and a little more tank. Pick on livery and on whose dealer you would rather deal with.",
     platform: LC4_690,
   },
   {
-    slug: "husqvarna-701-enduro-2025",
+    slug: "husqvarna-701-enduro-2020",
     make: "Husqvarna",
     model: "701 Enduro",
-    year: "2025",
+    year: "2020",
     spec: {
       serviceInterval: "6,200 mi",
       dryWeight: "147 kg",
@@ -587,7 +587,7 @@ export const bikes: Bike[] = [
     condition: "used",
     ink: "#6FA8FF",
     inkAlt: "#F7D417",
-    note: "The newer engine and electronics, still on the pre-2026 service interval. Sits awkwardly between a cheap 2018 and a warrantied 2026.",
+    note: "The 2020 suspension and clearance revision, still on the pre-2026 service interval. Sits awkwardly between a cheap 2017 and a warrantied 2026.",
     platform: LC4_690,
   },
   {

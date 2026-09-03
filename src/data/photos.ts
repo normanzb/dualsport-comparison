@@ -135,28 +135,28 @@ export const photos: Record<string, PhotoSet> = {
     credit: "CCM Motorcycles",
     source: "https://www.motorcyclespecs.co.za/model/ccm/CCM%20GP450%20Adventure.htm",
   },
-  "ktm-690-enduro-r-2018": {
-    views: [{ side: "right", src: "/bikes/ktm-690-enduro-r-2018/right.webp" }],
+  "ktm-690-enduro-r-2019": {
+    views: [{ side: "right", src: "/bikes/ktm-690-enduro-r-2019/right.webp" }],
     credit: "KTM Sportmotorcycle",
     source: "https://www.motorcyclespecs.co.za/model/ktm/KTM_690_Enduro_R_16.htm",
-    note: "2016 studio image; same bodywork generation as the 2018.",
+    note: "2016 studio image; the bodywork changed with the 2019 revision.",
   },
-  "ktm-690-enduro-r-2025": {
-    views: [{ side: "left", src: "/bikes/ktm-690-enduro-r-2025/left.webp" }],
+  "ktm-690-enduro-r-2021": {
+    views: [{ side: "left", src: "/bikes/ktm-690-enduro-r-2021/left.webp" }],
     credit: "KTM Sportmotorcycle",
     source: "https://www.motorcyclespecs.co.za/model/ktm/ktm_690_enduro_r_21.html",
-    note: "2021 studio image; same generation as the 2025.",
+    note: "2021 studio image.",
   },
-  "husqvarna-701-enduro-2018": {
-    views: [{ side: "right", src: "/bikes/husqvarna-701-enduro-2018/right.webp" }],
+  "husqvarna-701-enduro-2017": {
+    views: [{ side: "right", src: "/bikes/husqvarna-701-enduro-2017/right.webp" }],
     credit: "Husqvarna Motorcycles",
     source: "https://www.motorcyclespecs.co.za/model/husqvana/husqvarna_te_710_enduro_17.htm",
   },
-  "husqvarna-701-enduro-2025": {
-    views: [{ side: "right", src: "/bikes/husqvarna-701-enduro-2025/right.webp" }],
+  "husqvarna-701-enduro-2020": {
+    views: [{ side: "right", src: "/bikes/husqvarna-701-enduro-2020/right.webp" }],
     credit: "Husqvarna Motorcycles",
     source: "https://www.motorcyclespecs.co.za/model/husqvana/husqvarna-701-enduro-2023.html",
-    note: "2023 studio image; same generation as the 2025.",
+    note: "2023 studio image; unchanged bodywork from the 2020.",
   },
   "kove-450-rally": {
     views: [{ side: "right", src: "/bikes/kove-450-rally/right.webp" }],

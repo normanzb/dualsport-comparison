@@ -37,12 +37,12 @@ const MPG_US: Record<string, number> = {
   // UK road tests: 52-53 imperial, so ~44 US
   "ccm-gp450": 44,
   // Fuelly by year, 47.7 to 55. Same LC4 single as the 701.
-  "ktm-690-enduro-r-2018": 51,
-  "ktm-690-enduro-r-2025": 51,
+  "ktm-690-enduro-r-2019": 51,
+  "ktm-690-enduro-r-2021": 51,
   "ktm-690-enduro-r-2026": 51,
   // Fuelly 2017, 5 vehicles / 17,145 mi: 47.57
-  "husqvarna-701-enduro-2018": 48,
-  "husqvarna-701-enduro-2025": 48,
+  "husqvarna-701-enduro-2017": 48,
+  "husqvarna-701-enduro-2020": 48,
   "husqvarna-701-enduro-2026": 48,
   // KTM claims 83 imperial mpg on the WMTC cycle; knobblies and real roads cost you
   "ktm-390-enduro-r": 60,
@@ -103,12 +103,12 @@ const WIND: Record<string, number> = {
   // 1: a cowl or a number board
   "bmw-hp2-enduro": 1,
   "honda-crf300l": 1,
-  "husqvarna-701-enduro-2018": 1,
-  "husqvarna-701-enduro-2025": 1,
+  "husqvarna-701-enduro-2017": 1,
+  "husqvarna-701-enduro-2020": 1,
   "husqvarna-701-enduro-2026": 1,
   "ktm-390-enduro-r": 1,
-  "ktm-690-enduro-r-2018": 1,
-  "ktm-690-enduro-r-2025": 1,
+  "ktm-690-enduro-r-2019": 1,
+  "ktm-690-enduro-r-2021": 1,
   "ktm-690-enduro-r-2026": 1,
   "suzuki-drz4s": 1,
   "yamaha-wr125r": 1,
@@ -270,11 +270,11 @@ export function performance(b: Bike): number {
  */
 const LOW_COG: Record<string, number> = {
   "bmw-hp2-enduro": 3,
-  "husqvarna-701-enduro-2018": 2,
-  "husqvarna-701-enduro-2025": 2,
+  "husqvarna-701-enduro-2017": 2,
+  "husqvarna-701-enduro-2020": 2,
   "husqvarna-701-enduro-2026": 2,
-  "ktm-690-enduro-r-2018": 2,
-  "ktm-690-enduro-r-2025": 2,
+  "ktm-690-enduro-r-2019": 2,
+  "ktm-690-enduro-r-2021": 2,
   "ktm-690-enduro-r-2026": 2,
 };
 const COG_BASE = 1;
