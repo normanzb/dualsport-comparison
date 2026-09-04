@@ -161,14 +161,18 @@ export const photos: Record<string, PhotoSet> = {
   "ktm-690-enduro-r-2019": {
     views: [{ side: "right", src: "/bikes/ktm-690-enduro-r-2019/right.webp" }],
     credit: "KTM Sportmotorcycle",
-    source: "https://www.motorcyclespecs.co.za/model/ktm/KTM_690_Enduro_R_16.htm",
-    note: "2016 studio image; the bodywork changed with the 2019 revision.",
+    source:
+      "https://web.archive.org/web/20200626132750/https://www.ktm.com/ktmgroup-storage/PHO_BIKE_90_RE_690-enduror-2019-90-re_%23SALL_%23AEPI_%23V1.png",
+    note: "KTM published no left-side view of this model year.",
   },
   "ktm-690-enduro-r-2021": {
-    views: [{ side: "left", src: "/bikes/ktm-690-enduro-r-2021/left.webp" }],
+    views: [
+      { side: "right", src: "/bikes/ktm-690-enduro-r-2021/right.webp" },
+      { side: "left", src: "/bikes/ktm-690-enduro-r-2021/left.webp" },
+    ],
     credit: "KTM Sportmotorcycle",
-    source: "https://www.motorcyclespecs.co.za/model/ktm/ktm_690_enduro_r_21.html",
-    note: "2021 studio image.",
+    source:
+      "https://web.archive.org/web/20201206101503/https://www.ktm.com/ktmgroup-storage/PHO_BIKE_90_RE_690enduror-21-90re_%23SALL_%23AEPI_%23V1.jpg",
   },
   "husqvarna-701-enduro-2017": {
     views: [{ side: "right", src: "/bikes/husqvarna-701-enduro-2017/right.webp" }],
@@ -220,14 +224,20 @@ export const photos: Record<string, PhotoSet> = {
 /**
  * Every bike opens on its right. Ordering here rather than in the entries means
  * the set cannot drift as views are added: the panel simply shows the first.
+ *
+ * Sorted once, not per call: the panel holds the chosen side in state, and a
+ * fresh array on every render gave it a new set of views to compare against.
  */
 const SIDE_ORDER: Side[] = ["right", "left", "front"];
 
-export const photosFor = (slug: string): PhotoSet | undefined => {
-  const set = photos[slug];
-  if (!set) return undefined;
-  return {
-    ...set,
-    views: [...set.views].sort((a, b) => SIDE_ORDER.indexOf(a.side) - SIDE_ORDER.indexOf(b.side)),
-  };
-};
+const ordered: Record<string, PhotoSet> = Object.fromEntries(
+  Object.entries(photos).map(([slug, set]) => [
+    slug,
+    {
+      ...set,
+      views: [...set.views].sort((a, b) => SIDE_ORDER.indexOf(a.side) - SIDE_ORDER.indexOf(b.side)),
+    },
+  ]),
+);
+
+export const photosFor = (slug: string): PhotoSet | undefined => ordered[slug];
