@@ -38,13 +38,13 @@ upscale by more than 1.25x.
 
 ```bash
 # a normal studio photo, on a white or plain backdrop
-.venv-img/bin/python scripts/img/cutout.py photo.jpg ktm-890-adventure-r/left
+.venv-img/bin/python scripts/img/cutout.py photo.jpg ktm-890-adventure-r-2023/left
 
 # a source that already has an alpha channel: skip the model entirely
 .venv-img/bin/python scripts/img/cutout.py studio.png honda-crf300l/right --transparent
 
 # write a magenta-backed check image alongside it
-.venv-img/bin/python scripts/img/cutout.py photo.jpg ktm-790-adventure/right --preview
+.venv-img/bin/python scripts/img/cutout.py photo.jpg ktm-790-adventure-2023/right --preview
 ```
 
 Output goes to `public/bikes/<slug>/<side>.webp`. Sides are `left`, `right` or
@@ -73,6 +73,34 @@ neutralised the bodywork but the pair still did not match, because the frame blu
 differs between the two shoots for reasons white balance cannot touch. Correcting
 half the difference can look worse than leaving the shot as the photographer
 graded it. Compare both and keep whichever actually reads better.
+
+### Press images that carry more than the bike
+
+Manufacturer cutouts often ship with something extra baked in. `--isolate` keeps
+the largest solid shape plus the few pixels of soft edge around it, which is the
+bike's own antialiasing, and drops the rest:
+
+```bash
+.venv-img/bin/python scripts/img/cutout.py press.png <slug>/right --transparent --isolate
+```
+
+That covers the two common cases:
+
+- **A floating badge.** KTM's 790 Adventure right-side image carries a warranty
+  seal above the rear rack. It is fully opaque, so it lands inside the bounding
+  box and the bike is scaled down to make room for it.
+- **A baked contact shadow.** The Moto Morini press set keeps the studio shadow
+  in the alpha channel. It is all under the body threshold, so it never moves the
+  bounding box, but it still renders as a grey smudge on the dark page and the
+  bike sits short of the shared baseline.
+
+A shadow that runs right up under the tyres is connected to the bike at the
+default threshold, so it survives. Give the flag a higher alpha floor to break it
+away: `--isolate 230` is what the Alltrhike needed. Check the windscreen
+afterwards, since a high floor can also drop genuinely translucent parts.
+
+Run `--audit` after either: an image sitting well off the target bottom gap is
+the usual sign that something else got inside the bounding box.
 
 **Always check a cutout with `--preview`.** It writes a copy on magenta into
 `.img-preview/` (gitignored). Magenta should show through only where the bike is

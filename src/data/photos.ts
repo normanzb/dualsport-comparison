@@ -31,14 +31,14 @@ export const photos: Record<string, PhotoSet> = {
     credit: "Husqvarna Motorcycles",
     source: "https://www.husqvarna-motorcycles.com/en-gb/models/travel/701-enduro-2026.html",
   },
-  "ktm-450-excf": {
-    views: [{ side: "right", src: "/bikes/ktm-450-excf/right.webp" }],
+  "ktm-450-exc-f": {
+    views: [{ side: "right", src: "/bikes/ktm-450-exc-f/right.webp" }],
     credit: "KTM Sportmotorcycle",
     source: "https://www.ktm.com/en-gb/models/enduro.html",
     note: "Six Days edition shown; mechanically the 450 EXC-F.",
   },
-  "suzuki-drz4s": {
-    views: [{ side: "right", src: "/bikes/suzuki-drz4s/right.webp" }],
+  "suzuki-dr-z4s": {
+    views: [{ side: "right", src: "/bikes/suzuki-dr-z4s/right.webp" }],
     credit: "Suzuki GB",
     source: "https://bikes.suzuki.co.uk/",
   },
@@ -75,13 +75,36 @@ export const photos: Record<string, PhotoSet> = {
     source:
       "https://www.honda.co.uk/content/dam/central/motorcycles/colour-picker/adventure/crf300_rally/crf300_rally_2025/r-292r_extreme_red/25YM_CRF300-Rally_Studio_EXTREME-RED_R-292R_RHS.png",
   },
-  "ktm-890-adventure-r": {
+  "ktm-890-adventure-r-2023": {
     views: [
-      { side: "right", src: "/bikes/ktm-890-adventure-r/right.webp" },
-      { side: "left", src: "/bikes/ktm-890-adventure-r/left.webp" },
+      { side: "right", src: "/bikes/ktm-890-adventure-r-2023/right.webp" },
+      { side: "left", src: "/bikes/ktm-890-adventure-r-2023/left.webp" },
     ],
     credit: "KTM",
     source: "https://www.ktm.com/en-gb/models/adventure/2026-ktm-890-adventurer.html",
+    note: "2026 studio images; the bodywork is unchanged since the 2023 redesign.",
+  },
+  "ktm-790-adventure-2023": {
+    views: [
+      { side: "left", src: "/bikes/ktm-790-adventure-2023/left.webp" },
+      { side: "right", src: "/bikes/ktm-790-adventure-2023/right.webp" },
+    ],
+    credit: "KTM",
+    source: "https://www.ktm.com/en-gb/models/travel/ktm-790-adventure.html",
+    note: "2025 studio images; the bodywork is unchanged since the 2023 relaunch.",
+  },
+  "moto-morini-alltrhike-450": {
+    views: [
+      { side: "left", src: "/bikes/moto-morini-alltrhike-450/left.webp" },
+      { side: "right", src: "/bikes/moto-morini-alltrhike-450/right.webp" },
+    ],
+    credit: "Moto Morini",
+    source: "https://motomorini.eu/model/alltrhike/",
+  },
+  "rieju-aventura-rally-307": {
+    views: [{ side: "right", src: "/bikes/rieju-aventura-rally-307/right.webp" }],
+    credit: "Rieju",
+    source: "https://rieju.com/gb/off-road/121/602/aventura-rally-307",
   },
   "yamaha-tenere-700-rally": {
     views: [
@@ -150,13 +173,18 @@ export const photos: Record<string, PhotoSet> = {
   "husqvarna-701-enduro-2017": {
     views: [{ side: "right", src: "/bikes/husqvarna-701-enduro-2017/right.webp" }],
     credit: "Husqvarna Motorcycles",
-    source: "https://www.motorcyclespecs.co.za/model/husqvana/husqvarna_te_710_enduro_17.htm",
+    source:
+      "https://web.archive.org/web/20180611212503/http://www.husqvarna-motorcycles.com/at/enduro/701-enduro",
+    note: "2018 studio image, the same livery as the 2017. Husqvarna published no left-side view of this generation.",
   },
   "husqvarna-701-enduro-2020": {
-    views: [{ side: "right", src: "/bikes/husqvarna-701-enduro-2020/right.webp" }],
+    views: [
+      { side: "left", src: "/bikes/husqvarna-701-enduro-2020/left.webp" },
+      { side: "right", src: "/bikes/husqvarna-701-enduro-2020/right.webp" },
+    ],
     credit: "Husqvarna Motorcycles",
-    source: "https://www.motorcyclespecs.co.za/model/husqvana/husqvarna-701-enduro-2023.html",
-    note: "2023 studio image; unchanged bodywork from the 2020.",
+    source: "https://www.husqvarna-motorcycles.com/en-gb/models/travel/701-enduro-2022.html",
+    note: "2021 studio images; unchanged bodywork from the 2020.",
   },
   "kove-450-rally": {
     views: [{ side: "right", src: "/bikes/kove-450-rally/right.webp" }],
@@ -189,4 +217,17 @@ export const photos: Record<string, PhotoSet> = {
   },
 };
 
-export const photosFor = (slug: string): PhotoSet | undefined => photos[slug];
+/**
+ * Every bike opens on its right. Ordering here rather than in the entries means
+ * the set cannot drift as views are added: the panel simply shows the first.
+ */
+const SIDE_ORDER: Side[] = ["right", "left", "front"];
+
+export const photosFor = (slug: string): PhotoSet | undefined => {
+  const set = photos[slug];
+  if (!set) return undefined;
+  return {
+    ...set,
+    views: [...set.views].sort((a, b) => SIDE_ORDER.indexOf(a.side) - SIDE_ORDER.indexOf(b.side)),
+  };
+};

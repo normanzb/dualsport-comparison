@@ -5,7 +5,7 @@ Turn a manufacturer studio shot into a bike image this site can use.
 Cuts the background out, then places the bike on the shared canvas so every bike
 sits at the same scale with its tyres on the same line.
 
-    ./scripts/img/cutout.py photo.jpg ktm-890-adventure-r/left
+    ./scripts/img/cutout.py photo.jpg ktm-890-adventure-r-2023/left
     ./scripts/img/cutout.py studio.png honda-crf300l/right --transparent
     ./scripts/img/cutout.py --audit
 
@@ -76,6 +76,34 @@ def match_colour(img, ref_path):
     rgb = np.asarray(img.convert("RGB"), dtype=float) * gain
     corrected = Image.fromarray(np.clip(rgb, 0, 255).astype(np.uint8))
     return Image.merge("RGBA", (*corrected.split(), img.getchannel("A"))), gain
+
+
+def isolate(img, floor=BODY_ALPHA, grow=3):
+    """Keep the bike and nothing else.
+
+    Press cutouts arrive with company: a warranty seal floating clear of the
+    bike, which lands inside the bounding box and shrinks the bike to make room
+    for it, and the studio's contact shadow left in the alpha, which is all
+    under the body threshold but still renders as a smudge on a dark page.
+
+    Keep the largest solid shape plus the few pixels of soft edge around it,
+    which is the bike's own antialiasing, and drop everything else. A shadow
+    that runs right up under the tyres needs a higher floor than the default to
+    break it away from the bike, which is what the flag's value sets.
+    """
+    import numpy as np
+    from scipy import ndimage
+
+    pixels = np.array(img)
+    labels, count = ndimage.label(pixels[:, :, 3] > floor)
+    if count == 0:
+        return img, 0
+    sizes = ndimage.sum(np.ones_like(labels), labels, range(1, count + 1))
+    bike = labels == int(np.argmax(sizes)) + 1
+    keep = ndimage.binary_dilation(bike, iterations=grow)
+    removed = int((pixels[:, :, 3] > 0)[~keep].sum())
+    pixels[~keep, 3] = 0
+    return Image.fromarray(pixels), removed
 
 
 def place(img):
@@ -157,10 +185,19 @@ def audit():
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("source", nargs="?", help="studio photo to process")
-    ap.add_argument("target", nargs="?", help="slug/side, e.g. ktm-890-adventure-r/left")
+    ap.add_argument("target", nargs="?", help="slug/side, e.g. ktm-890-adventure-r-2023/left")
     ap.add_argument("--transparent", action="store_true", help="source already has alpha; skip the model")
     ap.add_argument("--model", default=DEFAULT_MODEL, help=f"rembg model (default {DEFAULT_MODEL})")
     ap.add_argument("--preview", action="store_true", help="also write a magenta-backed .preview.png")
+    ap.add_argument(
+        "--isolate",
+        nargs="?",
+        type=int,
+        const=BODY_ALPHA,
+        metavar="ALPHA",
+        help=f"drop everything that is not the bike: floating badges, baked contact shadows. "
+        f"Optional alpha floor for what counts as bike, default {BODY_ALPHA}",
+    )
     ap.add_argument(
         "--match",
         metavar="SLUG/SIDE",
@@ -176,6 +213,10 @@ def main():
 
     img = Image.open(args.source)
     img = img.convert("RGBA") if args.transparent else cut(img, args.model).convert("RGBA")
+
+    if args.isolate:
+        img, removed = isolate(img, args.isolate)
+        print(f"isolated the bike: dropped {removed} px" if removed else "nothing to drop")
 
     if args.match:
         img, gain = match_colour(img, os.path.join(OUT_DIR, args.match + ".webp"))

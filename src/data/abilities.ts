@@ -25,13 +25,13 @@ const MPG_US: Record<string, number> = {
   // Fuelly WR125 (2010), 2 vehicles: 70.96. Yamaha claims 94.
   "yamaha-wr125r": 71,
   // No data for the 2025 DR-Z4S yet; DR-Z400S predecessor runs ~49.7
-  "suzuki-drz4s": 50,
+  "suzuki-dr-z4s": 50,
   // WMTC 6.2 L/100 km
   "kove-450-rally": 38,
   // Fuelly combined: 48.57
   "honda-crf450l": 49,
   // Reported ~38 mpg, ~80 mi from the 8.5 L tank
-  "ktm-450-excf": 38,
+  "ktm-450-exc-f": 38,
   // No published economy yet; scored as its class peer, the 450 EXC-F
   "ducati-desmo450-eds": 38,
   // UK road tests: 52-53 imperial, so ~44 US
@@ -53,8 +53,8 @@ const MPG_US: Record<string, number> = {
   "yamaha-tenere-700-rally": 52,
   "yamaha-tenere-700-world-raid": 52,
   // Fuelly LC8c 790/890 adventure twins: high 40s
-  "ktm-790-adventure": 48,
-  "ktm-890-adventure-r": 46,
+  "ktm-790-adventure-2023": 48,
+  "ktm-890-adventure-r-2023": 46,
   // 293 single with a 21 L tank; makers claim 300+ miles, which lines up
   "rieju-aventura-rally-307": 58,
   // twin: CFMoto quote roughly 200 miles from 17.5 L
@@ -99,7 +99,7 @@ const WIND: Record<string, number> = {
   // 0: nothing in front of you
   "ducati-desmo450-eds": 0,
   "honda-crf450l": 0,
-  "ktm-450-excf": 0,
+  "ktm-450-exc-f": 0,
   // 1: a cowl or a number board
   "bmw-hp2-enduro": 1,
   "honda-crf300l": 1,
@@ -110,13 +110,13 @@ const WIND: Record<string, number> = {
   "ktm-690-enduro-r-2019": 1,
   "ktm-690-enduro-r-2021": 1,
   "ktm-690-enduro-r-2026": 1,
-  "suzuki-drz4s": 1,
+  "suzuki-dr-z4s": 1,
   "yamaha-wr125r": 1,
   // 2: a rally tower or half fairing, narrow
   "ajp-pr7": 2,
   "ccm-gp450": 2,
   "honda-crf300-rally": 2,
-  "ktm-890-adventure-r": 2,
+  "ktm-890-adventure-r-2023": 2,
   "kove-450-rally": 2,
   "rieju-aventura-rally-307": 2,
   "voge-300-rally": 2,
@@ -125,7 +125,7 @@ const WIND: Record<string, number> = {
   // 3: wide enough to lift the blast off your chest
   "cfmoto-450mt": 3,
   "ktm-390-adventure-r": 3,
-  "ktm-790-adventure": 3,
+  "ktm-790-adventure-2023": 3,
   "moto-morini-alltrhike-450": 3,
   "yamaha-tenere-700-world-raid": 3,
 };

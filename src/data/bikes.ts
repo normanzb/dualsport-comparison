@@ -1,5 +1,9 @@
-export type Bike = {
+export type Bike = Named & {
   slug: string;
+};
+
+/** Everything a bike is written with. The slug is derived from the first three. */
+type Named = {
   make: string;
   model: string;
   year?: string;
@@ -77,9 +81,8 @@ const KTM_390 = [
   "Both 390s run the 399 cc single from the 390 Duke generation, built in India alongside it, which is how a bike this specified reaches A2 money.",
 ] as const;
 
-export const bikes: Bike[] = [
+const catalogue: Named[] = [
   {
-    slug: "honda-crf300l",
     make: "Honda",
     model: "CRF300L",
     spec: {
@@ -115,7 +118,6 @@ export const bikes: Bike[] = [
       "The 300 is a longer-stroke development of the CRF250L rather than a new bike: 63 mm instead of 55 mm, which is where the extra displacement comes from. Thai-built and deliberately conventional, which is the point of it.",
   },
   {
-    slug: "yamaha-wr125r",
     make: "Yamaha",
     model: "WR125R",
     spec: {
@@ -152,7 +154,6 @@ export const bikes: Bike[] = [
       "The original WR125R ran from 2009 until Euro 4 saw it off in 2016, and Yamaha then left the class alone for the best part of a decade. This is the 2026 revival of the name, not the old bike: the row and the photographs are the new one.",
   },
   {
-    slug: "suzuki-drz4s",
     make: "Suzuki",
     model: "DR-Z4S",
     spec: {
@@ -188,7 +189,6 @@ export const bikes: Bike[] = [
       "The DR-Z400S this replaces ran essentially unchanged from 2000 to 2024, which is most of the reason it exists. Fuel injection, ride-by-wire and traction control finally arrive; the five-speed gearbox and the steel cradle frame do not.",
   },
   {
-    slug: "kove-450-rally",
     make: "Kove",
     model: "450 Rally",
     spec: {
@@ -224,7 +224,6 @@ export const bikes: Bike[] = [
       "Kove took a 450 Rally to Dakar in 2023 and finished it, the first Chinese manufacturer to manage that, and the bike you can buy is a thinly disguised version of the same thing. Which is both the appeal and the warning.",
   },
   {
-    slug: "honda-crf300-rally",
     make: "Honda",
     model: "CRF300 Rally",
     spec: {
@@ -260,7 +259,6 @@ export const bikes: Bike[] = [
       "Honda has sold a small rally-styled single since the CRF250 Rally of 2017, and this is the 300 version of that idea: the L's running gear behind a fairing modelled on the CRF450 Rally it takes to Dakar.",
   },
   {
-    slug: "honda-crf450l",
     make: "Honda",
     model: "CRF450L",
     spec: {
@@ -296,7 +294,6 @@ export const bikes: Bike[] = [
       "The engine is the CRF450R motocross unit detuned hard enough to pass emissions and survive a service interval: milder cams, lower compression, more flywheel, and a sixth gear the R has never had. The titanium fuel tank is a leftover from that parentage.",
   },
   {
-    slug: "ktm-450-excf",
     make: "KTM",
     model: "450 EXC-F",
     spec: {
@@ -334,7 +331,6 @@ export const bikes: Bike[] = [
   {
     // Ducati publishes no ground clearance for the EDS; 310 mm is an estimate,
     // hence the tilde. Everything else in that column is a published figure.
-    slug: "ducati-desmo450-eds",
     make: "Ducati",
     model: "Desmo450 EDS",
     spec: {
@@ -370,7 +366,6 @@ export const bikes: Bike[] = [
       "Ducati's first serious move off-road in its modern history, following the Desmo450 MX into motocross in 2025. Desmodromic valves are closed mechanically rather than by springs, which is Ducati's signature everywhere else in its range and now here too.",
   },
   {
-    slug: "ccm-gp450",
     make: "CCM",
     model: "GP450",
     spec: {
@@ -406,7 +401,6 @@ export const bikes: Bike[] = [
       "The engine is the 450 single BMW developed for its own G450X enduro and then walked away from. CCM, a small Bolton firm that has been hand-building frames since the early 1970s, put it into an adventure chassis instead.",
   },
   {
-    slug: "ktm-690-enduro-r-2019",
     make: "KTM",
     model: "690 Enduro R",
     year: "2019",
@@ -443,7 +437,6 @@ export const bikes: Bike[] = [
     platform: LC4_690,
   },
   {
-    slug: "ktm-690-enduro-r-2021",
     make: "KTM",
     model: "690 Enduro R",
     year: "2021",
@@ -480,7 +473,6 @@ export const bikes: Bike[] = [
     platform: LC4_690,
   },
   {
-    slug: "ktm-690-enduro-r-2026",
     make: "KTM",
     model: "690 Enduro R",
     year: "2026",
@@ -517,7 +509,6 @@ export const bikes: Bike[] = [
     platform: LC4_690,
   },
   {
-    slug: "husqvarna-701-enduro-2017",
     make: "Husqvarna",
     model: "701 Enduro",
     year: "2017",
@@ -554,7 +545,6 @@ export const bikes: Bike[] = [
     platform: LC4_690,
   },
   {
-    slug: "husqvarna-701-enduro-2020",
     make: "Husqvarna",
     model: "701 Enduro",
     year: "2020",
@@ -591,7 +581,6 @@ export const bikes: Bike[] = [
     platform: LC4_690,
   },
   {
-    slug: "husqvarna-701-enduro-2026",
     make: "Husqvarna",
     model: "701 Enduro",
     year: "2026",
@@ -628,7 +617,6 @@ export const bikes: Bike[] = [
     platform: LC4_690,
   },
   {
-    slug: "ktm-390-enduro-r",
     make: "KTM",
     model: "390 Enduro R",
     spec: {
@@ -665,7 +653,6 @@ export const bikes: Bike[] = [
     platform: KTM_390,
   },
   {
-    slug: "ktm-390-adventure-r",
     make: "KTM",
     model: "390 Adventure R",
     spec: {
@@ -702,7 +689,6 @@ export const bikes: Bike[] = [
     platform: KTM_390,
   },
   {
-    slug: "rieju-aventura-rally-307",
     make: "Rieju",
     model: "Aventura Rally 307",
     spec: {
@@ -739,7 +725,6 @@ export const bikes: Bike[] = [
   },
   {
     // Wet weight from independent measurement (195-197 kg), not CFMoto's claim
-    slug: "cfmoto-450mt",
     make: "CFMoto",
     model: "450MT",
     spec: {
@@ -775,7 +760,6 @@ export const bikes: Bike[] = [
       "The 449 twin is CFMoto's own, shared with its 450-class sports bikes, and CFMoto is the same factory that builds KTM's middleweight twins under a joint venture. That is the context for how much specification is on this bike per pound.",
   },
   {
-    slug: "voge-300-rally",
     make: "Voge",
     model: "300 Rally",
     spec: {
@@ -811,7 +795,6 @@ export const bikes: Bike[] = [
       "Voge is Loncin's own-brand arm, and Loncin is the factory that builds BMW's small singles. The engineering behind it is better than the badge suggests. The dealer network is not.",
   },
   {
-    slug: "moto-morini-alltrhike-450",
     make: "Moto Morini",
     model: "Alltrhike 450",
     spec: {
@@ -847,7 +830,6 @@ export const bikes: Bike[] = [
       "Moto Morini is a Bologna name dating to 1937, bought out of a long decline by the Chinese group Zhongneng in 2018. What has come since is Chinese-built with Italian styling input, and priced to reflect it.",
   },
   {
-    slug: "ajp-pr7",
     make: "AJP",
     model: "PR7",
     spec: {
@@ -883,7 +865,6 @@ export const bikes: Bike[] = [
       "AJP has been building off-road bikes in Portugal since the late 1980s, in volumes small enough that a PR7 is effectively assembled by hand. That buys you a genuinely different motorcycle and a parts supply to match.",
   },
   {
-    slug: "bmw-hp2-enduro",
     make: "BMW",
     model: "HP2 Enduro",
     spec: {
@@ -921,10 +902,9 @@ export const bikes: Bike[] = [
       "Built from 2005 to 2007 as the first of BMW's HP line, and the only time it has seriously tried to make a boxer work off road. The rear end holds no shock oil at all: an air spring and air damping in one unit, which was as strange then as it reads now. Solo seat, no pillion provision, shaft drive.",
   },
   {
-    slug: "ktm-790-adventure",
     make: "KTM",
     model: "790 Adventure",
-    year: "2026",
+    year: "2023",
     spec: {
       serviceInterval: "9,320 mi",
       dryWeight: "203 kg",
@@ -958,10 +938,9 @@ export const bikes: Bike[] = [
       "KTM dropped the 790 when the 890 arrived, then brought it back built in China by CFMoto under their joint venture, which is what lets it sit so far under the 890.",
   },
   {
-    slug: "ktm-890-adventure-r",
     make: "KTM",
     model: "890 Adventure R",
-    year: "2026",
+    year: "2023",
     spec: {
       serviceInterval: "9,320 mi",
       dryWeight: "200 kg",
@@ -995,7 +974,6 @@ export const bikes: Bike[] = [
       "The 890 is the 790's parallel twin taken out to 889 cc. The R adds longer WP suspension, a flatter seat and more clearance, which is most of the difference between the two.",
   },
   {
-    slug: "yamaha-tenere-700-rally",
     make: "Yamaha",
     model: "Tenere 700 Rally",
     spec: {
@@ -1031,7 +1009,6 @@ export const bikes: Bike[] = [
       "Yamaha's answer to riders who wanted the chassis pushed harder without carrying the World Raid's fuel load. Same CP2 twin, different suspension and ergonomics.",
   },
   {
-    slug: "yamaha-tenere-700-world-raid",
     make: "Yamaha",
     model: "Tenere 700 World Raid",
     spec: {
@@ -1067,7 +1044,6 @@ export const bikes: Bike[] = [
       "The dual tanks are a rally-raid idea rather than a styling one. Two side-mounted aluminium tanks cut the fuel slosh a single large tank produces, and the pump sits low in the left one to keep the mass centred.",
   },
   {
-    slug: "yamaha-tenere-700",
     make: "Yamaha",
     model: "Tenere 700",
     spec: {
@@ -1104,6 +1080,25 @@ export const bikes: Bike[] = [
   },
 ];
 
+const kebab = (text: string) =>
+  text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
+/**
+ * The one place a bike's identity becomes a string.
+ *
+ * A model year in the data has to reach the URL: without it two years of the
+ * same bike would want the same page. A bike written without one is the only
+ * one of its name, so it takes the bare stem, which is also the URL a reader
+ * gets sent to when they ask for a model and leave the year off.
+ */
+export const slugFor = (b: Named) =>
+  [kebab(b.make), kebab(b.model), b.year].filter(Boolean).join("-");
+
+export const bikes: Bike[] = catalogue.map((b) => ({ ...b, slug: slugFor(b) }));
+
 /** A slug with its trailing model year taken off; unchanged for a bike without one. */
 export const familyStem = (slug: string) => slug.replace(/-\d{4}$/, "");
 
@@ -1136,11 +1131,12 @@ const TRAVEL: Record<string, string> = {
   "honda-crf450l": "305 / 315 mm",
   "husqvarna-701-enduro-2017": "250 / 250 mm",
   "husqvarna-701-enduro-2020": "250 / 250 mm",
-  "ktm-450-excf": "300 / 310 mm",
+  "ktm-450-exc-f": "300 / 310 mm",
   "ktm-690-enduro-r-2019": "250 / 250 mm",
   "ktm-690-enduro-r-2021": "250 / 250 mm",
-  "ktm-790-adventure": "200 / 200 mm",
-  "ktm-890-adventure-r": "240 / 240 mm",
+  "ktm-790-adventure-2023": "200 / 200 mm",
+  "ktm-890-adventure-r-2023": "240 / 240 mm",
+  "rieju-aventura-rally-307": "235 / 235 mm",
   "yamaha-tenere-700": "210 / 200 mm",
   "yamaha-tenere-700-rally": "230 / 220 mm",
   "yamaha-tenere-700-world-raid": "230 / 220 mm",
