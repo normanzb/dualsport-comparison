@@ -74,6 +74,37 @@ differs between the two shoots for reasons white balance cannot touch. Correctin
 half the difference can look worse than leaving the shot as the photographer
 graded it. Compare both and keep whichever actually reads better.
 
+### Print originals in CMYK
+
+A press kit often ships CMYK JPEGs laid out for A4 at 300 dpi, carrying an ISO
+Coated profile. The script converts these through the file's own profile and
+says so when it does.
+
+Two ways to get this wrong, both of which came out green on BMW's HP2 shot,
+measured on a studio backdrop that should be neutral:
+
+| conversion                             | backdrop    |
+| -------------------------------------- | ----------- |
+| Pillow's plain `convert("RGB")`        | 108/124/128 |
+| through the profile, perceptual intent | 115/115/114 |
+| through the profile, relative + BPC    | 127/127/126 |
+| macOS ColorSync, for comparison        | 130/130/130 |
+
+The plain convert applies a formula and ignores the profile outright. Perceptual
+is neutral but compresses the whole gamut to fit, so it lands dark, and dark grey
+with any yellow in it reads as khaki. Relative colorimetric with black point
+compensation is what the script uses, and it tracks ColorSync to within a couple
+of points.
+
+Two other things about press files:
+
+- **Crop the caption bar off first.** It is solid black and fully opaque, so it
+  lands inside the bounding box and shrinks the bike to make room for it. It runs
+  down the side of a landscape frame and along the bottom of a portrait one.
+- **A cropped copy must not carry the CMYK profile.** Saving the crop as a PNG
+  keeps the profile, and Pillow then refuses to read its own file back
+  ("Decompressed Data Too Large"). Write the pixels into a fresh `Image` first.
+
 ### Press images that carry more than the bike
 
 Manufacturer cutouts often ship with something extra baked in. `--isolate` keeps

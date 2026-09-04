@@ -78,6 +78,39 @@ def match_colour(img, ref_path):
     return Image.merge("RGBA", (*corrected.split(), img.getchannel("A"))), gain
 
 
+def to_srgb(img):
+    """Convert a print original through its own profile.
+
+    Press kits ship CMYK JPEGs carrying an ISO Coated profile. Pillow's plain
+    convert("RGB") applies a formula and ignores the profile, which lands the
+    whole image several points green. Going through the profile keeps a neutral
+    studio backdrop neutral.
+    """
+    if img.mode != "CMYK":
+        return img, False
+    profile = img.info.get("icc_profile")
+    if not profile:
+        return img.convert("RGB"), False
+
+    import io as _io
+
+    from PIL import ImageCms
+
+    source = ImageCms.ImageCmsProfile(_io.BytesIO(profile))
+    # Relative colorimetric with black point compensation, not the default
+    # perceptual intent: perceptual compresses the whole gamut to fit and comes
+    # out dark and olive, which on the HP2 press shot turned grey bodywork khaki.
+    converted = ImageCms.profileToProfile(
+        img,
+        source,
+        ImageCms.createProfile("sRGB"),
+        renderingIntent=ImageCms.Intent.RELATIVE_COLORIMETRIC,
+        flags=ImageCms.Flags.BLACKPOINTCOMPENSATION,
+        outputMode="RGB",
+    )
+    return converted, True
+
+
 def isolate(img, floor=BODY_ALPHA, grow=3):
     """Keep the bike and nothing else.
 
@@ -212,6 +245,9 @@ def main():
         ap.error("give a source and a slug/side, or use --audit")
 
     img = Image.open(args.source)
+    img, managed = to_srgb(img)
+    if managed:
+        print("converted CMYK to sRGB through the file's own profile")
     img = img.convert("RGBA") if args.transparent else cut(img, args.model).convert("RGBA")
 
     if args.isolate:

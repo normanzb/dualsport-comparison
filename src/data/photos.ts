@@ -214,10 +214,11 @@ export const photos: Record<string, PhotoSet> = {
     views: [
       { side: "left", src: "/bikes/bmw-hp2-enduro-2005/left.webp" },
       { side: "right", src: "/bikes/bmw-hp2-enduro-2005/right.webp" },
+      { side: "front", src: "/bikes/bmw-hp2-enduro-2005/front.webp" },
     ],
-    credit: "BMW Motorrad",
-    source: "https://www.motorcyclespecs.co.za/model/bmw/bmw-hp2-enduro-06.html",
-    note: "2007 studio images; the HP2 ran unchanged from 2005 to 2008.",
+    credit: "BMW AG",
+    source: "https://www.press.bmwgroup.com/global/photo/detail/P0018219",
+    note: "BMW's own 04/2005 press set: P0018219, P0018213 and P0018220.",
   },
 };
 
