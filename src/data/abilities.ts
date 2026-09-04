@@ -35,7 +35,7 @@ const MPG_US: Record<string, number> = {
   // No published economy yet; scored as its class peer, the 450 EXC-F
   "ducati-desmo450-eds": 38,
   // UK road tests: 52-53 imperial, so ~44 US
-  "ccm-gp450": 44,
+  "ccm-gp450-2014": 44,
   // Fuelly by year, 47.7 to 55. Same LC4 single as the 701.
   "ktm-690-enduro-r-2019": 51,
   "ktm-690-enduro-r-2021": 51,
@@ -65,7 +65,7 @@ const MPG_US: Record<string, number> = {
   // 600 single, no owner sample; scored between the 450s and the 690
   "ajp-pr7": 55,
   // 1170 air-cooled boxer, and it drinks like one
-  "bmw-hp2-enduro": 45,
+  "bmw-hp2-enduro-2005": 45,
   "yamaha-tenere-700": 55,
 };
 
@@ -101,7 +101,7 @@ const WIND: Record<string, number> = {
   "honda-crf450l": 0,
   "ktm-450-exc-f": 0,
   // 1: a cowl or a number board
-  "bmw-hp2-enduro": 1,
+  "bmw-hp2-enduro-2005": 1,
   "honda-crf300l": 1,
   "husqvarna-701-enduro-2017": 1,
   "husqvarna-701-enduro-2020": 1,
@@ -114,7 +114,7 @@ const WIND: Record<string, number> = {
   "yamaha-wr125r": 1,
   // 2: a rally tower or half fairing, narrow
   "ajp-pr7": 2,
-  "ccm-gp450": 2,
+  "ccm-gp450-2014": 2,
   "honda-crf300-rally": 2,
   "ktm-890-adventure-r-2023": 2,
   "kove-450-rally": 2,
@@ -269,7 +269,7 @@ export function performance(b: Bike): number {
  * 196 kg bike.
  */
 const LOW_COG: Record<string, number> = {
-  "bmw-hp2-enduro": 3,
+  "bmw-hp2-enduro-2005": 3,
   "husqvarna-701-enduro-2017": 2,
   "husqvarna-701-enduro-2020": 2,
   "husqvarna-701-enduro-2026": 2,

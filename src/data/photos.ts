@@ -150,10 +150,10 @@ export const photos: Record<string, PhotoSet> = {
     source:
       "https://images.ctfassets.net/x7j9qwvpvr5s/3jEDT5uRS22eQMEUsmMtxc/07a88194aef5a8934a4fc23c27963329/2026-06-09-Desmo450-EDS-EU-MY27-Model-Preview-1050x650.png",
   },
-  "ccm-gp450": {
+  "ccm-gp450-2014": {
     views: [
-      { side: "right", src: "/bikes/ccm-gp450/right.webp" },
-      { side: "left", src: "/bikes/ccm-gp450/left.webp" },
+      { side: "right", src: "/bikes/ccm-gp450-2014/right.webp" },
+      { side: "left", src: "/bikes/ccm-gp450-2014/left.webp" },
     ],
     credit: "CCM Motorcycles",
     source: "https://www.motorcyclespecs.co.za/model/ccm/CCM%20GP450%20Adventure.htm",
@@ -210,14 +210,14 @@ export const photos: Record<string, PhotoSet> = {
     credit: "AJP Motos",
     source: "https://ajpmotos.com/en/bikes/pr7-650-adventure",
   },
-  "bmw-hp2-enduro": {
+  "bmw-hp2-enduro-2005": {
     views: [
-      { side: "left", src: "/bikes/bmw-hp2-enduro/left.webp" },
-      { side: "right", src: "/bikes/bmw-hp2-enduro/right.webp" },
+      { side: "left", src: "/bikes/bmw-hp2-enduro-2005/left.webp" },
+      { side: "right", src: "/bikes/bmw-hp2-enduro-2005/right.webp" },
     ],
     credit: "BMW Motorrad",
     source: "https://www.motorcyclespecs.co.za/model/bmw/bmw-hp2-enduro-06.html",
-    note: "2007 studio images.",
+    note: "2007 studio images; the HP2 ran unchanged from 2005 to 2008.",
   },
 };
 

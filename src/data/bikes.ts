@@ -368,6 +368,8 @@ const catalogue: Named[] = [
   {
     make: "CCM",
     model: "GP450",
+    year: "2014",
+
     spec: {
       serviceInterval: "5,000 mi",
       dryWeight: "130 kg",
@@ -867,6 +869,8 @@ const catalogue: Named[] = [
   {
     make: "BMW",
     model: "HP2 Enduro",
+    year: "2005",
+
     spec: {
       serviceInterval: "6,000 mi",
       dryWeight: "175 kg",
