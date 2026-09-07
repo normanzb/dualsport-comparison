@@ -37,10 +37,12 @@ const MPG_US: Record<string, number> = {
   // UK road tests: 52-53 imperial, so ~44 US
   "ccm-gp450-2014": 44,
   // Fuelly by year, 47.7 to 55. Same LC4 single as the 701.
+  "ktm-690-enduro-r-2014": 51,
   "ktm-690-enduro-r-2019": 51,
   "ktm-690-enduro-r-2021": 51,
   "ktm-690-enduro-r-2026": 51,
   // Fuelly 2017, 5 vehicles / 17,145 mi: 47.57
+  "husqvarna-701-enduro-2016": 48,
   "husqvarna-701-enduro-2017": 48,
   "husqvarna-701-enduro-2020": 48,
   "husqvarna-701-enduro-2026": 48,
@@ -55,6 +57,7 @@ const MPG_US: Record<string, number> = {
   // Fuelly LC8c 790/890 adventure twins: high 40s
   "ktm-790-adventure-2023": 48,
   "ktm-890-adventure-r-2023": 46,
+  "ktm-890-adventure-r-rally-2024": 46,
   // 293 single with a 21 L tank; makers claim 300+ miles, which lines up
   "rieju-aventura-rally-307": 58,
   // twin: CFMoto quote roughly 200 miles from 17.5 L
@@ -103,10 +106,12 @@ const WIND: Record<string, number> = {
   // 1: a cowl or a number board
   "bmw-hp2-enduro-2005": 1,
   "honda-crf300l": 1,
+  "husqvarna-701-enduro-2016": 1,
   "husqvarna-701-enduro-2017": 1,
   "husqvarna-701-enduro-2020": 1,
   "husqvarna-701-enduro-2026": 1,
   "ktm-390-enduro-r": 1,
+  "ktm-690-enduro-r-2014": 1,
   "ktm-690-enduro-r-2019": 1,
   "ktm-690-enduro-r-2021": 1,
   "ktm-690-enduro-r-2026": 1,
@@ -117,6 +122,7 @@ const WIND: Record<string, number> = {
   "ccm-gp450-2014": 2,
   "honda-crf300-rally": 2,
   "ktm-890-adventure-r-2023": 2,
+  "ktm-890-adventure-r-rally-2024": 2,
   "kove-450-rally": 2,
   "rieju-aventura-rally-307": 2,
   "voge-300-rally": 2,
@@ -270,9 +276,11 @@ export function performance(b: Bike): number {
  */
 const LOW_COG: Record<string, number> = {
   "bmw-hp2-enduro-2005": 3,
+  "husqvarna-701-enduro-2016": 2,
   "husqvarna-701-enduro-2017": 2,
   "husqvarna-701-enduro-2020": 2,
   "husqvarna-701-enduro-2026": 2,
+  "ktm-690-enduro-r-2014": 2,
   "ktm-690-enduro-r-2019": 2,
   "ktm-690-enduro-r-2021": 2,
   "ktm-690-enduro-r-2026": 2,

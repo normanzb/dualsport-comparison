@@ -2,6 +2,7 @@ import { Redirecting } from "@/components/Redirecting";
 import { Sheet } from "@/components/Sheet";
 import { type Bike, bikes, latestInFamily, stems } from "@/data/bikes";
 import { bikePath } from "@/lib/bike-url";
+import { SITE_NAME, canonicalFor, ogImage } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -20,16 +21,35 @@ export async function generateMetadata({ params }: PageProps<"/bikes/[slug]">): 
     if (!latest) return {};
     // the stem is a signpost, so point every crawler at the model it stands for
     return {
-      title: `${named(latest)} | Dualsport motorcycle side by side`,
-      alternates: { canonical: bikePath(latest.slug) },
+      title: named(latest),
+      alternates: { canonical: canonicalFor(latest.slug) },
       robots: { index: false, follow: true },
     };
   }
 
   const name = named(bike);
+  const description = `${name}: ${bike.spec.wetWeight} wet, ${bike.spec.seatHeight} seat, ${bike.spec.tank} tank, ${bike.spec.serviceInterval} service interval, ${bike.spec.price}. Measured against ${bikes.length - 1} other dual sport and enduro bikes on the UK market.`;
+  const canonical = canonicalFor(slug);
+
   return {
-    title: `${name} | Dualsport motorcycle side by side`,
-    description: `${name}: ${bike.spec.wetWeight} wet, ${bike.spec.seatHeight} seat, ${bike.spec.tank} tank, ${bike.spec.serviceInterval} service interval, ${bike.spec.price}. Measured against ${bikes.length - 1} other dual sport and enduro bikes on the UK market.`,
+    title: name,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      type: "article",
+      siteName: SITE_NAME,
+      locale: "en_GB",
+      url: canonical,
+      title: `${name} | ${SITE_NAME}`,
+      description,
+      images: [{ ...ogImage(slug), alt: `${name}, studio side view` }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${name} | ${SITE_NAME}`,
+      description,
+      images: [ogImage(slug).url],
+    },
   };
 }
 

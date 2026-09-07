@@ -14,10 +14,14 @@ import { asset } from "@/lib/base-path";
 type Mark = { file: string; aspect: number; optical?: number };
 
 const MARKS: Record<string, Mark> = {
+  CCM: { file: "/logos/ccm.svg", aspect: 6.244 },
   Ducati: { file: "/logos/ducati.svg", aspect: 5.411 },
   Honda: { file: "/logos/honda.svg", aspect: 8.228 },
   Husqvarna: { file: "/logos/husqvarna.svg", aspect: 5.475, optical: 1.24 },
   KTM: { file: "/logos/ktm.svg", aspect: 3.203 },
+  // squashed from a natural 18.5:1 and held to its own 100x10 rather than the
+  // shared cap height: ten characters of condensed caps dwarf the slot otherwise
+  "Moto Morini": { file: "/logos/morini.svg", aspect: 10, optical: 10 / 13 },
   Suzuki: { file: "/logos/suzuki.svg", aspect: 6.424 },
   Yamaha: { file: "/logos/yamaha.svg", aspect: 4.266 },
 };

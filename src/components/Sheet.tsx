@@ -48,8 +48,9 @@ export function Sheet({ initialSlug }: { initialSlug?: string }) {
               and price ranges included. Photographs are manufacturer studio images, reproduced for
               identification and credited on each bike. Brand marks are the property of their
               respective owners. Logo files: Wikimedia Commons, public domain except Suzuki (CC
-              BY-SA 4.0). {wordmarkOnly.slice(0, -1).join(", ")} and {wordmarkOnly.at(-1)} have no
-              freely licensed mark, so they appear as wordmarks.
+              BY-SA 4.0) and CCM, reproduced for identification.{" "}
+              {wordmarkOnly.slice(0, -1).join(", ")} and {wordmarkOnly.at(-1)} have no freely
+              licensed mark, so they appear as wordmarks.
             </p>
 
             <a

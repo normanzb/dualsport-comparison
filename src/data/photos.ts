@@ -84,6 +84,15 @@ export const photos: Record<string, PhotoSet> = {
     source: "https://www.ktm.com/en-gb/models/adventure/2026-ktm-890-adventurer.html",
     note: "2026 studio images; the bodywork is unchanged since the 2023 redesign.",
   },
+  "ktm-890-adventure-r-rally-2024": {
+    views: [
+      { side: "right", src: "/bikes/ktm-890-adventure-r-rally-2024/right.webp" },
+      { side: "left", src: "/bikes/ktm-890-adventure-r-rally-2024/left.webp" },
+    ],
+    credit: "KTM",
+    source: "https://www.ktm.com/en-gb/models/adventure/2026-ktm-890-adventurerrally.html",
+    note: "2026 studio images. The Red Bull livery is that year's run; the bike is unchanged since the 2024.",
+  },
   "ktm-790-adventure-2023": {
     views: [
       { side: "left", src: "/bikes/ktm-790-adventure-2023/left.webp" },
@@ -158,6 +167,13 @@ export const photos: Record<string, PhotoSet> = {
     credit: "CCM Motorcycles",
     source: "https://www.motorcyclespecs.co.za/model/ccm/CCM%20GP450%20Adventure.htm",
   },
+  "ktm-690-enduro-r-2014": {
+    views: [{ side: "right", src: "/bikes/ktm-690-enduro-r-2014/right.webp" }],
+    credit: "KTM Sportmotorcycle",
+    source:
+      "https://web.archive.org/web/20170301034704/http://www.ktm.com/globalassets/products-pim-data/ke2-11001/enduro/690-enduro-r2/690-enduro-r-2017/f9775q8/pho_bike_90_re.png",
+    note: "2017 studio image, unchanged bodywork across the run. KTM published no left-side view of this generation.",
+  },
   "ktm-690-enduro-r-2019": {
     views: [{ side: "right", src: "/bikes/ktm-690-enduro-r-2019/right.webp" }],
     credit: "KTM Sportmotorcycle",
@@ -173,6 +189,13 @@ export const photos: Record<string, PhotoSet> = {
     credit: "KTM Sportmotorcycle",
     source:
       "https://web.archive.org/web/20201206101503/https://www.ktm.com/ktmgroup-storage/PHO_BIKE_90_RE_690enduror-21-90re_%23SALL_%23AEPI_%23V1.jpg",
+  },
+  "husqvarna-701-enduro-2016": {
+    views: [{ side: "right", src: "/bikes/husqvarna-701-enduro-2016/right.webp" }],
+    credit: "Husqvarna Motorcycles",
+    source:
+      "https://web.archive.org/web/20170528180143/http://www.husqvarna-motorcycles.com/globalassets/products-pim-data/ke2-11007/enduro/dual-sport/701-enduro/701-enduro-2016/f2603p1/pho_bike_90_re.png",
+    note: "Husqvarna published no left-side view of this generation. The 2017 looks near identical: that update was mechanical.",
   },
   "husqvarna-701-enduro-2017": {
     views: [{ side: "right", src: "/bikes/husqvarna-701-enduro-2017/right.webp" }],

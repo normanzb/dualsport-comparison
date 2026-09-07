@@ -1,3 +1,5 @@
+import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, ogImage } from "@/lib/seo";
+import { SITE_ORIGIN } from "@/lib/bike-url";
 import type { Metadata } from "next";
 import { Bebas_Neue, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
@@ -10,9 +12,27 @@ const plex = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dualsport motorcycle side by side (UK market)",
-  description:
-    "A single-page comparison of 20 dual sport and enduro motorcycles: service intervals, weights, tank capacity, seat height, ground clearance, power and typical UK prices.",
+  // every relative URL below, canonical and card alike, resolves against this
+  metadataBase: new URL(SITE_ORIGIN),
+  title: { default: SITE_TITLE, template: `%s | ${SITE_NAME}` },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    locale: "en_GB",
+    url: "/",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [ogImage()],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [ogImage().url],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
