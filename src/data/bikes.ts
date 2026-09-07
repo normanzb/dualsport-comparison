@@ -887,7 +887,6 @@ const catalogue: Named[] = [
       "The 660 parallel twin came out of the RS 660 sportsbike and was detuned for torque rather than revs. Aprilia had not built an adventure bike in twenty years when this arrived; the Tuareg name goes back to their Paris-Dakar entries in the 1980s.",
   },
   {
-    // Aprilia publishes no ground clearance for the RX, hence the n/a
     make: "Aprilia",
     model: "RX 125",
     year: "2018",
@@ -898,7 +897,7 @@ const catalogue: Named[] = [
       tank: "7 L",
       gears: "6",
       seatHeight: "905 mm",
-      clearance: "n/a",
+      clearance: "220 mm",
       engine: "124 cc",
       power: "15 hp",
       torque: "11.5 Nm",
@@ -909,7 +908,7 @@ const catalogue: Named[] = [
       dryKg: 130,
       tankL: 7,
       seatMm: 905,
-      clearanceMm: null,
+      clearanceMm: 220,
       cc: 124,
       hp: 15,
       nm: 11.5,
@@ -922,8 +921,8 @@ const catalogue: Named[] = [
     note: "A learner bike with a 21-inch front and a 905 mm seat, which is the tallest thing you can ride on L plates. Fifteen horsepower means the trail is the point and the motorway is not.",
   },
   {
-    // Fantic publish no clearance or suspension travel for the Trail, and no
-    // power figure at all: 21 hp is the UK homologation number
+    // Fantic publish no suspension travel for the Trail, and no power figure at
+    // all: 21 hp is the UK homologation number
     make: "Fantic",
     model: "XEF 250 Trail",
     year: "2024",
@@ -934,7 +933,7 @@ const catalogue: Named[] = [
       tank: "7.6 L",
       gears: "6",
       seatHeight: "914 mm",
-      clearance: "n/a",
+      clearance: "325 mm",
       engine: "250 cc",
       power: "21 hp",
       torque: "18.6 Nm",
@@ -945,7 +944,7 @@ const catalogue: Named[] = [
       dryKg: 122,
       tankL: 7.6,
       seatMm: 914,
-      clearanceMm: null,
+      clearanceMm: 325,
       cc: 250,
       hp: 21,
       nm: 18.6,

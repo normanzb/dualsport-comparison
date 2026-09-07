@@ -23,7 +23,8 @@ type Col = {
 };
 
 const COLS: Col[] = [
-  { label: "Bike", value: (b) => `${b.model} ${b.year ?? ""}`.trim() },
+  // the cell reads make, model, year, so the column sorts on the same three
+  { label: "Bike", value: (b) => `${b.make} ${b.model} ${b.year ?? ""}`.trim() },
   ...TABLE_FIELDS.map((f) => ({
     key: f.key,
     label: f.label,
