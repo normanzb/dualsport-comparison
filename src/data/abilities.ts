@@ -21,19 +21,20 @@ import { type Bike, bikes } from "@/data/bikes";
  * ------------------------------------------------------------------------- */
 const MPG_US: Record<string, number> = {
   // Fuelly, 2021 model, 8 vehicles / 15,815 mi: 69.70
-  "honda-crf300l": 70,
+  "honda-crf300l-2021": 70,
   // Fuelly WR125 (2010), 2 vehicles: 70.96. Yamaha claims 94.
-  "yamaha-wr125r": 71,
+  "yamaha-wr125r-2026": 71,
   // No data for the 2025 DR-Z4S yet; DR-Z400S predecessor runs ~49.7
-  "suzuki-dr-z4s": 50,
+  "suzuki-dr-z4s-2025": 50,
   // WMTC 6.2 L/100 km
-  "kove-450-rally": 38,
+  "kove-450-rally-2023": 38,
   // Fuelly combined: 48.57
-  "honda-crf450l": 49,
+  "honda-crf450l-2019": 49,
   // Reported ~38 mpg, ~80 mi from the 8.5 L tank
-  "ktm-450-exc-f": 38,
+  "ktm-450-exc-f-2024": 38,
+  "ktm-500-exc-f-2024": 36,
   // No published economy yet; scored as its class peer, the 450 EXC-F
-  "ducati-desmo450-eds": 38,
+  "ducati-desmo450-eds-2027": 38,
   // UK road tests: 52-53 imperial, so ~44 US
   "ccm-gp450-2014": 44,
   // Fuelly by year, 47.7 to 55. Same LC4 single as the 701.
@@ -47,29 +48,29 @@ const MPG_US: Record<string, number> = {
   "husqvarna-701-enduro-2020": 48,
   "husqvarna-701-enduro-2026": 48,
   // KTM claims 83 imperial mpg on the WMTC cycle; knobblies and real roads cost you
-  "ktm-390-enduro-r": 60,
-  "ktm-390-adventure-r": 62,
+  "ktm-390-enduro-r-2025": 60,
+  "ktm-390-adventure-r-2025": 62,
   // Fuelly CRF300 Rally, same 286 single as the L with more bodywork to push
-  "honda-crf300-rally": 66,
+  "honda-crf300-rally-2021": 66,
   // Fuelly Tenere 700, 60+ vehicles: ~52. The variants share the CP2 twin.
-  "yamaha-tenere-700-rally": 52,
-  "yamaha-tenere-700-world-raid": 52,
+  "yamaha-tenere-700-rally-2025": 52,
+  "yamaha-tenere-700-world-raid-2022": 52,
   // Fuelly LC8c 790/890 adventure twins: high 40s
   "ktm-790-adventure-2023": 48,
   "ktm-890-adventure-r-2023": 46,
   "ktm-890-adventure-r-rally-2024": 46,
   // 293 single with a 21 L tank; makers claim 300+ miles, which lines up
-  "rieju-aventura-rally-307": 58,
+  "rieju-aventura-rally-307-2025": 58,
   // twin: CFMoto quote roughly 200 miles from 17.5 L
-  "cfmoto-450mt": 44,
-  "voge-300-rally": 65,
+  "cfmoto-450mt-2024": 44,
+  "voge-300-rally-2023": 65,
   // no owner data yet; scored as its class peer, the 450MT twin
-  "moto-morini-alltrhike-450": 48,
+  "moto-morini-alltrhike-450-2026": 48,
   // 600 single, no owner sample; scored between the 450s and the 690
-  "ajp-pr7": 55,
+  "ajp-pr7-2017": 55,
   // 1170 air-cooled boxer, and it drinks like one
   "bmw-hp2-enduro-2005": 45,
-  "yamaha-tenere-700": 55,
+  "yamaha-tenere-700-2025": 55,
 };
 
 /* ---------------------------------------------------------------------------
@@ -100,40 +101,41 @@ const MPG_US: Record<string, number> = {
  */
 const WIND: Record<string, number> = {
   // 0: nothing in front of you
-  "ducati-desmo450-eds": 0,
-  "honda-crf450l": 0,
-  "ktm-450-exc-f": 0,
+  "ducati-desmo450-eds-2027": 0,
+  "honda-crf450l-2019": 0,
+  "ktm-450-exc-f-2024": 0,
+  "ktm-500-exc-f-2024": 0,
   // 1: a cowl or a number board
   "bmw-hp2-enduro-2005": 1,
-  "honda-crf300l": 1,
+  "honda-crf300l-2021": 1,
   "husqvarna-701-enduro-2016": 1,
   "husqvarna-701-enduro-2017": 1,
   "husqvarna-701-enduro-2020": 1,
   "husqvarna-701-enduro-2026": 1,
-  "ktm-390-enduro-r": 1,
+  "ktm-390-enduro-r-2025": 1,
   "ktm-690-enduro-r-2014": 1,
   "ktm-690-enduro-r-2019": 1,
   "ktm-690-enduro-r-2021": 1,
   "ktm-690-enduro-r-2026": 1,
-  "suzuki-dr-z4s": 1,
-  "yamaha-wr125r": 1,
+  "suzuki-dr-z4s-2025": 1,
+  "yamaha-wr125r-2026": 1,
   // 2: a rally tower or half fairing, narrow
-  "ajp-pr7": 2,
+  "ajp-pr7-2017": 2,
   "ccm-gp450-2014": 2,
-  "honda-crf300-rally": 2,
+  "honda-crf300-rally-2021": 2,
   "ktm-890-adventure-r-2023": 2,
   "ktm-890-adventure-r-rally-2024": 2,
-  "kove-450-rally": 2,
-  "rieju-aventura-rally-307": 2,
-  "voge-300-rally": 2,
-  "yamaha-tenere-700": 2,
-  "yamaha-tenere-700-rally": 2,
+  "kove-450-rally-2023": 2,
+  "rieju-aventura-rally-307-2025": 2,
+  "voge-300-rally-2023": 2,
+  "yamaha-tenere-700-2025": 2,
+  "yamaha-tenere-700-rally-2025": 2,
   // 3: wide enough to lift the blast off your chest
-  "cfmoto-450mt": 3,
-  "ktm-390-adventure-r": 3,
+  "cfmoto-450mt-2024": 3,
+  "ktm-390-adventure-r-2025": 3,
   "ktm-790-adventure-2023": 3,
-  "moto-morini-alltrhike-450": 3,
-  "yamaha-tenere-700-world-raid": 3,
+  "moto-morini-alltrhike-450-2026": 3,
+  "yamaha-tenere-700-world-raid-2022": 3,
 };
 
 /**

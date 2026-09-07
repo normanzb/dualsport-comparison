@@ -76,6 +76,12 @@ const LC4_690 = [
   "Twin balancer shafts are what make a single this big tolerable on the road. The clutch is hydraulic, and early slave cylinders were a known weak point; later revisions sorted it, so on a used one it is worth asking what has already been replaced.",
 ] as const;
 
+/** KTM's road-legal race enduros: same chassis, two displacements. */
+const EXC_F = [
+  "Europe lets a race enduro bike be homologated for the road, and KTM has been exploiting that for decades. This is not a road bike with knobblies; it is the machine people race on Sunday, with lights and a plate.",
+  "The 450 and the 500 share a chassis, a seat height and a service schedule counted in engine hours. The 500 trades a little revvability for torque you can lug, which is why it is the one people pick for anything longer than a lap.",
+] as const;
+
 /** KTM's 399 single, built in India with Bajaj, in its two 2025 bodies. */
 const KTM_390 = [
   "Both 390s run the 399 cc single from the 390 Duke generation, built in India alongside it, which is how a bike this specified reaches A2 money.",
@@ -85,6 +91,7 @@ const catalogue: Named[] = [
   {
     make: "Honda",
     model: "CRF300L",
+    year: "2021",
     spec: {
       serviceInterval: "8,000 mi",
       dryWeight: "~132 kg",
@@ -120,6 +127,7 @@ const catalogue: Named[] = [
   {
     make: "Yamaha",
     model: "WR125R",
+    year: "2026",
     spec: {
       serviceInterval: "~3,500 mi",
       dryWeight: "~130 kg",
@@ -156,6 +164,7 @@ const catalogue: Named[] = [
   {
     make: "Suzuki",
     model: "DR-Z4S",
+    year: "2025",
     spec: {
       serviceInterval: "3,750 mi",
       dryWeight: "~141 kg",
@@ -191,6 +200,7 @@ const catalogue: Named[] = [
   {
     make: "Kove",
     model: "450 Rally",
+    year: "2023",
     spec: {
       serviceInterval: "1,240 mi",
       dryWeight: "~145 kg",
@@ -226,6 +236,7 @@ const catalogue: Named[] = [
   {
     make: "Honda",
     model: "CRF300 Rally",
+    year: "2021",
     spec: {
       serviceInterval: "8,000 mi",
       dryWeight: "~143 kg",
@@ -261,6 +272,7 @@ const catalogue: Named[] = [
   {
     make: "Honda",
     model: "CRF450L",
+    year: "2019",
     spec: {
       serviceInterval: "600 mi",
       dryWeight: "~125 kg",
@@ -294,8 +306,46 @@ const catalogue: Named[] = [
       "The engine is the CRF450R motocross unit detuned hard enough to pass emissions and survive a service interval: milder cams, lower compression, more flywheel, and a sixth gear the R has never had. The titanium fuel tank is a leftover from that parentage.",
   },
   {
+    // KTM publishes no output for the EXC-F line, so power and torque carry tildes.
+    // Everything else is off their own spec sheet.
+    make: "KTM",
+    model: "500 EXC-F",
+    year: "2024",
+    spec: {
+      serviceInterval: "15 hr",
+      dryWeight: "115 kg",
+      wetWeight: "~121 kg",
+      tank: "8.2 L",
+      gears: "6",
+      seatHeight: "963 mm",
+      clearance: "347 mm",
+      engine: "511 cc",
+      power: "~52 hp",
+      torque: "~50 Nm",
+      price: "~£11,400 new",
+    },
+    n: {
+      wetKg: 121,
+      dryKg: 115,
+      tankL: 8.2,
+      seatMm: 963,
+      clearanceMm: 347,
+      cc: 511,
+      hp: 52,
+      nm: 50,
+      priceFrom: 11400,
+      serviceMi: null,
+    },
+    condition: "new",
+    ink: "#FF7A1A",
+    inkAlt: "#FFFFFF",
+    note: "The 450 with another 61 cc and the torque that comes with it, on the same chassis, seat and clearance. Still serviced in engine hours, so the same caveat applies: a race enduro bike with a plate.",
+    platform: EXC_F,
+  },
+  {
     make: "KTM",
     model: "450 EXC-F",
+    year: "2024",
     spec: {
       serviceInterval: "15 hr",
       dryWeight: "107 kg",
@@ -325,14 +375,14 @@ const catalogue: Named[] = [
     ink: "#FF7A1A",
     inkAlt: "#FFFFFF",
     note: "Serviced in engine hours rather than miles, which tells you what it actually is: a race enduro bike with lights. Road legal, but the range and the seat height make anything beyond a trail day hard work.",
-    story:
-      "Europe lets a race enduro bike be homologated for the road, and KTM has been exploiting that for decades. This is not a road bike with knobblies; it is the machine people race on Sunday, with lights and a plate.",
+    platform: EXC_F,
   },
   {
     // Ducati publishes no ground clearance for the EDS; 310 mm is an estimate,
     // hence the tilde. Everything else in that column is a published figure.
     make: "Ducati",
     model: "Desmo450 EDS",
+    year: "2027",
     spec: {
       serviceInterval: "30 hr",
       dryWeight: "~119 kg",
@@ -693,6 +743,7 @@ const catalogue: Named[] = [
   {
     make: "KTM",
     model: "390 Enduro R",
+    year: "2025",
     spec: {
       serviceInterval: "4,650 mi",
       dryWeight: "~159 kg",
@@ -729,6 +780,7 @@ const catalogue: Named[] = [
   {
     make: "KTM",
     model: "390 Adventure R",
+    year: "2025",
     spec: {
       serviceInterval: "4,650 mi",
       dryWeight: "~165 kg",
@@ -765,6 +817,7 @@ const catalogue: Named[] = [
   {
     make: "Rieju",
     model: "Aventura Rally 307",
+    year: "2025",
     spec: {
       serviceInterval: "3,100 mi",
       dryWeight: "137 kg",
@@ -801,6 +854,7 @@ const catalogue: Named[] = [
     // Wet weight from independent measurement (195-197 kg), not CFMoto's claim
     make: "CFMoto",
     model: "450MT",
+    year: "2024",
     spec: {
       serviceInterval: "3,000 mi",
       dryWeight: "175 kg",
@@ -836,6 +890,7 @@ const catalogue: Named[] = [
   {
     make: "Voge",
     model: "300 Rally",
+    year: "2023",
     spec: {
       serviceInterval: "3,700 mi",
       dryWeight: "~150 kg",
@@ -871,6 +926,7 @@ const catalogue: Named[] = [
   {
     make: "Moto Morini",
     model: "Alltrhike 450",
+    year: "2026",
     spec: {
       serviceInterval: "~6,200 mi",
       dryWeight: "170 kg",
@@ -906,6 +962,7 @@ const catalogue: Named[] = [
   {
     make: "AJP",
     model: "PR7",
+    year: "2017",
     spec: {
       serviceInterval: "3,100 mi",
       dryWeight: "140 kg",
@@ -1088,6 +1145,7 @@ const catalogue: Named[] = [
   {
     make: "Yamaha",
     model: "Tenere 700 Rally",
+    year: "2025",
     spec: {
       serviceInterval: "6,000 mi",
       dryWeight: "~198 kg",
@@ -1123,6 +1181,7 @@ const catalogue: Named[] = [
   {
     make: "Yamaha",
     model: "Tenere 700 World Raid",
+    year: "2022",
     spec: {
       serviceInterval: "6,000 mi",
       dryWeight: "~203 kg",
@@ -1158,6 +1217,7 @@ const catalogue: Named[] = [
   {
     make: "Yamaha",
     model: "Tenere 700",
+    year: "2025",
     spec: {
       serviceInterval: "6,000 mi",
       dryWeight: "~196 kg",
@@ -1238,23 +1298,24 @@ const WHEELS_DEFAULT = "21/18";
 const WHEELS: Record<string, string> = {};
 
 const TRAVEL: Record<string, string> = {
-  "honda-crf300-rally": "260 / 260 mm",
-  "honda-crf300l": "206 / 260 mm",
-  "honda-crf450l": "305 / 315 mm",
+  "honda-crf300-rally-2021": "260 / 260 mm",
+  "honda-crf300l-2021": "206 / 260 mm",
+  "honda-crf450l-2019": "305 / 315 mm",
   "husqvarna-701-enduro-2016": "275 / 275 mm",
   "husqvarna-701-enduro-2017": "275 / 275 mm",
   "husqvarna-701-enduro-2020": "275 / 275 mm",
-  "ktm-450-exc-f": "300 / 310 mm",
+  "ktm-450-exc-f-2024": "300 / 310 mm",
+  "ktm-500-exc-f-2024": "300 / 310 mm",
   "ktm-690-enduro-r-2014": "250 / 250 mm",
   "ktm-690-enduro-r-2019": "250 / 250 mm",
   "ktm-690-enduro-r-2021": "250 / 250 mm",
   "ktm-790-adventure-2023": "200 / 200 mm",
   "ktm-890-adventure-r-2023": "240 / 240 mm",
   "ktm-890-adventure-r-rally-2024": "270 / 270 mm",
-  "rieju-aventura-rally-307": "235 / 235 mm",
-  "yamaha-tenere-700": "210 / 200 mm",
-  "yamaha-tenere-700-rally": "230 / 220 mm",
-  "yamaha-tenere-700-world-raid": "230 / 220 mm",
+  "rieju-aventura-rally-307-2025": "235 / 235 mm",
+  "yamaha-tenere-700-2025": "210 / 200 mm",
+  "yamaha-tenere-700-rally-2025": "230 / 220 mm",
+  "yamaha-tenere-700-world-raid-2022": "230 / 220 mm",
 };
 
 export const wheelsOf = (slug: string) => WHEELS[slug] ?? WHEELS_DEFAULT;
