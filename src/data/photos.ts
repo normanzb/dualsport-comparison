@@ -110,6 +110,74 @@ export const photos: Record<string, PhotoSet> = {
     source: "https://www.ktm.com/en-gb/models/travel/ktm-790-adventure.html",
     note: "2025 studio images; the bodywork is unchanged since the 2023 relaunch.",
   },
+  "kove-800x-rally-2023": {
+    views: [{ side: "right", src: "/bikes/kove-800x-rally-2023/right.webp" }],
+    credit: "Kove Moto UK",
+    source: "https://koveuk.com/bikes/800x-rally/",
+  },
+  "kove-800x-touring-2026": {
+    views: [{ side: "right", src: "/bikes/kove-800x-touring-2026/right.webp" }],
+    credit: "Kove Moto UK",
+    source: "https://koveuk.com/bikes/800x-touring/",
+    note: "Shown with the standard three-case luggage set.",
+  },
+  "kove-800x-pro-2023": {
+    views: [{ side: "right", src: "/bikes/kove-800x-pro-2023/right.webp" }],
+    credit: "Kove Moto UK",
+    source: "https://koveuk.com/bikes/800x-pro/",
+  },
+  "bmw-r12g-s-2025": {
+    views: [{ side: "left", src: "/bikes/bmw-r12g-s-2025/left.webp" }],
+    credit: "BMW Motorrad",
+    source: "https://www.bmw-motorrad.co.uk/en/models/heritage/r12gs.html",
+  },
+  "bmw-g450x-2008": {
+    views: [
+      { side: "left", src: "/bikes/bmw-g450x-2008/left.webp" },
+      { side: "right", src: "/bikes/bmw-g450x-2008/right.webp" },
+    ],
+    credit: "BMW Motorrad",
+    source: "https://www.totalmotorcycle.com/photos/2009models/2009-BMW-G450X",
+  },
+  "bmw-f650gs-dakar-2000": {
+    views: [{ side: "left", src: "/bikes/bmw-f650gs-dakar-2000/left.webp" }],
+    credit: "BMW Motorrad",
+    source: "https://www.bennetts.co.uk/bikesocial/reviews/bikes/bmw/f650gs-dakar-used-review",
+  },
+  "bmw-f800gs-2007": {
+    views: [
+      { side: "left", src: "/bikes/bmw-f800gs-2007/left.webp" },
+      { side: "right", src: "/bikes/bmw-f800gs-2007/right.webp" },
+    ],
+    credit: "BMW Motorrad",
+    source: "https://www.press.bmwgroup.com/global/photo/detail/P90224430",
+    note: "Studio images of the facelifted 2016 bike in GS Trophy trim; BMW published none of the 2007 original.",
+  },
+  "bmw-g650gs-2011": {
+    views: [
+      { side: "left", src: "/bikes/bmw-g650gs-2011/left.webp" },
+      { side: "right", src: "/bikes/bmw-g650gs-2011/right.webp" },
+    ],
+    credit: "BMW Motorrad",
+    source: "https://www.press.bmwgroup.com/global/photo/detail/P90098416",
+  },
+  "bmw-g650gs-sertao-2012": {
+    views: [
+      { side: "left", src: "/bikes/bmw-g650gs-sertao-2012/left.webp" },
+      { side: "right", src: "/bikes/bmw-g650gs-sertao-2012/right.webp" },
+    ],
+    credit: "BMW Motorrad",
+    source: "https://www.press.bmwgroup.com/global/photo/detail/P90083472",
+  },
+  "bmw-f900gs-2024": {
+    views: [
+      { side: "left", src: "/bikes/bmw-f900gs-2024/left.webp" },
+      { side: "right", src: "/bikes/bmw-f900gs-2024/right.webp" },
+    ],
+    credit: "BMW Motorrad",
+    source: "https://www.bmw-motorrad.co.uk/en/models/adventure/f900gs.html",
+    note: "Right-side view courtesy of T-Tech Suspension, on a bike wearing an aftermarket silencer.",
+  },
   "moto-morini-alltrhike-450-2026": {
     views: [
       { side: "left", src: "/bikes/moto-morini-alltrhike-450-2026/left.webp" },
