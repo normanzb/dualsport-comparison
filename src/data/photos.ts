@@ -226,6 +226,22 @@ export const photos: Record<string, PhotoSet> = {
     credit: "Kove Moto UK",
     source: "https://koveuk.com/bikes/450-rally/",
   },
+  "husqvarna-norden-901-2022": {
+    views: [
+      { side: "right", src: "/bikes/husqvarna-norden-901-2022/right.webp" },
+      { side: "left", src: "/bikes/husqvarna-norden-901-2022/left.webp" },
+    ],
+    credit: "Husqvarna Motorcycles",
+    source: "https://www.husqvarna-motorcycles.com/en-gb/models/travel/norden-901-2025.html",
+    note: "2024 and 2025 studio images; the Norden has not been redesigned since 2022.",
+  },
+  "husqvarna-norden-901-expedition-2023": {
+    views: [{ side: "right", src: "/bikes/husqvarna-norden-901-expedition-2023/right.webp" }],
+    credit: "Husqvarna Motorcycles",
+    source:
+      "https://www.husqvarna-motorcycles.com/en-gb/models/travel/norden-901-expedition-2025.html",
+    note: "2025 studio image, panniers fitted as they are sold.",
+  },
   "aprilia-tuareg-660-2022": {
     views: [{ side: "right", src: "/bikes/aprilia-tuareg-660-2022/right.webp" }],
     credit: "Aprilia",

@@ -2,7 +2,7 @@
  * Brand marks normalised by cap height, not by bounding box.
  *
  * Every SVG is cropped to its wordmark, so sizing them all to one height makes
- * eight different marks read at the same optical weight. Widths then differ
+ * ten different marks read at the same optical weight. Widths then differ
  * honestly (KTM is three letters, Honda is five), which is why callers give the
  * logo a fixed slot to sit in rather than sizing to content.
  *
@@ -14,8 +14,11 @@ import { asset } from "@/lib/base-path";
 type Mark = { file: string; aspect: number; optical?: number };
 
 const MARKS: Record<string, Mark> = {
+  // lowercase with a descender, so the box runs well past the cap line
+  Aprilia: { file: "/logos/aprilia.svg", aspect: 2.712, optical: 1.3 },
   CCM: { file: "/logos/ccm.svg", aspect: 6.244 },
   Ducati: { file: "/logos/ducati.svg", aspect: 5.411 },
+  Fantic: { file: "/logos/fantic.svg", aspect: 7.058 },
   Honda: { file: "/logos/honda.svg", aspect: 8.228 },
   Husqvarna: { file: "/logos/husqvarna.svg", aspect: 5.475, optical: 1.24 },
   KTM: { file: "/logos/ktm.svg", aspect: 3.203 },

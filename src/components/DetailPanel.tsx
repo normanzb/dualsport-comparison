@@ -123,11 +123,6 @@ function Stack({ bike }: { bike: Bike }) {
             </button>
           );
         })}
-        {views.length === 1 && (
-          <span className="text-[10px] tracking-[0.14em] text-ink-faint uppercase">
-            One side published
-          </span>
-        )}
       </div>
 
       {set && (

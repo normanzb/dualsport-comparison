@@ -60,6 +60,8 @@ const MPG_US: Record<string, number> = {
   "yamaha-tenere-700-world-raid-2022": 52,
   // Fuelly LC8c 790/890 adventure twins: high 40s
   "ktm-790-adventure-2023": 48,
+  "husqvarna-norden-901-2022": 46,
+  "husqvarna-norden-901-expedition-2023": 46,
   "ktm-890-adventure-r-2023": 46,
   "ktm-890-adventure-r-rally-2024": 46,
   // 293 single with a 21 L tank; makers claim 300+ miles, which lines up
@@ -139,6 +141,8 @@ const WIND: Record<string, number> = {
   // 3: wide enough to lift the blast off your chest
   "cfmoto-450mt-2024": 3,
   "ktm-390-adventure-r-2025": 3,
+  "husqvarna-norden-901-2022": 3,
+  "husqvarna-norden-901-expedition-2023": 3,
   "ktm-790-adventure-2023": 3,
   "moto-morini-alltrhike-450-2026": 3,
   "yamaha-tenere-700-world-raid-2022": 3,

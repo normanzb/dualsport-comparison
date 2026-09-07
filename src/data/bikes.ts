@@ -76,6 +76,12 @@ const LC4_690 = [
   "Twin balancer shafts are what make a single this big tolerable on the road. The clutch is hydraulic, and early slave cylinders were a known weak point; later revisions sorted it, so on a used one it is worth asking what has already been replaced.",
 ] as const;
 
+/** Husqvarna's take on KTM's 889 twin, in its two states of tune for travel. */
+const NORDEN_901 = [
+  "The 889 cc LC8c twin is the same unit as the KTM 890 Adventure, in a chassis Husqvarna styled and damped for the road rather than the trail. Pierer builds all three in Mattighofen.",
+  "The Expedition is not a trim level: it takes the standard bike's WP Apex units out for longer-travel Xplor, adds 17 mm of clearance and a taller seat, and carries the luggage and heated kit as standard.",
+] as const;
+
 /** KTM's road-legal race enduros: same chassis, two displacements. */
 const EXC_F = [
   "Europe lets a race enduro bike be homologated for the road, and KTM has been exploiting that for decades. This is not a road bike with knobblies; it is the machine people race on Sunday, with lights and a plate.",
@@ -851,6 +857,76 @@ const catalogue: Named[] = [
       "Rieju has built bikes in Figueres since the 1940s, and when GasGas was sold to KTM's parent it took over the off-road production line and much of the staff that came with it. That is the reason a small Spanish firm can price a 21-litre rally bike like this.",
   },
   {
+    make: "Husqvarna",
+    model: "Norden 901",
+    year: "2022",
+    spec: {
+      serviceInterval: "9,320 mi",
+      dryWeight: "204 kg",
+      wetWeight: "~218 kg",
+      tank: "19 L",
+      gears: "6",
+      seatHeight: "854 mm",
+      clearance: "252 mm",
+      engine: "889 cc",
+      power: "103.6 hp",
+      torque: "100 Nm",
+      price: "~£12,899 new",
+    },
+    n: {
+      wetKg: 218,
+      dryKg: 204,
+      tankL: 19,
+      seatMm: 854,
+      clearanceMm: 252,
+      cc: 889,
+      hp: 103.6,
+      nm: 100,
+      priceFrom: 12899,
+      serviceMi: 9320,
+    },
+    condition: "new",
+    ink: "#6FA8FF",
+    inkAlt: "#F7D417",
+    note: "The 890 twin in a road-biased chassis, with the lowest seat here that still runs a 21-inch front. Nineteen litres and a 252 mm clearance make it the touring end of this list, not the trail end.",
+    platform: NORDEN_901,
+  },
+  {
+    make: "Husqvarna",
+    model: "Norden 901 Expedition",
+    year: "2023",
+    spec: {
+      serviceInterval: "9,320 mi",
+      dryWeight: "215 kg",
+      wetWeight: "~229 kg",
+      tank: "19 L",
+      gears: "6",
+      seatHeight: "875 mm",
+      clearance: "269 mm",
+      engine: "889 cc",
+      power: "103.6 hp",
+      torque: "100 Nm",
+      price: "~£14,599 new",
+    },
+    n: {
+      wetKg: 229,
+      dryKg: 215,
+      tankL: 19,
+      seatMm: 875,
+      clearanceMm: 269,
+      cc: 889,
+      hp: 103.6,
+      nm: 100,
+      priceFrom: 14599,
+      serviceMi: 9320,
+    },
+    condition: "new",
+    ink: "#6FA8FF",
+    inkAlt: "#F7D417",
+    note: "Longer travel, 17 mm more clearance and the luggage already fitted, for eleven kilos and £1,700 over the standard bike. The heaviest thing here, which is the price of carrying everything.",
+    platform: NORDEN_901,
+  },
+  {
     make: "Aprilia",
     model: "Tuareg 660",
     year: "2022",
@@ -1423,6 +1499,8 @@ const TRAVEL: Record<string, string> = {
   "yamaha-tenere-700-rally-2025": "230 / 220 mm",
   "yamaha-tenere-700-world-raid-2022": "230 / 220 mm",
   "aprilia-tuareg-660-2022": "240 / 240 mm",
+  "husqvarna-norden-901-2022": "220 / 215 mm",
+  "husqvarna-norden-901-expedition-2023": "240 / 240 mm",
 };
 
 export const wheelsOf = (slug: string) => WHEELS[slug] ?? WHEELS_DEFAULT;
