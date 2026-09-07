@@ -1687,7 +1687,7 @@ const catalogue: Named[] = [
   },
   {
     make: "Yamaha",
-    model: "Tenere 700",
+    model: "Ténéré 700",
     year: "2025",
     spec: {
       serviceInterval: "6,000 mi",
@@ -1723,7 +1723,7 @@ const catalogue: Named[] = [
   },
   {
     make: "Yamaha",
-    model: "Tenere 700 Rally",
+    model: "Ténéré 700 Rally",
     year: "2025",
     spec: {
       serviceInterval: "6,000 mi",
@@ -1759,7 +1759,7 @@ const catalogue: Named[] = [
   },
   {
     make: "Yamaha",
-    model: "Tenere 700 World Raid",
+    model: "Ténéré 700 World Raid",
     year: "2022",
     spec: {
       serviceInterval: "6,000 mi",
