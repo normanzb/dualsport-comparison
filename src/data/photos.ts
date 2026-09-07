@@ -226,6 +226,24 @@ export const photos: Record<string, PhotoSet> = {
     credit: "Kove Moto UK",
     source: "https://koveuk.com/bikes/450-rally/",
   },
+  "aprilia-tuareg-660-2022": {
+    views: [{ side: "right", src: "/bikes/aprilia-tuareg-660-2022/right.webp" }],
+    credit: "Aprilia",
+    source: "https://www.aprilia.com/gb_EN/models/tuareg/tuareg-660-parallel-twin-4-stroke-2025/",
+    note: "2025 studio image; the bodywork was restyled that year, so the 2022 looks slightly different.",
+  },
+  "aprilia-rx-125-2018": {
+    views: [{ side: "right", src: "/bikes/aprilia-rx-125-2018/right.webp" }],
+    credit: "Aprilia",
+    source: "https://www.aprilia.com/gb_EN/models/rx-125/rx-125-125-4s4v-2025/",
+    note: "2025 studio image; the graphics have changed since 2018, the bike has not.",
+  },
+  "fantic-xef-250-trail-2024": {
+    views: [{ side: "right", src: "/bikes/fantic-xef-250-trail-2024/right.webp" }],
+    credit: "Fantic Motor",
+    source: "https://www.fantic.com/ii-en/moto/enduro/xef-250-trail_m28g3",
+    note: "Fantic publish this at 950 px, so it upscales more than the rest of the set.",
+  },
   "cfmoto-450mt-2024": {
     views: [{ side: "right", src: "/bikes/cfmoto-450mt-2024/right.webp" }],
     credit: "CFMOTO UK",

@@ -24,6 +24,9 @@ const MPG_US: Record<string, number> = {
   "honda-crf300l-2021": 70,
   // Fuelly WR125 (2010), 2 vehicles: 70.96. Yamaha claims 94.
   "yamaha-wr125r-2026": 71,
+  "aprilia-rx-125-2018": 80,
+  "fantic-xef-250-trail-2024": 65,
+  "aprilia-tuareg-660-2022": 52,
   // No data for the 2025 DR-Z4S yet; DR-Z400S predecessor runs ~49.7
   "suzuki-dr-z4s-2025": 50,
   // WMTC 6.2 L/100 km
@@ -119,6 +122,9 @@ const WIND: Record<string, number> = {
   "ktm-690-enduro-r-2026": 1,
   "suzuki-dr-z4s-2025": 1,
   "yamaha-wr125r-2026": 1,
+  "aprilia-rx-125-2018": 1,
+  "fantic-xef-250-trail-2024": 0,
+  "aprilia-tuareg-660-2022": 2,
   // 2: a rally tower or half fairing, narrow
   "ajp-pr7-2017": 2,
   "ccm-gp450-2014": 2,
@@ -205,8 +211,9 @@ export const mpgFor = (b: Bike) => MPG_US[b.slug] ?? 45;
  */
 export const RANGE_FULL_MARKS = 500;
 
-const span = (pick: (b: Bike) => number) => {
-  const vs = bikes.map(pick);
+/** Bikes with no published figure are left out: a null must not drag the floor to zero. */
+const span = (pick: (b: Bike) => number | null) => {
+  const vs = bikes.map(pick).filter((v): v is number => v !== null);
   return { lo: Math.min(...vs), hi: Math.max(...vs) };
 };
 const unit = (v: number, r: { lo: number; hi: number }) =>
@@ -330,7 +337,7 @@ const LIGHT_ZERO = 100; // kg dry: past here weight counts against the bike
 const LIGHT_SPAN = 85;
 const LIGHT_MIN = -1.5;
 const SEAT = span((b) => b.n.seatMm);
-const CLEAR = span((b) => b.n.clearanceMm ?? 0);
+const CLEAR = span((b) => b.n.clearanceMm);
 
 /**
  * Weights for the offroad index. Mass leads, clearance follows, the rest temper.
@@ -361,7 +368,8 @@ const W_OFFROAD = W_LIGHT + W_CLEAR + W_COG + W_SEAT;
  */
 export function offroad(b: Bike): number {
   const light = Math.min(1, Math.max(LIGHT_MIN, (LIGHT_ZERO - b.n.dryKg) / LIGHT_SPAN));
-  const clear = unit(b.n.clearanceMm ?? 0, CLEAR);
+  // unpublished clearance scores as the worst on the list, not as zero millimetres
+  const clear = unit(b.n.clearanceMm ?? CLEAR.lo, CLEAR);
   const low = 1 - unit(b.n.seatMm, SEAT);
   const cog = cogScore(b.slug);
   const raw =
