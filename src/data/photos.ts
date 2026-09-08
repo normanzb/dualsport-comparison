@@ -322,6 +322,21 @@ export const photos: Record<string, PhotoSet> = {
     source: "https://www.aprilia.com/gb_EN/models/rx-125/rx-125-125-4s4v-2025/",
     note: "2025 studio image; the graphics have changed since 2018, the bike has not.",
   },
+  "fantic-xef-450-rally-2023": {
+    views: [
+      { side: "right", src: "/bikes/fantic-xef-450-rally-2023/right.webp" },
+      { side: "left", src: "/bikes/fantic-xef-450-rally-2023/left.webp" },
+    ],
+    credit: "Fantic Motor",
+    source: "https://www.fantic.com/ii-en/moto/rally/xef-rally-2025_il672",
+    note: "Fantic publish these at 950 px, so they upscale more than the rest of the set.",
+  },
+  "fantic-xef-450-rally-factory-2023": {
+    views: [{ side: "right", src: "/bikes/fantic-xef-450-rally-factory-2023/right.webp" }],
+    credit: "Fantic Motor",
+    source: "https://www.fantic.com/ii-en/moto/rally/xef-rally-factory_enb0d",
+    note: "Fantic publish this at 950 px, and only from the one side.",
+  },
   "fantic-xef-250-trail-2024": {
     views: [{ side: "right", src: "/bikes/fantic-xef-250-trail-2024/right.webp" }],
     credit: "Fantic Motor",

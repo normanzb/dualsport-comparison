@@ -93,6 +93,12 @@ const KTM_390 = [
   "Both 390s run the 399 cc single from the 390 Duke generation, built in India alongside it, which is how a bike this specified reaches A2 money.",
 ] as const;
 
+/** Fantic's Dakar replica, standard and Factory, on Yamaha's WR450F engine. */
+const FANTIC_XEF_RALLY = [
+  "Yamaha's WR450F single in an aluminium perimeter frame, hand-assembled at the Minarelli works Fantic owns in Bologna. Announced in November 2022 and in customers' hands from March 2023; the Factory is a numbered run of fifty.",
+  "Two figures here are softer than the rest of the table. Neither Fantic nor Yamaha publishes an output for this engine, so power and torque are estimates: a road test put it near 55 hp, which squares with an independent dyno of the donor Yamaha, while the 19 hp and 21.5 PS numbers in circulation are licensing declarations. Fantic's sub-140 kg claim is the rally convention of an empty tank, so the wet figures add the thirty litres back at 22 kg.",
+] as const;
+
 /** One 652 cc Rotax single, under three names and two factories. */
 const ROTAX_652 = [
   "BMW sold this engine as the F650GS from 2000, renamed it G650GS in 2008, and moved assembly from Aprilia at Noale to Loncin in China in 2011. The single outlived both arrangements and only stopped in 2017.",
@@ -102,7 +108,7 @@ const ROTAX_652 = [
 /** Kove's 799 twin, sold in Britain as three bikes with one engine and frame. */
 const KOVE_800X = [
   "Kove’s own 799 cc twin, with a 75-degree crank rather than the 270 everyone else uses, shown at EICMA 2023 and imported into Britain in three states of dress. Engine, frame and 21/18 wheels are common to all three; tank, suspension, screen, seat and luggage are what separate them.",
-  "The published weights are worth a pinch of salt across the range. MCN put a Pro on scales at 196 kg against Kove’s claimed 185, and there is no reason the other two are measured any differently.",
+  "Weights here come from type approval and from independent weighings, not from the importer, which quotes 185 kg for a Pro that Kove itself type-approves at 190 and that four sets of scales put between 191 and 196 kg. The Rally's 176 kg kerb claim fits nothing: its 165 kg dry figure is corroborated, and two owners weighed one at 182 and 184 kg.",
 ] as const;
 
 const catalogue: Named[] = [
@@ -669,6 +675,84 @@ const catalogue: Named[] = [
     note: "The road-legal detune of Fantic's 250 enduro racer: same chassis and Arrow pipe, restricted to 21 hp for an A2 licence. Serviced every 3,000 miles, which is a racer's schedule on a bike sold as a trail tool.",
   },
   {
+    make: "Fantic",
+    model: "XEF 450 Rally",
+    year: "2023",
+    spec: {
+      serviceInterval: "15 hr",
+      dryWeight: "~140 kg",
+      wetWeight: "~162 kg",
+      tank: "30 L",
+      gears: "5",
+      seatHeight: "955 mm",
+      clearance: "n/a",
+      engine: "450 cc",
+      power: "~55 hp",
+      torque: "~47 Nm",
+      price: "£13,999 new",
+    },
+    n: {
+      wetKg: 162,
+      dryKg: 140,
+      tankL: 30,
+      seatMm: 955,
+      priceFrom: 13999,
+      serviceMi: null,
+      clearanceMm: null,
+      cc: 450,
+      hp: 55,
+      nm: 47,
+    },
+    driveSide: "left",
+    exhaustSide: "right",
+    condition: "new",
+    ink: "#E8112D",
+    inkAlt: "#F2F2F2",
+    note: "Thirty litres split between a side tank and one under the seat, 310 mm of fork travel and a 955 mm seat: this is a road-legal Dakar bike, not an adventure bike, and a service schedule counted in engine hours is the tell. Nothing else here carries this much fuel this far off the ground.",
+    story:
+      "The roadbook tower, the navigation mounts and the twin-tank layout are the point of it; the KYB units are the same ones under the enduro XEFs, at longer travel. Fifteen hours between top-end checks is a competition schedule, so budget accordingly.",
+    platform: FANTIC_XEF_RALLY,
+  },
+  {
+    make: "Fantic",
+    model: "XEF 450 Rally Factory",
+    year: "2023",
+    spec: {
+      serviceInterval: "15 hr",
+      dryWeight: "138.5 kg",
+      wetWeight: "~161 kg",
+      tank: "30 L",
+      gears: "5",
+      seatHeight: "955 mm",
+      clearance: "n/a",
+      engine: "450 cc",
+      power: "~55 hp",
+      torque: "~47 Nm",
+      price: "~£20,900 new",
+    },
+    n: {
+      wetKg: 161,
+      dryKg: 138.5,
+      tankL: 30,
+      seatMm: 955,
+      priceFrom: 20900,
+      serviceMi: null,
+      clearanceMm: null,
+      cc: 450,
+      hp: 55,
+      nm: 47,
+    },
+    driveSide: "left",
+    exhaustSide: "right",
+    condition: "new",
+    ink: "#E8112D",
+    inkAlt: "#F2F2F2",
+    note: "Seven thousand pounds buys a numbered tag, an Arrow titanium system worth 1.5 kg, billet triple clamps and hubs, a front oil cooler and a roadbook structure built for a professional tripmaster. Nobody claims it makes more power. Whether that is worth half again the price of the standard bike depends entirely on whether you are entering something.",
+    story:
+      "Fifty units, each numbered, sold with a jersey and a 144-litre tool trolley. Fantic quote the same sub-140 kg as the standard bike; the Arrow system accounts for the 1.5 kg that separates them on paper.",
+    platform: FANTIC_XEF_RALLY,
+  },
+  {
     make: "Honda",
     model: "CRF300 Rally",
     year: "2021",
@@ -1032,8 +1116,8 @@ const catalogue: Named[] = [
     year: "2023",
     spec: {
       serviceInterval: "5,000 mi",
-      dryWeight: "~170 kg",
-      wetWeight: "185 kg",
+      dryWeight: "171 kg",
+      wetWeight: "190 kg",
       tank: "20 L",
       gears: "6",
       seatHeight: "875 mm",
@@ -1044,8 +1128,8 @@ const catalogue: Named[] = [
       price: "£9,699 new",
     },
     n: {
-      wetKg: 185,
-      dryKg: 170,
+      wetKg: 190,
+      dryKg: 171,
       tankL: 20,
       seatMm: 875,
       clearanceMm: 275,
@@ -1062,7 +1146,7 @@ const catalogue: Named[] = [
     inkAlt: "#F2F2F2",
     note: "The middle one, and the one worth arguing about: 95 hp, 275 mm of clearance and 240 mm of travel at both ends for less than a Ténéré 700, and with more of all three. Buy on the numbers, then go and find out what the dealer network is like.",
     story:
-      "Fully adjustable KYB at both ends, Pirelli tubeless tyres, crash bars, a bashplate and a steering damper, all standard. Nine kilos heavier than the Rally and forty lighter than the Touring.",
+      "Fully adjustable KYB at both ends, Pirelli tubeless tyres, crash bars, a bashplate and a steering damper, all standard. Six kilos heavier than the Rally and twenty-five lighter than the Touring.",
     platform: KOVE_800X,
   },
   {
@@ -1071,8 +1155,8 @@ const catalogue: Named[] = [
     year: "2023",
     spec: {
       serviceInterval: "5,000 mi",
-      dryWeight: "~161 kg",
-      wetWeight: "176 kg",
+      dryWeight: "165 kg",
+      wetWeight: "~184 kg",
       tank: "20 L",
       gears: "6",
       seatHeight: "890 mm",
@@ -1083,8 +1167,8 @@ const catalogue: Named[] = [
       price: "£9,499 new",
     },
     n: {
-      wetKg: 176,
-      dryKg: 161,
+      wetKg: 184,
+      dryKg: 165,
       tankL: 20,
       seatMm: 890,
       clearanceMm: 293,
@@ -1099,7 +1183,7 @@ const catalogue: Named[] = [
     condition: "new",
     ink: "#1EB8AE",
     inkAlt: "#F2F2F2",
-    note: "Nine kilos under the Pro, 18 mm more clearance, 30 mm more fork travel and two hundred pounds cheaper. Ninety-five horsepower at 176 kg is a better ratio than anything here that is not a race enduro, and the 890 mm seat is what it costs.",
+    note: "Six kilos under the Pro, 18 mm more clearance, 30 mm more fork travel and two hundred pounds cheaper. Ninety-five horsepower at 184 kg is the best power-to-weight on the list bar the HP2 Enduro, and the 890 mm seat is what it costs.",
     story:
       "YUAN suspension rather than the Pro’s KYB, a narrower 140-section rear on knobblies, and none of the touring furniture. The version that spends its weight budget on travel instead of luggage.",
     platform: KOVE_800X,
@@ -1138,7 +1222,7 @@ const catalogue: Named[] = [
     condition: "new",
     ink: "#1EB8AE",
     inkAlt: "#F2F2F2",
-    note: "Two litres more tank than the Pro and three alloy cases Kove counts inside the 215 kg, which is 39 kg over the Rally on the same engine and frame. As a way to buy panniers it is cheap. As a way to ride a 21-inch front off road it is not.",
+    note: "Two litres more tank than the Pro and three alloy cases Kove counts inside the 215 kg, which is 31 kg over the Rally on the same engine and frame. Nobody has put one on scales, so alone in the range that figure stands unchecked. As a way to buy panniers it is cheap. As a way to ride a 21-inch front off road it is not.",
     story:
       "The 800X GT in other markets, shown at EICMA 2025. Fly-by-wire throttle, quickshifter and heated controls arrive with the 2026 model year, and the top box and panniers are standard fitment rather than an accessory line.",
     platform: KOVE_800X,
@@ -1908,6 +1992,8 @@ const TRAVEL: Record<string, string> = {
   "aprilia-tuareg-660-2022": "240 / 240 mm",
   "husqvarna-norden-901-2022": "220 / 215 mm",
   "husqvarna-norden-901-expedition-2023": "240 / 240 mm",
+  "fantic-xef-450-rally-2023": "310 / 300 mm",
+  "fantic-xef-450-rally-factory-2023": "310 / 300 mm",
   "bmw-r12g-s-2025": "210 / 200 mm",
   "bmw-f900gs-2024": "230 / 215 mm",
   "bmw-g450x-2008": "300 / 320 mm",
