@@ -89,6 +89,22 @@ export const photos: Record<string, PhotoSet> = {
     source:
       "https://www.honda.co.uk/content/dam/central/motorcycles/colour-picker/adventure/crf300l/crf300l_2025/r-292r_extreme_red/25YM_CRF300L_EXTREME-RED_R-292R_RHS.png",
   },
+  "yamaha-xt600z-tenere-1983": {
+    views: [{ side: "right", src: "/bikes/yamaha-xt600z-tenere-1983/right.webp" }],
+    credit: "Yamaha Motor",
+    source:
+      "https://www.yamaha-motor.eu/gb/en/about-us/our-history/iconic-eu-products/1980/1983-xt600-tenere/",
+    note: "The only studio image Yamaha still publish of the 34L, and it is a three-quarter rather than the side view the rest of the set uses.",
+  },
+  "yamaha-xt660z-tenere-2008": {
+    views: [
+      { side: "right", src: "/bikes/yamaha-xt660z-tenere-2008/right.webp" },
+      { side: "left", src: "/bikes/yamaha-xt660z-tenere-2008/left.webp" },
+    ],
+    credit: "Yamaha Motor",
+    source: "https://www.yamaha-motor.eu/",
+    note: "2015 studio images of the ABS model; the bodywork is unchanged from the 2008 original. Yamaha published them at 950 px, so they upscale more than the rest of the set.",
+  },
   "yamaha-tenere-700-2025": {
     views: [
       { side: "right", src: "/bikes/yamaha-tenere-700-2025/right.webp" },
