@@ -283,12 +283,13 @@ export function performance(b: Bike): number {
  * to feed the offroad index, because a bike that keeps its weight low is far
  * easier to handle off the tarmac than its kerb weight alone suggests.
  *
- * 1 is the norm. The LC4 690/701 sit at 2 for their underseat tank. The boxer
- * HP2 is 3: two cylinders lying flat put its mass low, though it is still a
- * 196 kg bike.
+ * 1 is the norm. The LC4 690/701 sit at 2 for their underseat tank. The two
+ * boxers are 3: cylinders lying flat at axle height put their mass low, though
+ * both are still heavy bikes.
  */
 const LOW_COG: Record<string, number> = {
   "bmw-hp2-enduro-2005": 3,
+  "bmw-r12g-s-2025": 3,
   "husqvarna-701-enduro-2016": 2,
   "husqvarna-701-enduro-2017": 2,
   "husqvarna-701-enduro-2020": 2,

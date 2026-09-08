@@ -73,7 +73,7 @@ type Named = {
 const LC4_690 = [
   "KTM's parent bought Husqvarna from BMW in 2013, which is why the 690 and the 701 are the same motorcycle in different plastics.",
   "The tank is the clever part: a polymer moulding sitting low and behind the rider, under the seat rather than over the engine, which doubles as a load-bearing section of the rear subframe. It puts the fuel mass where it helps and deletes a chunk of steel tubing at the same time.",
-  "Twin balancer shafts are what make a single this big tolerable on the road. The clutch is hydraulic, and early slave cylinders were a known weak point; later revisions sorted it, so on a used one it is worth asking what has already been replaced.",
+  "Twin balancer shafts are what make a single this big tolerable on the road. The clutch is hydraulic, and the slave cylinder was a known weak point on the earlier bikes; KTM revised it years ago, so it is a question to ask about a used one and not about anything current.",
 ] as const;
 
 /** Husqvarna's take on KTM's 889 twin, in its two states of tune for travel. */
