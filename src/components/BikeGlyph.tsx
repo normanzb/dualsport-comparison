@@ -3,7 +3,7 @@ export function BikeGlyph({
   side,
   className,
 }: {
-  side: "left" | "right" | "front";
+  side: "left" | "right" | "front" | "rear";
   className?: string;
 }) {
   if (side === "front") {
@@ -20,6 +20,25 @@ export function BikeGlyph({
           <path d="M24 9 L20 15 H28 Z" />
           <path d="M24 15 V24" />
           <ellipse cx={24} cy={24} rx={3.5} ry={3.5} />
+        </g>
+      </svg>
+    );
+  }
+  if (side === "rear") {
+    // seen from behind: tail light and number plate over the rear tyre, no bars
+    return (
+      <svg viewBox="0 0 48 28" className={className} aria-hidden focusable="false">
+        <g
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M19 6 H29" />
+          <path d="M20 10 H28" />
+          <path d="M24 10 V17" />
+          <rect x={20} y={17} width={8} height={8} rx={2} />
         </g>
       </svg>
     );

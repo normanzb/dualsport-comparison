@@ -1,4 +1,4 @@
-export type Side = "left" | "right" | "front";
+export type Side = "left" | "right" | "front" | "rear";
 export type View = { side: Side; src: string };
 export type PhotoSet = {
   views: View[];
@@ -19,6 +19,8 @@ export const photos: Record<string, PhotoSet> = {
     views: [
       { side: "left", src: "/bikes/ktm-690-rally-2027/left.webp" },
       { side: "right", src: "/bikes/ktm-690-rally-2027/right.webp" },
+      { side: "front", src: "/bikes/ktm-690-rally-2027/front.webp" },
+      { side: "rear", src: "/bikes/ktm-690-rally-2027/rear.webp" },
     ],
     credit: "KTM Sportmotorcycle",
     source: "https://www.ktm.com/en-gb/models/adventure/2027-ktm-690-rally.html",
@@ -395,7 +397,7 @@ export const photos: Record<string, PhotoSet> = {
  * Sorted once, not per call: the panel holds the chosen side in state, and a
  * fresh array on every render gave it a new set of views to compare against.
  */
-const SIDE_ORDER: Side[] = ["right", "left", "front"];
+const SIDE_ORDER: Side[] = ["right", "left", "front", "rear"];
 
 const ordered: Record<string, PhotoSet> = Object.fromEntries(
   Object.entries(photos).map(([slug, set]) => [

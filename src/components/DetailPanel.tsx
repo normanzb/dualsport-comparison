@@ -21,8 +21,9 @@ import { asset } from "@/lib/base-path";
  * left, and a shaft-drive boxer claims neither.
  */
 function sideLabel(bike: Bike, side: Side) {
-  // a head-on view has no side to attribute the drive or the exhaust to
+  // an end-on view has no side to attribute the drive or the exhaust to
   if (side === "front") return "Front";
+  if (side === "rear") return "Rear";
   const name = side === "left" ? "Left" : "Right";
   const on = [
     (bike.driveSide ?? "left") === side && "drive",
@@ -80,7 +81,7 @@ function Stack({ bike }: { bike: Bike }) {
           <Image
             key={v.side}
             src={asset(v.src)}
-            alt={`${bike.make} ${bike.model}${bike.year ? ` ${bike.year}` : ""}, ${v.side} side`}
+            alt={`${bike.make} ${bike.model}${bike.year ? ` ${bike.year}` : ""}, ${v.side} view`}
             fill
             priority={v.side === views[0].side}
             sizes="(max-width: 1024px) 92vw, 52vw"
@@ -100,7 +101,7 @@ function Stack({ bike }: { bike: Bike }) {
               type="button"
               onClick={() => setSide(v.side)}
               aria-pressed={on}
-              title={`${v.side === "left" ? "Left" : "Right"} side`}
+              title={`${v.side[0].toUpperCase()}${v.side.slice(1)} view`}
               className="group flex items-center gap-2 border px-3 py-2 transition-colors"
               style={{
                 borderColor: on ? "var(--livery)" : "var(--color-hair)",
