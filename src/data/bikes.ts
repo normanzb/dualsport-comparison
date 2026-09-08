@@ -1518,6 +1518,47 @@ const catalogue: Named[] = [
     platform: LC4_690,
   },
   {
+    // KTM's own page shows no rear travel figure and its marketing copy still
+    // quotes the pre-2026 910 mm seat; the spec table's 935 mm is the current one
+    make: "KTM",
+    model: "690 Rally",
+    year: "2027",
+    spec: {
+      serviceInterval: "9,320 mi",
+      dryWeight: "161.5 kg",
+      wetWeight: "~176 kg",
+      tank: "20 L",
+      gears: "6",
+      seatHeight: "935 mm",
+      clearance: "265 mm",
+      engine: "693 cc",
+      power: "79 hp",
+      torque: "73 Nm",
+      price: "~£13,500 new",
+    },
+    n: {
+      wetKg: 176,
+      dryKg: 161.5,
+      tankL: 20,
+      seatMm: 935,
+      priceFrom: 13500,
+      serviceMi: 9320,
+      clearanceMm: 265,
+      cc: 693,
+      hp: 79,
+      nm: 73,
+    },
+    driveSide: "left",
+    exhaustSide: "left",
+    condition: "new",
+    ink: "#FF6600",
+    inkAlt: "#F2F2F2",
+    note: "The 690 Enduro R chassis with seven more horsepower and seven more litres, split between two front tanks and the one under the seat. Twenty litres behind a 79 hp single is the longest range of any big single here, and 161.5 kg without fuel is thirty under the twins that match it for tank size.",
+    story:
+      "A rally tower with an integrated screen, slim bodywork meant to be ridden standing, a dedicated RALLY ride mode, and WP XPLOR at both ends with 265 mm at the front. KTM have not published a UK price or a rear travel figure yet.",
+    platform: LC4_690,
+  },
+  {
     make: "KTM",
     model: "790 Adventure",
     year: "2023",
@@ -1914,6 +1955,45 @@ const catalogue: Named[] = [
     story:
       "The original WR125R ran from 2009 until Euro 4 saw it off in 2016, and Yamaha then left the class alone for the best part of a decade. This is the 2026 revival of the name, not the old bike: the row and the photographs are the new one.",
   },
+  {
+    // Yamaha never published a ground clearance for the XT660Z
+    make: "Yamaha",
+    model: "XT660Z Ténéré",
+    year: "2008",
+    spec: {
+      serviceInterval: "6,000 mi",
+      dryWeight: "183 kg",
+      wetWeight: "206 kg",
+      tank: "23 L",
+      gears: "5",
+      seatHeight: "895 mm",
+      clearance: "n/a",
+      engine: "660 cc",
+      power: "47 hp",
+      torque: "58 Nm",
+      price: "~£3,500 used",
+    },
+    n: {
+      wetKg: 206,
+      dryKg: 183,
+      tankL: 23,
+      seatMm: 895,
+      priceFrom: 3500,
+      serviceMi: 6000,
+      clearanceMm: null,
+      cc: 660,
+      hp: 47,
+      nm: 58,
+    },
+    driveSide: "left",
+    exhaustSide: "right",
+    condition: "used",
+    ink: "#4E8CFF",
+    inkAlt: "#F2F2F2",
+    note: "Two hundred and six kilos makes it the heaviest single here, and nothing bigger than a 450 has a worse power-to-weight. What the 47 hp buys is 23 litres and a reputation for arriving; the 17-inch rear and 200 mm of rear travel say Yamaha expected most of those litres to be spent on tarmac.",
+    story:
+      "The Minarelli-built 660 single that ran from 2008 to 2016 and was replaced by the Ténéré 700, which is 14 kg lighter and 25 hp stronger for a reason. Fuel injection cured the carburetted XTZ's worst habits; what is left to check on a used one is the fuelling at low revs and the state of the loom and connectors.",
+  },
 ];
 
 const kebab = (text: string) =>
@@ -1968,6 +2048,7 @@ const WHEELS: Record<string, string> = {
   "bmw-g650gs-sertao-2012": "21/17",
   "bmw-g650gs-2011": "19/17",
   "bmw-r12g-s-2025": "21/17",
+  "yamaha-xt660z-tenere-2008": "21/17",
 };
 
 const TRAVEL: Record<string, string> = {
@@ -1989,6 +2070,7 @@ const TRAVEL: Record<string, string> = {
   "yamaha-tenere-700-2025": "210 / 200 mm",
   "yamaha-tenere-700-rally-2025": "230 / 220 mm",
   "yamaha-tenere-700-world-raid-2022": "230 / 220 mm",
+  "yamaha-xt660z-tenere-2008": "210 / 200 mm",
   "aprilia-tuareg-660-2022": "240 / 240 mm",
   "husqvarna-norden-901-2022": "220 / 215 mm",
   "husqvarna-norden-901-expedition-2023": "240 / 240 mm",

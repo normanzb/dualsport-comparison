@@ -15,6 +15,15 @@ export type PhotoSet = {
  * right is the exhaust side.
  */
 export const photos: Record<string, PhotoSet> = {
+  "ktm-690-rally-2027": {
+    views: [
+      { side: "left", src: "/bikes/ktm-690-rally-2027/left.webp" },
+      { side: "right", src: "/bikes/ktm-690-rally-2027/right.webp" },
+    ],
+    credit: "KTM Sportmotorcycle",
+    source: "https://www.ktm.com/en-gb/models/adventure/2027-ktm-690-rally.html",
+    note: "KTM publish these at 918 px, so they upscale more than the rest of the set.",
+  },
   "ktm-690-enduro-r-2026": {
     views: [
       { side: "left", src: "/bikes/ktm-690-enduro-r-2026/left.webp" },
