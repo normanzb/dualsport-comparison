@@ -316,6 +316,12 @@ export const photos: Record<string, PhotoSet> = {
       "https://web.archive.org/web/20180611212503/http://www.husqvarna-motorcycles.com/at/enduro/701-enduro",
     note: "2018 studio image, the same livery as the 2017. Husqvarna published no left-side view of this generation.",
   },
+  "husqvarna-701-enduro-lr-2020": {
+    views: [{ side: "right", src: "/bikes/husqvarna-701-enduro-lr-2020/right.webp" }],
+    credit: "Husqvarna Motorcycles",
+    source: "https://www.husqvarna-motorcycles.com/",
+    note: "The one studio angle Husqvarna published before the model was dropped.",
+  },
   "husqvarna-701-enduro-2020": {
     views: [
       { side: "left", src: "/bikes/husqvarna-701-enduro-2020/left.webp" },
