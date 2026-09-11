@@ -1612,7 +1612,7 @@ const catalogue: Named[] = [
       engine: "693 cc",
       power: "79 hp",
       torque: "73 Nm",
-      price: "~£13,500 new",
+      price: "~£11,500 new",
     },
     n: {
       wetKg: 176,
