@@ -1410,7 +1410,7 @@ const catalogue: Named[] = [
     condition: "new",
     ink: "#FF6600",
     inkAlt: "#F2F2F2",
-    note: "Thirty-five litres is the biggest tank here and £33,149 the biggest number, and neither is really the point: this is the bike KTM take to Dakar, sold in a run of 150 to people who intend to enter something. Sixty-three horsepower at 139 kg without fuel, on cone-valve WP with 304 mm at the front, and a valve check every fifteen hours.",
+    note: "Thirty-five litres of fuel and £33,149, the biggest number on the list, and neither is really the point: this is the bike KTM take to Dakar, sold in a run of 150 to people who intend to enter something. Sixty-three horsepower at 139 kg without fuel, on cone-valve WP with 304 mm at the front, and a valve check every fifteen hours.",
     story:
       "Two independent radiators, a chrome-molybdenum frame, a die-cast aluminium swingarm and a navigation tower built around a roadbook and twin tripmasters. KTM quote no torque figure and no weight with fuel; the 165 kg here is their 139 kg dry plus the 35 litres. Five Sanders Edition bikes were built alongside it.",
   },
@@ -1635,6 +1635,47 @@ const catalogue: Named[] = [
     story:
       "A rally tower with an integrated screen, slim bodywork meant to be ridden standing, a dedicated RALLY ride mode, and WP XPLOR at both ends with 265 mm at the front. KTM have not published a UK price or a rear travel figure yet.",
     platform: LC4_690,
+  },
+  {
+    // A 654 the spec sheets badge 690, in a tune the road bike never got. No
+    // service schedule was published for it; the 6,200 miles is the road 690's.
+    make: "KTM",
+    model: "690 Rally Factory Replica",
+    year: "2007",
+    spec: {
+      serviceInterval: "6,200 mi",
+      dryWeight: "162 kg",
+      wetWeight: "205 kg",
+      tank: "36 L",
+      gears: "6",
+      seatHeight: "960 mm",
+      clearance: "320 mm",
+      engine: "654 cc",
+      power: "80.2 hp",
+      torque: "75 Nm",
+      price: "~£18,000+ used",
+    },
+    n: {
+      wetKg: 205,
+      dryKg: 162,
+      tankL: 36,
+      seatMm: 960,
+      priceFrom: 18000,
+      serviceMi: 6200,
+      clearanceMm: 320,
+      cc: 654,
+      hp: 80.2,
+      nm: 75,
+    },
+    driveSide: "left",
+    // twin Akrapovic cans, one down each side
+    exhaustSide: "none",
+    condition: "used",
+    ink: "#FF6600",
+    inkAlt: "#F2F2F2",
+    note: "A Dakar bike KTM would build to order, not a road bike with a fairing. Thirty-six litres in three tanks, 320 mm of clearance, and a carburetted LC4 tuned to 80 hp, seventeen more than the road 690 of the same year. The 2027 690 Rally is identical dry and carries sixteen litres less: the tanks are the whole difference.",
+    story:
+      "KTM's Rally Department built these to order from March 2007, in the works Repsol livery, for people entering rallies rather than watching them. The fuel is split three ways, 8.5 litres in each front tank and eighteen in the rear, which is what buys the range and what puts the mass high and wide. KTM published 205 kg wet against 162 dry, a gap twelve kilos wider than 36 litres of petrol and a fill of oil and coolant accounts for, so one of the two is soft.",
   },
   {
     make: "KTM",
@@ -2183,6 +2224,7 @@ const TRAVEL: Record<string, string> = {
   "ktm-690-enduro-r-2014": "250 / 250 mm",
   "ktm-690-enduro-r-2019": "250 / 250 mm",
   "ktm-690-enduro-r-2021": "250 / 250 mm",
+  "ktm-690-rally-factory-replica-2007": "300 / 310 mm",
   "ktm-790-adventure-2023": "200 / 200 mm",
   "ktm-890-adventure-r-2023": "240 / 240 mm",
   "ktm-890-adventure-r-rally-2024": "270 / 270 mm",

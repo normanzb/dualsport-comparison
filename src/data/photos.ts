@@ -26,6 +26,16 @@ export const photos: Record<string, PhotoSet> = {
     source: "https://www.ktm.com/en-gb/models/adventure/2027-ktm-690-rally.html",
     note: "KTM publish these at 918 px, so they upscale more than the rest of the set.",
   },
+  "ktm-690-rally-factory-replica-2007": {
+    views: [
+      { side: "left", src: "/bikes/ktm-690-rally-factory-replica-2007/left.webp" },
+      { side: "right", src: "/bikes/ktm-690-rally-factory-replica-2007/right.webp" },
+    ],
+    credit: "Modern Classic Collective",
+    source:
+      "https://modernclassiccollective.com/products/2008-ktm-690-rally-factory-replica-24-000kms",
+    note: "KTM shot the works bike, not the customer one, so this is a dealer's photography of chassis 171.",
+  },
   "ktm-690-enduro-r-2026": {
     views: [
       { side: "left", src: "/bikes/ktm-690-enduro-r-2026/left.webp" },

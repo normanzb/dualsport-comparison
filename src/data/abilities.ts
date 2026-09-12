@@ -45,6 +45,8 @@ const MPG_US: Record<string, number> = {
   "ktm-690-enduro-r-2019": 51,
   "ktm-690-enduro-r-2021": 51,
   "ktm-690-enduro-r-2026": 51,
+  // no owner sample; a carburetted race tune of the same LC4, so under the road bike
+  "ktm-690-rally-factory-replica-2007": 40,
   // Fuelly 2017, 5 vehicles / 17,145 mi: 47.57
   "husqvarna-701-enduro-2016": 48,
   "husqvarna-701-enduro-2017": 48,
@@ -134,6 +136,7 @@ const WIND: Record<string, number> = {
   "ktm-890-adventure-r-2023": 2,
   "ktm-890-adventure-r-rally-2024": 2,
   "kove-450-rally-2023": 2,
+  "ktm-690-rally-factory-replica-2007": 2,
   "rieju-aventura-rally-307-2025": 2,
   "voge-300-rally-2023": 2,
   "yamaha-tenere-700-2025": 2,
