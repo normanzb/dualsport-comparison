@@ -395,6 +395,12 @@ export const photos: Record<string, PhotoSet> = {
     source: "https://www.fantic.com/ii-en/moto/enduro/xef-250-trail_m28g3",
     note: "Fantic publish this at 950 px, so it upscales more than the rest of the set.",
   },
+  "fb-mondial-mud-452-2025": {
+    views: [{ side: "right", src: "/bikes/fb-mondial-mud-452-2025/right.webp" }],
+    credit: "F.B Mondial",
+    source: "https://www.fbmondial.com/mud-452-2/",
+    note: "Lifted from the technical data sheet, which is the only place FB Mondial publish a studio shot at full size.",
+  },
   "cfmoto-450mt-2024": {
     views: [{ side: "right", src: "/bikes/cfmoto-450mt-2024/right.webp" }],
     credit: "CFMOTO UK",

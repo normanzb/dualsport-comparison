@@ -70,6 +70,8 @@ const MPG_US: Record<string, number> = {
   "rieju-aventura-rally-307-2025": 58,
   // twin: CFMoto quote roughly 200 miles from 17.5 L
   "cfmoto-450mt-2024": 44,
+  // same CFMoto 449 twin, no owner data of its own
+  "fb-mondial-mud-452-2025": 44,
   "voge-300-rally-2023": 65,
   // no owner data yet; scored as its class peer, the 450MT twin
   "moto-morini-alltrhike-450-2026": 48,
@@ -136,6 +138,7 @@ const WIND: Record<string, number> = {
   "ktm-890-adventure-r-2023": 2,
   "ktm-890-adventure-r-rally-2024": 2,
   "kove-450-rally-2023": 2,
+  "fb-mondial-mud-452-2025": 2,
   "ktm-690-rally-factory-replica-2007": 2,
   "rieju-aventura-rally-307-2025": 2,
   "voge-300-rally-2023": 2,

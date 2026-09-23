@@ -753,6 +753,47 @@ const catalogue: Named[] = [
     platform: FANTIC_XEF_RALLY,
   },
   {
+    // FB Mondial's own pages disagree: the English one says 175 kg "in running
+    // order" with 17.5 L, the Italian one 197 kg with 19 L. The road tests settle
+    // it, 175 kg is the weight without fuel. Tank follows the majority, 17.5 L.
+    // Price is the Italian list converted; the bike is not sold in the UK.
+    make: "FB Mondial",
+    model: "MUD 452",
+    year: "2025",
+    spec: {
+      serviceInterval: "3,106 mi",
+      dryWeight: "175 kg",
+      wetWeight: "197 kg",
+      tank: "17.5 L",
+      gears: "6",
+      seatHeight: "890 mm",
+      clearance: "264 mm",
+      engine: "449 cc",
+      power: "47 hp",
+      torque: "39 Nm",
+      price: "~£5,550 new",
+    },
+    n: {
+      wetKg: 197,
+      dryKg: 175,
+      tankL: 17.5,
+      seatMm: 890,
+      priceFrom: 5550,
+      serviceMi: 3106,
+      clearanceMm: 264,
+      cc: 449,
+      hp: 47,
+      nm: 39,
+    },
+    condition: "new",
+    // the brand mark is navy, lifted here to clear CCM's blue
+    ink: "#6C5CE7",
+    inkAlt: "#F2F2F2",
+    note: "The CFMoto 450 twin in a chassis built for the part of the job CFMoto's own 450MT avoids: 264 mm of clearance, 260 mm of fork travel, adjustable at both ends, on tubeless spoked 21 and 18 inch wheels. Seventy millimetres of seat height over the 450MT is what it costs, and the A2 licence is what it is for.",
+    story:
+      "Rodolfo Frascoli drew it and FB Mondial assembles it, but the engine is CFMoto's 449 twin, retuned longer-geared and softer off the throttle than the 450MT uses it. The bodywork and the suspension are the argument: a genuine 260 mm at the front where the CFMoto has 200, and fully adjustable where the CFMoto gives you preload. Servicing is every 5,000 km, the same short schedule as the 450MT, and the bike is not currently sold in the UK.",
+  },
+  {
     make: "Honda",
     model: "CRF300 Rally",
     year: "2021",
@@ -2239,6 +2280,7 @@ const TRAVEL: Record<string, string> = {
   "husqvarna-norden-901-expedition-2023": "240 / 240 mm",
   "fantic-xef-450-rally-2023": "310 / 300 mm",
   "fantic-xef-450-rally-factory-2023": "310 / 300 mm",
+  "fb-mondial-mud-452-2025": "260 / 250 mm",
   "bmw-r12g-s-2025": "210 / 200 mm",
   "bmw-f900gs-2024": "230 / 215 mm",
   "bmw-g450x-2008": "300 / 320 mm",
