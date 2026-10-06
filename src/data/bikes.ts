@@ -607,7 +607,7 @@ const catalogue: Named[] = [
     model: "Desmo450 EDS",
     year: "2027",
     spec: {
-      serviceInterval: "30 hr",
+      serviceInterval: "1,500 mi",
       dryWeight: "~119 kg",
       wetWeight: "~126 kg",
       tank: "8.5 L",
@@ -629,14 +629,14 @@ const catalogue: Named[] = [
       hp: 63.5,
       nm: 53.5,
       priceFrom: 11500,
-      serviceMi: null,
+      serviceMi: 1500,
     },
     condition: "new",
     ink: "#FF4757",
     inkAlt: "#F2F2F2",
-    note: "Thirty engine hours between services, on a desmodromic 450 single nobody else builds. You are paying for the novelty and the finish as much as the performance.",
+    note: "Oil and filter every 1,500 miles, a valve clearance check at 3,000 and the main engine service at 7,000, on a desmodromic 450 single nobody else builds. You are paying for the novelty and the finish as much as the performance.",
     story:
-      "Ducati's first serious move off-road in its modern history, following the Desmo450 MX into motocross in 2025. Desmodromic valves are closed mechanically rather than by springs, which is Ducati's signature everywhere else in its range and now here too.",
+      "Ducati's first serious move off-road in its modern history, following the Desmo450 MX into motocross in 2025. Desmodromic valves are closed mechanically rather than by springs, which is Ducati's signature everywhere else in its range and now here too. The three intervals above are the published ones; the bike also watches how hard it is being used and brings the next service forward when it needs to.",
   },
   {
     // Fantic publish no suspension travel for the Trail, and no power figure at
