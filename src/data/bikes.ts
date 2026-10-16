@@ -111,6 +111,12 @@ const KOVE_800X = [
   "Weights here come from type approval and from independent weighings, not from the importer, which quotes 185 kg for a Pro that Kove itself type-approves at 190 and that four sets of scales put between 191 and 196 kg. The Rally's 176 kg kerb claim fits nothing: its 165 kg dry figure is corroborated, and two owners weighed one at 182 and 184 kg.",
 ] as const;
 
+/** Hero's 199.6 cc single, sold in Britain as a standard bike and a Pro. */
+const XPULSE_200 = [
+  "Hero has contested the Dakar with a factory team since 2017 and built the XPulse around that: an oil-cooled 199.6 cc four-valve single, a five-speed box, a kickstarter alongside the button, and spoked 21 and 18 inch rims. Engine, frame, tank and brakes are identical on both versions.",
+  "Hero brought the two to Britain in May 2026 through MotoGB, which is the only reason they are here; until then the XPulse was an Indian-market bike. The prices shown are Hero's showroom figures and take £300 of on-the-road costs on top. Hero publish no suspension travel for either one, so those figures come from road tests rather than the brochure.",
+] as const;
+
 const catalogue: Named[] = [
   {
     make: "AJP",
@@ -792,6 +798,79 @@ const catalogue: Named[] = [
     note: "The CFMoto 450 twin in a chassis built for the part of the job CFMoto's own 450MT avoids: 264 mm of clearance, 260 mm of fork travel, adjustable at both ends, on tubeless spoked 21 and 18 inch wheels. Seventy millimetres of seat height over the 450MT is what it costs, and the A2 licence is what it is for.",
     story:
       "Rodolfo Frascoli drew it and FB Mondial assembles it, but the engine is CFMoto's 449 twin, retuned longer-geared and softer off the throttle than the 450MT uses it. The bodywork and the suspension are the argument: a genuine 260 mm at the front where the CFMoto has 200, and fully adjustable where the CFMoto gives you preload. Servicing is every 5,000 km, the same short schedule as the 450MT, and the bike is not currently sold in the UK.",
+  },
+  {
+    // 2026 is the UK launch spec, not the 2021 debut of the 4V engine.
+    // Hero quote kerb only; the dry figures take out 13 L and a fill of oil.
+    make: "Hero",
+    model: "XPulse 200 4V",
+    year: "2026",
+    spec: {
+      serviceInterval: "3,728 mi",
+      dryWeight: "~145 kg",
+      wetWeight: "159 kg",
+      tank: "13 L",
+      gears: "5",
+      seatHeight: "825 mm",
+      clearance: "220 mm",
+      engine: "200 cc",
+      power: "18.9 hp",
+      torque: "17.4 Nm",
+      price: "£2,499 new",
+    },
+    n: {
+      wetKg: 159,
+      dryKg: 145,
+      tankL: 13,
+      seatMm: 825,
+      priceFrom: 2499,
+      serviceMi: 3728,
+      clearanceMm: 220,
+      cc: 200,
+      hp: 18.9,
+      nm: 17.4,
+    },
+    condition: "new",
+    ink: "#E0115F",
+    inkAlt: "#F2F2F2",
+    note: "Fifteen hundred pounds under the next cheapest new bike here, and the money still buys a 21-inch front wheel, spoked rims, 220 mm of clearance and a bashplate. Nineteen horsepower is the catch: a trail bike you can commute on rather than something to cross a country at speed.",
+    platform: XPULSE_200,
+  },
+  {
+    // Same engine and frame as the standard bike; the Pro is suspension and height.
+    make: "Hero",
+    model: "XPulse 200 4V Pro",
+    year: "2026",
+    spec: {
+      serviceInterval: "3,728 mi",
+      dryWeight: "~147 kg",
+      wetWeight: "161 kg",
+      tank: "13 L",
+      gears: "5",
+      seatHeight: "891 mm",
+      clearance: "270 mm",
+      engine: "200 cc",
+      power: "18.9 hp",
+      torque: "17.4 Nm",
+      price: "£2,699 new",
+    },
+    n: {
+      wetKg: 161,
+      dryKg: 147,
+      tankL: 13,
+      seatMm: 891,
+      priceFrom: 2699,
+      serviceMi: 3728,
+      clearanceMm: 270,
+      cc: 200,
+      hp: 18.9,
+      nm: 17.4,
+    },
+    condition: "new",
+    ink: "#E0115F",
+    inkAlt: "#F2F2F2",
+    note: "Two hundred pounds over the standard bike buys 50 mm of ground clearance, 66 mm more seat, and a cartridge fork adjustable for compression and rebound rather than a plain telescopic one. Same 19 hp and the same 13 litres, so what you are paying for is where it will go, not how fast.",
+    platform: XPULSE_200,
   },
   {
     make: "Honda",
@@ -2252,6 +2331,8 @@ const WHEELS: Record<string, string> = {
 };
 
 const TRAVEL: Record<string, string> = {
+  "hero-xpulse-200-4v-2026": "190 / 170 mm",
+  "hero-xpulse-200-4v-pro-2026": "250 / 220 mm",
   "honda-crf300-rally-2021": "260 / 260 mm",
   "honda-crf300l-2021": "206 / 260 mm",
   "honda-crf450l-2019": "305 / 315 mm",

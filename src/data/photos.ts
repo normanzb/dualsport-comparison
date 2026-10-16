@@ -395,6 +395,17 @@ export const photos: Record<string, PhotoSet> = {
     source: "https://www.fantic.com/ii-en/moto/enduro/xef-250-trail_m28g3",
     note: "Fantic publish this at 950 px, so it upscales more than the rest of the set.",
   },
+  "hero-xpulse-200-4v-2026": {
+    views: [{ side: "right", src: "/bikes/hero-xpulse-200-4v-2026/right.webp" }],
+    credit: "Hero MotoCorp",
+    source: "https://www.heromotocorp.com/en-gb/products/premium/xpulse-200-4v.html",
+  },
+  "hero-xpulse-200-4v-pro-2026": {
+    views: [{ side: "right", src: "/bikes/hero-xpulse-200-4v-pro-2026/right.webp" }],
+    credit: "Hero MotoCorp",
+    source: "https://www.heromotocorp.com/en-gb/products/premium/xpulse-200-4v.html",
+    note: "Hero only publish the Pro at 800 px, as a frame of its 360 viewer, so it upscales more than the rest of the set.",
+  },
   "fb-mondial-mud-452-2025": {
     views: [{ side: "right", src: "/bikes/fb-mondial-mud-452-2025/right.webp" }],
     credit: "F.B Mondial",

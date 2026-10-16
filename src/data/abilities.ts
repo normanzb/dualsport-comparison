@@ -72,6 +72,9 @@ const MPG_US: Record<string, number> = {
   "cfmoto-450mt-2024": 44,
   // same CFMoto 449 twin, no owner data of its own
   "fb-mondial-mud-452-2025": 44,
+  // Indian owner reports cluster at 33-38 kmpl; the Pro shares the engine
+  "hero-xpulse-200-4v-2026": 80,
+  "hero-xpulse-200-4v-pro-2026": 80,
   "voge-300-rally-2023": 65,
   // no owner data yet; scored as its class peer, the 450MT twin
   "moto-morini-alltrhike-450-2026": 48,
@@ -116,6 +119,9 @@ const WIND: Record<string, number> = {
   "ktm-500-exc-f-2024": 0,
   // 1: a cowl or a number board
   "bmw-hp2-enduro-2005": 1,
+  // both XPulses carry a flyscreen, not a fairing: chest and shoulders in clean air
+  "hero-xpulse-200-4v-2026": 1,
+  "hero-xpulse-200-4v-pro-2026": 1,
   "honda-crf300l-2021": 1,
   "husqvarna-701-enduro-2016": 1,
   "husqvarna-701-enduro-2017": 1,
