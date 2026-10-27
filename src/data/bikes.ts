@@ -1233,6 +1233,48 @@ const catalogue: Named[] = [
     platform: NORDEN_901,
   },
   {
+    // UK spec: fuel injected from the 2009 restyle, where the US kept the
+    // carburettor until 2018 and made a horsepower less. Kawasaki quote kerb
+    // only, so the dry figure takes out 7.7 L and a fill of oil. The service
+    // interval is the one soft number: published figures run from 5,000 to
+    // 12,000 km depending on which market manual you read, and 6,000 km is both
+    // the middle and the annual service UK owners describe paying for.
+    make: "Kawasaki",
+    model: "KLX250",
+    year: "2009",
+    spec: {
+      serviceInterval: "3,750 mi",
+      dryWeight: "~128 kg",
+      wetWeight: "138 kg",
+      tank: "7.7 L",
+      gears: "6",
+      seatHeight: "890 mm",
+      clearance: "285 mm",
+      engine: "249 cc",
+      power: "22 hp",
+      torque: "20 Nm",
+      price: "~£2,250–3,250 used",
+    },
+    n: {
+      wetKg: 138,
+      dryKg: 128,
+      tankL: 7.7,
+      seatMm: 890,
+      priceFrom: 2250,
+      serviceMi: 3750,
+      clearanceMm: 285,
+      cc: 249,
+      hp: 22,
+      nm: 20,
+    },
+    condition: "used",
+    ink: "#3EB82B",
+    inkAlt: "#F2F2F2",
+    note: "The cheapest way onto this list, and 285 mm of clearance on a 138 kg bike is a lot of trail capability for the money. Twenty-two horsepower and 7.7 litres are the two numbers that decide what it is for: an afternoon of green lanes, not a week away.",
+    story:
+      "Kawasaki restyled the KLX250 in 2009 and sold it largely unchanged until the mid-2010s, which is why a decade of used bikes all look alike. Britain got fuel injection from the start while America kept the carburettor until 2018, so a UK bike starts cleanly from cold and is the one to want. The suspension is adjustable at both ends, 16-way for compression at the front and compression and rebound at the back, which is unusual at this money and worth setting up before deciding the bike is soft.",
+  },
+  {
     make: "Kove",
     model: "450 Rally",
     year: "2023",
@@ -2340,6 +2382,7 @@ const TRAVEL: Record<string, string> = {
   "husqvarna-701-enduro-2017": "275 / 275 mm",
   "husqvarna-701-enduro-2020": "275 / 275 mm",
   "husqvarna-701-enduro-lr-2020": "250 / 250 mm",
+  "kawasaki-klx250-2009": "254 / 231 mm",
   "ktm-450-exc-f-2024": "300 / 310 mm",
   "ktm-450-rally-replica-2027": "304 / 280 mm",
   "ktm-500-exc-f-2024": "300 / 310 mm",

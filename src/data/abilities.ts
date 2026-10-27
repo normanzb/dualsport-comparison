@@ -72,6 +72,8 @@ const MPG_US: Record<string, number> = {
   "cfmoto-450mt-2024": 44,
   // same CFMoto 449 twin, no owner data of its own
   "fb-mondial-mud-452-2025": 44,
+  // MCN's tested 60 imperial
+  "kawasaki-klx250-2009": 50,
   // Indian owner reports cluster at 33-38 kmpl; the Pro shares the engine
   "hero-xpulse-200-4v-2026": 80,
   "hero-xpulse-200-4v-pro-2026": 80,
@@ -127,6 +129,7 @@ const WIND: Record<string, number> = {
   "husqvarna-701-enduro-2017": 1,
   "husqvarna-701-enduro-2020": 1,
   "husqvarna-701-enduro-2026": 1,
+  "kawasaki-klx250-2009": 1,
   "ktm-390-enduro-r-2025": 1,
   "ktm-690-enduro-r-2014": 1,
   "ktm-690-enduro-r-2019": 1,

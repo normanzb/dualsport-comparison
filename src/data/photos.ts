@@ -395,6 +395,12 @@ export const photos: Record<string, PhotoSet> = {
     source: "https://www.fantic.com/ii-en/moto/enduro/xef-250-trail_m28g3",
     note: "Fantic publish this at 950 px, so it upscales more than the rest of the set.",
   },
+  "kawasaki-klx250-2009": {
+    views: [{ side: "left", src: "/bikes/kawasaki-klx250-2009/left.webp" }],
+    credit: "Kawasaki Motors",
+    source: "https://www.totalmotorcycle.com/motorcycles/2019/2019-kawasaki-klx250/",
+    note: "2019 studio image. The bodywork is unchanged from the 2009 restyle; the UK bike had fuel injection from the start, where this US one got it that year.",
+  },
   "hero-xpulse-200-4v-2026": {
     views: [{ side: "right", src: "/bikes/hero-xpulse-200-4v-2026/right.webp" }],
     credit: "Hero MotoCorp",
