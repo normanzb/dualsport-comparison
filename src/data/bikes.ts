@@ -71,7 +71,7 @@ type Named = {
  * ever since, so anything true of one platform quirk is true of all six here.
  */
 const LC4_690 = [
-  "KTM's parent bought Husqvarna from BMW in 2013, which is why the 690 and the 701 are the same motorcycle in different plastics.",
+  "KTM's parent bought Husqvarna from BMW in 2013 and GASGAS in 2019, which is why the 690, the 701 and the ES 700 are the same motorcycle in three sets of plastics.",
   "The tank is the clever part: a polymer moulding sitting low and behind the rider, under the seat rather than over the engine, which doubles as a load-bearing section of the rear subframe. It puts the fuel mass where it helps and deletes a chunk of steel tubing at the same time.",
   "Twin balancer shafts are what make a single this big tolerable on the road. The clutch is hydraulic, and the slave cylinder was a known weak point on the earlier bikes; KTM revised it years ago, so it is a question to ask about a used one and not about anything current.",
 ] as const;
@@ -798,6 +798,46 @@ const catalogue: Named[] = [
     note: "The CFMoto 450 twin in a chassis built for the part of the job CFMoto's own 450MT avoids: 264 mm of clearance, 260 mm of fork travel, adjustable at both ends, on tubeless spoked 21 and 18 inch wheels. Seventy millimetres of seat height over the 450MT is what it costs, and the A2 licence is what it is for.",
     story:
       "Rodolfo Frascoli drew it and FB Mondial assembles it, but the engine is CFMoto's 449 twin, retuned longer-geared and softer off the throttle than the 450MT uses it. The bodywork and the suspension are the argument: a genuine 260 mm at the front where the CFMoto has 200, and fully adjustable where the CFMoto gives you preload. Servicing is every 5,000 km, the same short schedule as the 450MT, and the bike is not currently sold in the UK.",
+  },
+  {
+    // Out of production: 2024 was the last model year and dealers are down to
+    // used stock, so the price is what one costs now rather than the £9,599 RRP.
+    make: "GASGAS",
+    model: "ES 700",
+    year: "2022",
+    spec: {
+      serviceInterval: "6,200 mi",
+      dryWeight: "147.5 kg",
+      wetWeight: "~158 kg",
+      tank: "13.5 L",
+      gears: "6",
+      seatHeight: "935 mm",
+      clearance: "269 mm",
+      engine: "693 cc",
+      power: "74 hp",
+      torque: "73.5 Nm",
+      price: "~£7,000–8,200 used",
+    },
+    n: {
+      wetKg: 158,
+      dryKg: 147.5,
+      tankL: 13.5,
+      seatMm: 935,
+      priceFrom: 7000,
+      serviceMi: 6200,
+      clearanceMm: 269,
+      cc: 693,
+      hp: 74,
+      nm: 73.5,
+    },
+    exhaustSide: "left",
+    condition: "used",
+    ink: "#D94F2B",
+    inkAlt: "#F2F2F2",
+    note: "The 690 Enduro R in Spanish colours: same engine, same 13.5 litres, a kilo and a half heavier, six millimetres more seat and a millimetre less clearance. Continental TKC 80s as standard and a few hundred pounds off the used price are most of what you gain.",
+    story:
+      "GASGAS has been a Pierer brand since 2019 and the ES 700 is what that bought: the 701 Enduro's chassis and engine with new bodywork, built on the same line in Mattighofen. It ran from 2022 to 2024 and was then dropped, which is why there is no newer model year.",
+    platform: LC4_690,
   },
   {
     // 2026 is the UK launch spec, not the 2021 debut of the 4V engine.
@@ -2020,6 +2060,82 @@ const catalogue: Named[] = [
       "Rieju has built bikes in Figueres since the 1940s, and when GasGas was sold to KTM's parent it took over the off-road production line and much of the staff that came with it. That is the reason a small Spanish firm can price a 21-litre rally bike like this.",
   },
   {
+    // Seat is adjustable 825-845; the lower setting is quoted, as MCN do.
+    make: "Royal Enfield",
+    model: "Himalayan 450",
+    year: "2024",
+    spec: {
+      serviceInterval: "6,200 mi",
+      dryWeight: "181 kg",
+      wetWeight: "196 kg",
+      tank: "17 L",
+      gears: "6",
+      seatHeight: "825 mm",
+      clearance: "230 mm",
+      engine: "452 cc",
+      power: "40 hp",
+      torque: "40 Nm",
+      price: "£5,750 new",
+    },
+    n: {
+      wetKg: 196,
+      dryKg: 181,
+      tankL: 17,
+      seatMm: 825,
+      priceFrom: 5750,
+      serviceMi: 6200,
+      clearanceMm: 230,
+      cc: 452,
+      hp: 40,
+      nm: 40,
+    },
+    condition: "new",
+    ink: "#B03A4B",
+    inkAlt: "#F2F2F2",
+    note: "Forty horsepower and 196 kg for £5,750, with a 21-inch front, 200 mm of travel at both ends and a seat that drops to 825 mm. Within £51 and a kilogram of the CFMoto 450MT, which is the comparison that matters: the Enfield trades the twin's smoothness for 10 mm more clearance and a single anyone can work on.",
+    story:
+      "Royal Enfield's first liquid-cooled, double-overhead-cam engine, and the bike that replaced the 411 that made the company's name off-road. The Showa fork is not adjustable and the shock takes preload only, which is where the money was saved; the frame, the brakes and the 4-inch TFT with built-in navigation are where it was spent.",
+  },
+  {
+    // Shown at EICMA in November 2026 as a 2027 model. Royal Enfield publish
+    // both weights but they do not reconcile: 28 kg apart on a 17.8 L tank.
+    // No service schedule published yet, so the 450's 10,000 km stands in.
+    make: "Royal Enfield",
+    model: "Himalayan 750",
+    year: "2027",
+    spec: {
+      serviceInterval: "6,200 mi",
+      dryWeight: "195 kg",
+      wetWeight: "223 kg",
+      tank: "17.8 L",
+      gears: "6",
+      seatHeight: "815 mm",
+      clearance: "205 mm",
+      engine: "743 cc",
+      power: "54 hp",
+      torque: "63 Nm",
+      price: "£6,999 new",
+    },
+    n: {
+      wetKg: 223,
+      dryKg: 195,
+      tankL: 17.8,
+      seatMm: 815,
+      priceFrom: 6999,
+      serviceMi: 6200,
+      clearanceMm: 205,
+      cc: 743,
+      hp: 54,
+      nm: 63,
+    },
+    condition: "new",
+    ink: "#B03A4B",
+    inkAlt: "#F2F2F2",
+    note: "A 743 cc twin, cruise control, a six-axis IMU and five ride modes for £6,999, which is three thousand pounds under a Ténéré 700 and four under a Tuareg. The 19-inch front, 205 mm of clearance and 190 mm of travel say where the compromise was made: this is the road end of the list.",
+    story:
+      "Royal Enfield's first 750 and its first air and oil-cooled parallel twin, shown at EICMA in November 2026 and sold in Britain from £6,999 on cast wheels or £7,299 on spoked. The fork is a fully adjustable 43 mm Showa and the shock has remote preload, which is more adjustment than the 450 offers and more than most of this price bracket.",
+  },
+  {
     make: "Suzuki",
     model: "DR-Z4S",
     year: "2025",
@@ -2370,6 +2486,8 @@ const WHEELS: Record<string, string> = {
   "bmw-g650gs-2011": "19/17",
   "bmw-r12g-s-2025": "21/17",
   "yamaha-xt660z-tenere-2008": "21/17",
+  "royal-enfield-himalayan-450-2024": "21/17",
+  "royal-enfield-himalayan-750-2027": "19/17",
 };
 
 const TRAVEL: Record<string, string> = {
@@ -2394,6 +2512,8 @@ const TRAVEL: Record<string, string> = {
   "ktm-890-adventure-r-2023": "240 / 240 mm",
   "ktm-890-adventure-r-rally-2024": "270 / 270 mm",
   "rieju-aventura-rally-307-2025": "235 / 235 mm",
+  "royal-enfield-himalayan-450-2024": "200 / 200 mm",
+  "royal-enfield-himalayan-750-2027": "190 / 175 mm",
   "yamaha-tenere-700-2025": "210 / 200 mm",
   "yamaha-tenere-700-rally-2025": "230 / 220 mm",
   "yamaha-tenere-700-world-raid-2022": "230 / 220 mm",
@@ -2405,6 +2525,7 @@ const TRAVEL: Record<string, string> = {
   "fantic-xef-450-rally-2023": "310 / 300 mm",
   "fantic-xef-450-rally-factory-2023": "310 / 300 mm",
   "fb-mondial-mud-452-2025": "260 / 250 mm",
+  "gasgas-es-700-2022": "250 / 250 mm",
   "bmw-r12g-s-2025": "210 / 200 mm",
   "bmw-f900gs-2024": "230 / 215 mm",
   "bmw-g450x-2008": "300 / 320 mm",

@@ -395,6 +395,27 @@ export const photos: Record<string, PhotoSet> = {
     source: "https://www.fantic.com/ii-en/moto/enduro/xef-250-trail_m28g3",
     note: "Fantic publish this at 950 px, so it upscales more than the rest of the set.",
   },
+  "gasgas-es-700-2022": {
+    views: [
+      { side: "left", src: "/bikes/gasgas-es-700-2022/left.webp" },
+      { side: "right", src: "/bikes/gasgas-es-700-2022/right.webp" },
+    ],
+    credit: "GASGAS Motorcycles",
+    source: "https://www.gasgas.com/en-gb/models/travel/es-700-2024.html",
+    note: "Pierer publish these at 918 px, so they upscale more than the rest of the set.",
+  },
+  "royal-enfield-himalayan-750-2027": {
+    views: [{ side: "left", src: "/bikes/royal-enfield-himalayan-750-2027/left.webp" }],
+    credit: "Royal Enfield",
+    source: "https://www.bikewale.com/royalenfield-bikes/himalayan-750/images/",
+    note: "The Aztec Green launch bike on cast wheels, which is the £6,999 version in the row.",
+  },
+  "royal-enfield-himalayan-450-2024": {
+    views: [{ side: "right", src: "/bikes/royal-enfield-himalayan-450-2024/right.webp" }],
+    credit: "Royal Enfield",
+    source: "https://www.totalmotorcycle.com/motorcycles/2024/2024-royal-enfield-himalayan-450/",
+    note: "Cropped out of Royal Enfield's colour line-up, and shown with the accessory engine bars and rack fitted.",
+  },
   "kawasaki-klx250-2009": {
     views: [{ side: "left", src: "/bikes/kawasaki-klx250-2009/left.webp" }],
     credit: "Kawasaki Motors",

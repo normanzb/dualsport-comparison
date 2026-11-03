@@ -72,6 +72,12 @@ const MPG_US: Record<string, number> = {
   "cfmoto-450mt-2024": 44,
   // same CFMoto 449 twin, no owner data of its own
   "fb-mondial-mud-452-2025": 44,
+  // same LC4 single as the 690 and the 701
+  "gasgas-es-700-2022": 51,
+  // MCN's tested 51.2 imperial
+  "royal-enfield-himalayan-450-2024": 43,
+  // no owner data yet; Enfield's other air-oil twins return about 60 imperial
+  "royal-enfield-himalayan-750-2027": 50,
   // MCN's tested 60 imperial
   "kawasaki-klx250-2009": 50,
   // Indian owner reports cluster at 33-38 kmpl; the Pro shares the engine
@@ -121,6 +127,7 @@ const WIND: Record<string, number> = {
   "ktm-500-exc-f-2024": 0,
   // 1: a cowl or a number board
   "bmw-hp2-enduro-2005": 1,
+  "gasgas-es-700-2022": 1,
   // both XPulses carry a flyscreen, not a fairing: chest and shoulders in clean air
   "hero-xpulse-200-4v-2026": 1,
   "hero-xpulse-200-4v-pro-2026": 1,
@@ -150,6 +157,8 @@ const WIND: Record<string, number> = {
   "fb-mondial-mud-452-2025": 2,
   "ktm-690-rally-factory-replica-2007": 2,
   "rieju-aventura-rally-307-2025": 2,
+  "royal-enfield-himalayan-450-2024": 2,
+  "royal-enfield-himalayan-750-2027": 2,
   "voge-300-rally-2023": 2,
   "yamaha-tenere-700-2025": 2,
   "yamaha-tenere-700-rally-2025": 2,
