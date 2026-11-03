@@ -80,6 +80,17 @@ export const photos: Record<string, PhotoSet> = {
     credit: "Suzuki GB",
     source: "https://bikes.suzuki.co.uk/",
   },
+  "ktm-125-enduro-r-2026": {
+    views: [
+      { side: "left", src: "/bikes/ktm-125-enduro-r-2026/left.webp" },
+      { side: "right", src: "/bikes/ktm-125-enduro-r-2026/right.webp" },
+      { side: "front", src: "/bikes/ktm-125-enduro-r-2026/front.webp" },
+      { side: "rear", src: "/bikes/ktm-125-enduro-r-2026/rear.webp" },
+    ],
+    credit: "KTM Sportmotorcycle",
+    source: "https://www.ktm.com/en-gb/models/dual-sport/2026-ktm-125-enduror.html",
+    note: "KTM publish these at 918 px, so they upscale more than the rest of the set.",
+  },
   "ktm-390-enduro-r-2025": {
     views: [
       { side: "left", src: "/bikes/ktm-390-enduro-r-2025/left.webp" },
@@ -438,6 +449,17 @@ export const photos: Record<string, PhotoSet> = {
     credit: "F.B Mondial",
     source: "https://www.fbmondial.com/mud-452-2/",
     note: "Lifted from the technical data sheet, which is the only place FB Mondial publish a studio shot at full size.",
+  },
+  "cfmoto-1000mt-x-2026": {
+    views: [{ side: "right", src: "/bikes/cfmoto-1000mt-x-2026/right.webp" }],
+    credit: "CFMOTO UK",
+    source: "https://www.cfmoto.co.uk/motorcycles/1000mt-x/",
+  },
+  "cfmoto-800mt-x-2025": {
+    views: [{ side: "right", src: "/bikes/cfmoto-800mt-x-2025/right.webp" }],
+    credit: "CFMOTO UK",
+    source: "https://www.cfmoto.co.uk/motorcycles/800mt-x/",
+    note: "CFMOTO only publish the low-seat build; the row quotes the 870 mm one.",
   },
   "cfmoto-450mt-2024": {
     views: [{ side: "right", src: "/bikes/cfmoto-450mt-2024/right.webp" }],

@@ -70,6 +70,11 @@ const MPG_US: Record<string, number> = {
   "rieju-aventura-rally-307-2025": 58,
   // twin: CFMoto quote roughly 200 miles from 17.5 L
   "cfmoto-450mt-2024": 44,
+  // no owner data yet; scored with the 790 Adventure, whose engine the 800 is
+  "cfmoto-800mt-x-2025": 48,
+  "cfmoto-1000mt-x-2026": 45,
+  // learner 125s run 70-80; this one is heavy and knobblied
+  "ktm-125-enduro-r-2026": 70,
   // same CFMoto 449 twin, no owner data of its own
   "fb-mondial-mud-452-2025": 44,
   // same LC4 single as the 690 and the 701
@@ -137,6 +142,7 @@ const WIND: Record<string, number> = {
   "husqvarna-701-enduro-2020": 1,
   "husqvarna-701-enduro-2026": 1,
   "kawasaki-klx250-2009": 1,
+  "ktm-125-enduro-r-2026": 1,
   "ktm-390-enduro-r-2025": 1,
   "ktm-690-enduro-r-2014": 1,
   "ktm-690-enduro-r-2019": 1,
@@ -164,6 +170,8 @@ const WIND: Record<string, number> = {
   "yamaha-tenere-700-rally-2025": 2,
   // 3: wide enough to lift the blast off your chest
   "cfmoto-450mt-2024": 3,
+  "cfmoto-800mt-x-2025": 3,
+  "cfmoto-1000mt-x-2026": 3,
   "ktm-390-adventure-r-2025": 3,
   "husqvarna-norden-901-2022": 3,
   "husqvarna-norden-901-expedition-2023": 3,
