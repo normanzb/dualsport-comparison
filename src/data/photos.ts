@@ -158,6 +158,12 @@ export const photos: Record<string, PhotoSet> = {
     source: "https://www.ktm.com/en-gb/models/adventure/2026-ktm-890-adventurerrally.html",
     note: "2026 studio images. The Red Bull livery is that year's run; the bike is unchanged since the 2024.",
   },
+  "ktm-990-adventure-2006": {
+    views: [{ side: "right", src: "/bikes/ktm-990-adventure-2006/right.webp" }],
+    credit: "KTM Sportmotorcycle",
+    source: "https://www.motorcyclespecs.co.za/model/ktm/ktm_990_adventure%2006.htm",
+    note: "The 2006 launch photograph, the largest copy still online at 640 px, so it upscales further than anything else in the set.",
+  },
   "ktm-790-adventure-2023": {
     views: [
       { side: "left", src: "/bikes/ktm-790-adventure-2023/left.webp" },

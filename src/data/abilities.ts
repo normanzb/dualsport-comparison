@@ -75,6 +75,8 @@ const MPG_US: Record<string, number> = {
   "cfmoto-1000mt-x-2026": 45,
   // learner 125s run 70-80; this one is heavy and knobblied
   "ktm-125-enduro-r-2026": 70,
+  // MCN's tested 43 imperial; an owner survey put it at 39
+  "ktm-990-adventure-2006": 36,
   // same CFMoto 449 twin, no owner data of its own
   "fb-mondial-mud-452-2025": 44,
   // same LC4 single as the 690 and the 701
@@ -176,6 +178,7 @@ const WIND: Record<string, number> = {
   "husqvarna-norden-901-2022": 3,
   "husqvarna-norden-901-expedition-2023": 3,
   "ktm-790-adventure-2023": 3,
+  "ktm-990-adventure-2006": 3,
   "moto-morini-alltrhike-450-2026": 3,
   "yamaha-tenere-700-world-raid-2022": 3,
 };
