@@ -262,7 +262,7 @@ const catalogue: Named[] = [
     inkAlt: "#F2F2F2",
     note: "A horsepower and a half over a Ténéré 700, the same 68 Nm, two more litres and a seat 25 mm lower, for twelve kilos more. A 65 degree V-twin doing it, which almost nothing else in this class offers.",
     story:
-      "Benda build cruisers, and this is their first adventure bike: a 692 cc 65 degree V-twin in a steel trellis frame with an aluminium swingarm, 230 mm of travel at the front and 220 at the rear, and 21 and 18 inch wire wheels. Shown at EICMA in November 2026 with no price, no ground clearance figure, no service schedule and no launch date, so the table borrows the 4,000 miles and the money from Benda's LFC 700; treat both as placeholders. Benda have released no studio photography either, which is why there is no cutout here yet.",
+      "Benda build cruisers, and this is their first adventure bike: a 692 cc 65 degree V-twin in a steel trellis frame with an aluminium swingarm, 230 mm of travel at the front and 220 at the rear, and 21 and 18 inch wire wheels. Shown at EICMA in November 2026 with no price, no ground clearance figure, no service schedule and no launch date, so the table borrows the 4,000 miles and the money from Benda's LFC 700; treat both as placeholders. Benda have released no studio photography either, so the image here is from their EICMA stand, wheel chock and all.",
   },
   {
     make: "BMW",

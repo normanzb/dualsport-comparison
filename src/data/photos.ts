@@ -202,6 +202,12 @@ export const photos: Record<string, PhotoSet> = {
     credit: "BMW Motorrad",
     source: "https://www.totalmotorcycle.com/photos/2009models/2009-BMW-G450X",
   },
+  "benda-capra-700-2027": {
+    views: [{ side: "right", src: "/bikes/benda-capra-700-2027/right.webp" }],
+    credit: "Benda",
+    source: "https://www.bendakeeway.com/",
+    note: "Shot on Benda's EICMA stand rather than in a studio, so the bike sits in a bolted wheel chock and the source is smaller than the rest of the set.",
+  },
   "bmw-f650gs-dakar-2000": {
     views: [{ side: "left", src: "/bikes/bmw-f650gs-dakar-2000/left.webp" }],
     credit: "BMW Motorrad",
