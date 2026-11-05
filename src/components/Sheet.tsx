@@ -28,8 +28,8 @@ export function Sheet({ initialSlug }: { initialSlug?: string }) {
           </h1>
 
           <p className="mt-6 max-w-xl text-sm leading-relaxed text-ink-dim">
-            {bikes.length} bikes on one sheet. Pick any row and it opens underneath, with
-            photographs and its abilities measured against the rest of the field.
+            Fancy a new dual-sport, or just admiring? A growing list of {bikes.length} bikes at a
+            glance, hope you like it. &#10084;&#65039;
           </p>
         </header>
 
