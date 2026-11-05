@@ -225,6 +225,46 @@ const catalogue: Named[] = [
       "The 660 parallel twin came out of the RS 660 sportsbike and was detuned for torque rather than revs. Aprilia had not built an adventure bike in twenty years when this arrived; the Tuareg name goes back to their Paris-Dakar entries in the 1980s.",
   },
   {
+    // Shown at EICMA on 3 November 2026. Benda's English release calls the
+    // 220 kg ready-to-ride, so the dry figure takes the 18 L back out. No
+    // ground clearance, service schedule or price published: the 4,000 miles
+    // is the LFC 700's, and the price sits beside that bike's UK money.
+    make: "Benda",
+    model: "Capra 700",
+    year: "2027",
+    spec: {
+      serviceInterval: "4,000 mi",
+      dryWeight: "~207 kg",
+      wetWeight: "220 kg",
+      tank: "18 L",
+      gears: "6",
+      seatHeight: "850 mm",
+      clearance: "n/a",
+      engine: "692 cc",
+      power: "73.4 hp",
+      torque: "68 Nm",
+      price: "~£9,000 new",
+    },
+    n: {
+      wetKg: 220,
+      dryKg: 207,
+      tankL: 18,
+      seatMm: 850,
+      priceFrom: 9000,
+      serviceMi: 4000,
+      clearanceMm: null,
+      cc: 692,
+      hp: 73.4,
+      nm: 68,
+    },
+    condition: "new",
+    ink: "#D0A2F7",
+    inkAlt: "#F2F2F2",
+    note: "A horsepower and a half over a Ténéré 700, the same 68 Nm, two more litres and a seat 25 mm lower, for twelve kilos more. A 65 degree V-twin doing it, which almost nothing else in this class offers.",
+    story:
+      "Benda build cruisers, and this is their first adventure bike: a 692 cc 65 degree V-twin in a steel trellis frame with an aluminium swingarm, 230 mm of travel at the front and 220 at the rear, and 21 and 18 inch wire wheels. Shown at EICMA in November 2026 with no price, no ground clearance figure, no service schedule and no launch date, so the table borrows the 4,000 miles and the money from Benda's LFC 700; treat both as placeholders. Benda have released no studio photography either, which is why there is no cutout here yet.",
+  },
+  {
     make: "BMW",
     model: "F650GS Dakar",
     year: "2000",
@@ -605,6 +645,46 @@ const catalogue: Named[] = [
     note: "A 449 parallel twin with cruise control and a TFT dash for the money of a used single. The low seat and modest clearance say road-to-trail rather than trail.",
     story:
       "The 449 twin is CFMoto's own, shared with its 450-class sports bikes, and CFMoto is the same factory that builds KTM's middleweight twins under a joint venture. That is the context for how much specification is on this bike per pound.",
+  },
+  {
+    // Shown at EICMA in November 2026; CFMOTO label the figures development
+    // data. 526 cc is CFMOTO UK's own number, where most outlets printed 527.
+    // No service schedule or UK price published: the 3,000 miles is the
+    // 450MT's, and the price sits between the 450MT and the 800MT-X.
+    make: "CFMoto",
+    model: "550MT-X",
+    year: "2027",
+    spec: {
+      serviceInterval: "3,000 mi",
+      dryWeight: "172 kg",
+      wetWeight: "183 kg",
+      tank: "16 L",
+      gears: "6",
+      seatHeight: "850/830 mm",
+      clearance: "250 mm",
+      engine: "526 cc",
+      power: "54 hp",
+      torque: "52 Nm",
+      price: "~£6,200 new",
+    },
+    n: {
+      wetKg: 183,
+      dryKg: 172,
+      tankL: 16,
+      seatMm: 850,
+      priceFrom: 6200,
+      serviceMi: 3000,
+      clearanceMm: 250,
+      cc: 526,
+      hp: 54,
+      nm: 52,
+    },
+    condition: "new",
+    ink: "#4C9AE8",
+    inkAlt: "#F2F2F2",
+    note: "Twelve horsepower more than the 450MT and twelve kilos less, on fully adjustable KYB at both ends and 250 mm of clearance. The Himalayan 750 makes the same 54 hp and carries forty kilos more. Sixteen litres is the compromise, a litre and a half down on the smaller bike.",
+    story:
+      "A new 526 cc twin rather than a bored-out 449, sat above the 450MT rather than replacing it, and A2-legal at 54 hp. The MT-X is the off-road build: 21 and 18 inch wire wheels, 230 mm of travel and a 320 mm front disc, where the plain 550MT runs a 19, a 23-litre tank and road suspension. CFMOTO have published neither a service schedule nor a UK price, so the table borrows the 450MT's 3,000 miles and puts the price between the 450MT and the 800MT-X; treat both as placeholders.",
   },
   {
     // Figures are the 870 mm build. The low-seat version is a different
@@ -1927,14 +2007,14 @@ const catalogue: Named[] = [
       engine: "693 cc",
       power: "79 hp",
       torque: "73 Nm",
-      price: "~£11,500 new",
+      price: "£11,499 new",
     },
     n: {
       wetKg: 176,
       dryKg: 161.5,
       tankL: 20,
       seatMm: 935,
-      priceFrom: 13500,
+      priceFrom: 11499,
       serviceMi: 9320,
       clearanceMm: 265,
       cc: 693,
@@ -1948,7 +2028,7 @@ const catalogue: Named[] = [
     inkAlt: "#F2F2F2",
     note: "The 690 Enduro R chassis with seven more horsepower and seven more litres, split between two front tanks and the one under the seat. Twenty litres behind a 79 hp single is the longest range of any big single here, and 161.5 kg without fuel is thirty under the twins that match it for tank size.",
     story:
-      "A rally tower with an integrated screen, slim bodywork meant to be ridden standing, a dedicated RALLY ride mode, and WP XPLOR at both ends with 265 mm at the front. KTM have not published a UK price or a rear travel figure yet.",
+      "A rally tower with an integrated screen, slim bodywork meant to be ridden standing, a dedicated RALLY ride mode, and WP XPLOR at both ends with 265 mm at the front. KTM confirmed £11,499 on the road in October 2026; a rear travel figure is still missing.",
     platform: LC4_690,
   },
   {
@@ -2137,7 +2217,7 @@ const catalogue: Named[] = [
     condition: "used",
     ink: "#FF7A1A",
     inkAlt: "#FFFFFF",
-    note: "The only V-twin on this list, and a proper one: 999 cc, 100 Nm and a 21-inch front on a bike people genuinely rode across deserts. Two hundred and nine kilos without fuel, a service every 4,500 miles and a valve check every 9,000 are what it asks in return.",
+    note: "One of the few V-twins on this list, and the biggest: 999 cc, 100 Nm and a 21-inch front on a bike people genuinely rode across deserts. Two hundred and nine kilos without fuel, a service every 4,500 miles and a valve check every 9,000 are what it asks in return.",
     story:
       "KTM fuel injected the 950 Adventure for 2006 and called it the 990; it ran until 2013 and the 1190 replaced it. The 2009 revision brought a new LC8 making 106 hp and a taller 880 mm seat, and renamed the S to R, so an early bike is the cheap way in rather than the good one. Known faults are a leaking clutch slave cylinder, a dry sump that makes the oil level easy to misread, and early injected bikes running badly if you press the starter before the self-check has finished.",
   },
@@ -2682,6 +2762,8 @@ const TRAVEL: Record<string, string> = {
   "fantic-xef-450-rally-factory-2023": "310 / 300 mm",
   "fb-mondial-mud-452-2025": "260 / 250 mm",
   "gasgas-es-700-2022": "250 / 250 mm",
+  "benda-capra-700-2027": "230 / 220 mm",
+  "cfmoto-550mt-x-2027": "230 / 220 mm",
   "cfmoto-800mt-x-2025": "230 / 230 mm",
   "cfmoto-1000mt-x-2026": "230 / 230 mm",
   "bmw-r12g-s-2025": "210 / 200 mm",

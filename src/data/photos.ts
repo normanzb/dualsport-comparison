@@ -456,6 +456,12 @@ export const photos: Record<string, PhotoSet> = {
     source: "https://www.fbmondial.com/mud-452-2/",
     note: "Lifted from the technical data sheet, which is the only place FB Mondial publish a studio shot at full size.",
   },
+  "cfmoto-550mt-x-2027": {
+    views: [{ side: "left", src: "/bikes/cfmoto-550mt-x-2027/left.webp" }],
+    credit: "CFMOTO UK",
+    source: "https://www.cfmoto.co.uk/cfmoto-550mt-550mt-x-eicma-2026/",
+    note: "CFMOTO released only a three-quarter view at the EICMA launch, so this one sits shorter in frame than the profile shots.",
+  },
   "cfmoto-1000mt-x-2026": {
     views: [{ side: "right", src: "/bikes/cfmoto-1000mt-x-2026/right.webp" }],
     credit: "CFMOTO UK",

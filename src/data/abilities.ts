@@ -68,8 +68,12 @@ const MPG_US: Record<string, number> = {
   "ktm-890-adventure-r-rally-2024": 46,
   // 293 single with a 21 L tank; makers claim 300+ miles, which lines up
   "rieju-aventura-rally-307-2025": 58,
+  // no owner data; scored under the Ténéré 700's 52 for the extra twelve kilos
+  "benda-capra-700-2027": 48,
   // twin: CFMoto quote roughly 200 miles from 17.5 L
   "cfmoto-450mt-2024": 44,
+  // new 526 twin, no owner data yet; scored just under the 449 it sits above
+  "cfmoto-550mt-x-2027": 42,
   // no owner data yet; scored with the 790 Adventure, whose engine the 800 is
   "cfmoto-800mt-x-2025": 48,
   "cfmoto-1000mt-x-2026": 45,
@@ -171,7 +175,9 @@ const WIND: Record<string, number> = {
   "yamaha-tenere-700-2025": 2,
   "yamaha-tenere-700-rally-2025": 2,
   // 3: wide enough to lift the blast off your chest
+  "benda-capra-700-2027": 3,
   "cfmoto-450mt-2024": 3,
+  "cfmoto-550mt-x-2027": 3,
   "cfmoto-800mt-x-2025": 3,
   "cfmoto-1000mt-x-2026": 3,
   "ktm-390-adventure-r-2025": 3,
